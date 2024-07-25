@@ -1,15 +1,16 @@
-SRC		= cub3d.c
+NAME	= cub3D
+SRC		= cub3d.c ft_map.c
 OBJ		= $(SRC:.c=.o)
 HEADER	= cub3d.h
-NAME	= cub3d
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
+LINKS	= -lmlx -framework OpenGL -framework AppKit
 RM		= rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) $(LINKS) -o $(NAME)
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -19,5 +20,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+
+bonus:
 
 re: fclean all
