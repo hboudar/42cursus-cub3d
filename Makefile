@@ -6,19 +6,25 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 LINKS	= -lmlx -framework OpenGL -framework AppKit
 RM		= rm -f
+LIB = 	./lib/libft.a
 
-all: $(NAME)
+all: pre $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LINKS) -o $(NAME)
+$(NAME): $(OBJ) $(LIB)
+	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB)
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+pre:
+	@$(MAKE) -C lib
+
 clean:
+	$(MAKE) -C lib clean
 	$(RM) $(OBJ)
 
 fclean: clean
+	$(MAKE) -C lib fclean
 	$(RM) $(NAME)
 
 bonus:
