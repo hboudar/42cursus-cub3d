@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "./minilib/mlx.h"
-# include <math.h>
+// # include <math.h>
 # include <stdio.h>
 
 #endif
