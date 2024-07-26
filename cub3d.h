@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/26 13:33:45 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 14:14:55 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	print_file(t_cube *cube);
 //utils
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
 void    get_element(t_cube *cube, char *str, char mode);
+void    ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
 void    ft_error(char *msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/26 13:38:58 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 14:34:44 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,34 @@ void    parse_textures(t_cube *cube)
         ft_error("Error : Too many elements\n");
 }
 
+void    parse_mape(t_cube *cube)
+{
+    int i;
+
+    i = 6;
+    // printf("map :\n %s\n", cube->file[6]);
+    if (!cube->file[i] || !ft_strchr(cube->file[6], '1'))
+        ft_eraser(cube, NULL, NULL, "Error : No map\n");
+    while (cube->file[i])
+        i++;
+    cube->map = malloc(sizeof(char *) * (i + 1));
+    if (!cube->map)
+        ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
+    i = 0;
+    while (cube->file[i + 6])
+    {
+        cube->map[i] = ft_strdup(cube->file[i + 6]);
+        i++;
+    }
+    cube->map[i] = NULL;
+    i = 0;
+    while (cube->map[i])
+    {
+        printf("%s\n", cube->map[i]);
+        i++;
+    }
+}
+
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube)
 {
@@ -109,4 +137,5 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     if (!cube->texture.north || !cube->texture.south || !cube->texture.west
         || !cube->texture.east || !cube->texture.floor || !cube->texture.ceiling)
         ft_error("Error : Missing element\n");
+    parse_mape(cube);
 }

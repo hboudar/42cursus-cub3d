@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:57 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/26 13:07:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 14:21:04 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 {
 	t_cube	cube;
 
-	atexit(f);
+	// atexit(f);
 	is_map_valid(argc, argv, &cube);
 	cube.mlx = mlx_init();
 	cube.mlx_win = mlx_new_window(cube.mlx, 1920, 1080, "Hello world!");
