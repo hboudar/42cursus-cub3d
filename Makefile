@@ -1,5 +1,5 @@
 NAME	= cub3D
-SRC		= cub3d.c ft_map.c
+SRC		= cub3d.c ft_map.c cub3d_utils.c
 OBJ		= $(SRC:.c=.o)
 HEADER	= cub3d.h
 CC		= cc

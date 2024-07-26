@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/25 18:28:06 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 13:38:58 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 void    ft_init_texture(t_cube *cube)
 {
     cube->texture.flag = 0;
+    cube->file = NULL;
+    cube->map = NULL;
     cube->texture.north = NULL;
     cube->texture.south = NULL;
     cube->texture.west = NULL;
     cube->texture.east = NULL;
-    // cube->texture.floor[0] = -1;
-    // cube->texture.floor[1] = -1;
-    // cube->texture.floor[2] = -1;
-    // cube->texture.ceiling[0] = -1;
-    // cube->texture.ceiling[1] = -1;
-    // cube->texture.ceiling[2] = -1;
+    cube->texture.floor = NULL;
+    cube->texture.ceiling = NULL;
     
 }
 
@@ -60,29 +58,28 @@ static void check_name(int argc, char *str)
 void    parse_textures(t_cube *cube)
 {
     int i;
-    if (!cube->file)
-    {
-        write(2, "Error : ft_split failed\n", 25);
-        exit (EXIT_FAILURE);
-    }
+
     i = 0;
+    if (!cube->file)
+        ft_error("Error : ft_split failed\n");
     while (cube->file[i] && i < 6)
     {
         if (cube->file[i][0] == 'N' && cube->file[i][1] == 'O' && cube->file[i][2] == ' ')
-            cube->texture.north = get_element(cube->file[i], &cube->texture.flag);
+            get_element(cube, cube->file[i], 'N');
         else if (cube->file[i][0] == 'S' && cube->file[i][1] == 'O' && cube->file[i][2] == ' ')
-            cube->texture.south = get_element(cube->file[i], &cube->texture.flag);
+            get_element(cube, cube->file[i], 'S');
         else if (cube->file[i][0] == 'W' && cube->file[i][1] == 'E' && cube->file[i][2] == ' ')
-            cube->texture.west = get_element(cube->file[i], &cube->texture.flag);
+            get_element(cube, cube->file[i], 'W');
         else if (cube->file[i][0] == 'E' && cube->file[i][1] == 'A' && cube->file[i][2] == ' ')
-            cube->texture.east = get_element(cube->file[i], &cube->texture.flag);
+            get_element(cube, cube->file[i], 'E');
         else if (cube->file[i][0] == 'F' && cube->file[i][1] == ' ')
-            getelement2(cube->file[i], &cube->texture.flag);
+            get_element(cube, cube->file[i], 'F');
         else if (cube->file[i][0] == 'C' && cube->file[i][1] == ' ')
-            getelement2(cube->file[i], &cube->texture.flag);
+            get_element(cube, cube->file[i], 'C');
         i++;
     }
-    // print_file(cube);
+    if (cube->texture.flag > 6)
+        ft_error("Error : Too many elements\n");
 }
 
 
@@ -109,4 +106,7 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     cube->file = ft_split(tmp, '\n');
     free(tmp);
     parse_textures(cube);
+    if (!cube->texture.north || !cube->texture.south || !cube->texture.west
+        || !cube->texture.east || !cube->texture.floor || !cube->texture.ceiling)
+        ft_error("Error : Missing element\n");
 }

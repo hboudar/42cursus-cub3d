@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/25 18:26:31 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 13:33:45 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "./lib/libft.h"
-# include <stdio.h>
+# include <stdio.h> //to be removed
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
@@ -43,9 +43,13 @@ typedef struct s_cube
 }   t_cube;
 
 
-
-void	is_map_valid(int argc, char *argv[], t_cube *cube);
+//tmp
 void	print_file(t_cube *cube);
 
+
+//utils
+void	is_map_valid(int argc, char *argv[], t_cube *cube);
+void    get_element(t_cube *cube, char *str, char mode);
+void    ft_error(char *msg);
 
 #endif
