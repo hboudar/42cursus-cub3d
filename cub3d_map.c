@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map.c                                           :+:      :+:    :+:   */
+/*   cub3d_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/26 14:34:44 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 18:19:32 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void    ft_init_texture(t_cube *cube)
 {
+    cube->map_len = 0;
+    cube->file_len = 0;
     cube->texture.flag = 0;
     cube->file = NULL;
     cube->map = NULL;
@@ -55,14 +57,11 @@ static void check_name(int argc, char *str)
     }
 }
 
-void    parse_textures(t_cube *cube)
+void    parse_textures(t_cube *cube, int i)
 {
-    int i;
-
-    i = 0;
     if (!cube->file)
         ft_error("Error : ft_split failed\n");
-    while (cube->file[i] && i < 6)
+    while (cube->file[i] && i < 7)
     {
         if (cube->file[i][0] == 'N' && cube->file[i][1] == 'O' && cube->file[i][2] == ' ')
             get_element(cube, cube->file[i], 'N');
@@ -78,8 +77,11 @@ void    parse_textures(t_cube *cube)
             get_element(cube, cube->file[i], 'C');
         i++;
     }
-    if (cube->texture.flag > 6)
-        ft_error("Error : Too many elements\n");
+    if (cube->texture.flag != 6)
+        ft_error("Error : elements are not valid\n");
+    else if (!cube->texture.north || !cube->texture.south || !cube->texture.west
+        || !cube->texture.east || !cube->texture.floor || !cube->texture.ceiling)
+        ft_error("Error : an element is missing\n");
 }
 
 void    parse_mape(t_cube *cube)
@@ -87,29 +89,12 @@ void    parse_mape(t_cube *cube)
     int i;
 
     i = 6;
-    // printf("map :\n %s\n", cube->file[6]);
     if (!cube->file[i] || !ft_strchr(cube->file[6], '1'))
-        ft_eraser(cube, NULL, NULL, "Error : No map\n");
-    while (cube->file[i])
-        i++;
-    cube->map = malloc(sizeof(char *) * (i + 1));
-    if (!cube->map)
-        ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
-    i = 0;
-    while (cube->file[i + 6])
-    {
-        cube->map[i] = ft_strdup(cube->file[i + 6]);
-        i++;
-    }
-    cube->map[i] = NULL;
-    i = 0;
-    while (cube->map[i])
-    {
-        printf("%s\n", cube->map[i]);
-        i++;
-    }
+        ft_eraser(cube, NULL, NULL, "Error : invalid map\n");
+    printf("flie_len = %d\n", cube->file_len);
+    printf("map_len = %d\n", cube->map_len);
+    
 }
-
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube)
 {
@@ -124,18 +109,14 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
         exit (EXIT_FAILURE);
     }
     ft_init_texture(cube);
-    line = get_next_line(cube->fd);
-    tmp = ft_strdup("");
+    (1) && (line = get_next_line(cube->fd), tmp = ft_strdup(""));
     while(line)
     {
+        cube->file_len++;
+        if (line[0] == '\n' || is_an_element(line))
+            cube->map_len++;
         tmp = ft_strjoin(tmp, line);
         line = get_next_line(cube->fd);
     }
-    cube->file = ft_split(tmp, '\n');
-    free(tmp);
-    parse_textures(cube);
-    if (!cube->texture.north || !cube->texture.south || !cube->texture.west
-        || !cube->texture.east || !cube->texture.floor || !cube->texture.ceiling)
-        ft_error("Error : Missing element\n");
-    parse_mape(cube);
+    (1) && (cube->file = ft_split(tmp, '\n'), free(tmp), tmp = NULL);
 }

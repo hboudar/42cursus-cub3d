@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/26 14:19:51 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/26 18:16:58 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,14 @@ void    get_element(t_cube *cube, char *str, char mode)
     free(tmp);
 }
 
-void    ft_error(char *msg)
+int is_an_element(char *str)
 {
-    ft_putstr_fd(msg, 2);
-    exit (EXIT_FAILURE);
+    if ((str[0] == 'N' && str[1] == 'O' && str[2] == ' ')
+        || (str[0] == 'S' && str[1] == 'O' && str[2] == ' ')
+        || (str[0] == 'W' && str[1] == 'E' && str[2] == ' ')
+        || (str[0] == 'E' && str[1] == 'A' && str[2] == ' ')
+        || (str[0] == 'F' && str[1] == ' ')
+        || (str[0] == 'C' && str[1] == ' '))
+        return (1);
+    return (0);
 }
