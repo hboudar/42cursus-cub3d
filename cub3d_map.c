@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <cstdio>
 
 void    ft_init_texture(t_cube *cube)
 {
@@ -93,6 +94,11 @@ void    parse_mape(t_cube *cube)
         ft_eraser(cube, NULL, NULL, "Error : invalid map\n");
     printf("flie_len = %d\n", cube->file_len);
     printf("map_len = %d\n", cube->map_len);
+    cube->map = malloc(sizeof(char *) * (cube->map_len + 1));
+    if (!cube->map)
+        ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
+
+    
     
 }
 
