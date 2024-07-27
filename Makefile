@@ -1,5 +1,5 @@
 NAME	= cub3D
-SRC		= cub3d.c ft_map.c cub3d_utils.c
+SRC		= cub3d.c cub3d_map.c cub3d_utils.c cub3d_map_2.c
 OBJ		= $(SRC:.c=.o)
 HEADER	= cub3d.h
 CC		= cc
@@ -8,10 +8,10 @@ LINKS	= -lmlx -framework OpenGL -framework AppKit
 RM		= rm -f
 LIB = 	./lib/libft.a
 
-all: pre $(NAME)
+all: pre $(NAME) clean
 
 $(NAME): $(OBJ) $(LIB)
-	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB)
+	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB) -fsanitize=address
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
