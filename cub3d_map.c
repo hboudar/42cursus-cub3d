@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/26 18:19:32 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 16:54:01 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,14 @@ void    parse_mape(t_cube *cube)
         ft_eraser(cube, NULL, NULL, "Error : invalid map\n");
     printf("flie_len = %d\n", cube->file_len);
     printf("map_len = %d\n", cube->map_len);
-    cube->map = (char **)malloc(sizeof(char *) * (cube->file_len - 6 + 1));
+    cube->map = (char **)malloc(sizeof(char *) * (cube->file_len + 1));
     if (!cube->map)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     take_map(cube, 0, 0, 0);
     i = 0;
     while (ft_strlen(cube->map[i]) == 0)
         i++;
-    tmp = (char **)malloc(sizeof(char *) * (cube->file_len - 6 + 1));
+    tmp = (char **)malloc(sizeof(char *) * (cube->file_len + 1));
     if (!tmp)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     int j = 0;
