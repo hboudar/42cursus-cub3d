@@ -12,7 +12,7 @@ int count_elem(char **file)
         y = 0;  
         while (file[x][y])
         {
-            if (file[x][y] == 'N')
+            if (file[x][y] == 'N' || file[x][y] == 'S' || file[x][y] == 'W' || file[x][y] == 'E')
                 count++;
             y++;
         }
@@ -31,7 +31,9 @@ int check_map(char **file)
         y = 0;  
         while (file[x][y])
         {
-            if ((file[x][y] == '0' || file[x][y] == 'N') && (file[x + 1][y] && file[x - 1][y] && file[x][y + 1] && file[x][y - 1]))
+            if ((file[x][y] == '0' || file[x][y] == 'N' \
+                || file[x][y] == 'S' || file[x][y] == 'W' || file[x][y] == 'E') \
+                    && (file[x + 1][y] && file[x - 1][y] && file[x][y + 1] && file[x][y - 1]))
             {
                 if (file[x + 1][y] != '0' && file[x + 1][y] != '1' && file[x + 1][y] != 'N')
                     return 1;
@@ -42,7 +44,8 @@ int check_map(char **file)
                 if (file[x][y - 1] != '0' && file[x][y - 1] != '1' && file[x][y - 1] != 'N')
                     return 1;
             }
-            else if (file[x][y] == '0' || file[x][y] == 'N')
+            else if (file[x][y] == '0' || file[x][y] == 'N' \
+                || file[x][y] == 'S' || file[x][y] == 'W' || file[x][y] == 'E')
                 return 1;
             y++;
         }
@@ -67,17 +70,17 @@ int main()
     
     file[0] = strdup("     1 1 1");
     file[1] = strdup("    1010101       1111");
-    file[2] = strdup("1111100011011111111111111");
+    file[2] = strdup("1111100011111111111111111");
     file[3] = strdup("1000000000110000000000001    1");
     file[4] = strdup("1011000001110000000000001   101");
     file[5] = strdup("1001000000000000000000001111111111");
     file[6] = strdup("111111111011000001110000000000001");
     file[7] = strdup("1111111111111111111111111111111111");
-    file[8] = strdup("111111111111N111111111111111111111");
-    file[9] = strdup("11110111111111011101010010001");
+    file[8] = strdup("11111111111111111111111111111111111111111N");
+    file[9] = strdup("111101111111110111010100100011");
     file[10] =strdup( "11000000111101011100000010001");
-    file[11] =strdup( "1000000001 1000001100000010001");
-    file[12] =strdup( "100000000N1000001101010011001");
+    file[11] =strdup( "10000000011000001100000010001");
+    file[12] =strdup( "1000000001000001101010011001");
     file[13] =strdup( "1111111111111111111111111 11");
     file[14] = strdup("");
     int r  = 0;
