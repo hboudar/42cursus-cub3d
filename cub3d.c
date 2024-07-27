@@ -67,9 +67,9 @@ int	main(int argc, char **argv)
 		ft_error("Error : Map is invalid\n");
 	else
 	 	printf("Map is valid\n");
-	cube.mlx = mlx_init();
-	cube.mlx_win = mlx_new_window(cube.mlx, 1920, 1080, "Hello world!");
-    mlx_key_hook(cube.mlx_win, key_hook, (void *)0);
-	mlx_loop(cube.mlx);
+	// cube.mlx = mlx_init();
+	// cube.mlx_win = mlx_new_window(cube.mlx, 1920, 1080, "Hello world!");
+    // mlx_key_hook(cube.mlx_win, key_hook, (void *)0);
+	// mlx_loop(cube.mlx);
 	
 }
