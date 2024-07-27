@@ -8,7 +8,7 @@ LINKS	= -lmlx -framework OpenGL -framework AppKit
 RM		= rm -f
 LIB = 	./lib/libft.a
 
-all: pre $(NAME)
+all: pre $(NAME) clean
 
 $(NAME): $(OBJ) $(LIB)
 	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB)

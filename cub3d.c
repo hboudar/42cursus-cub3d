@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 {
 	t_cube	cube;
 
-	atexit(f);
+	// atexit(f);
 	is_map_valid(argc, argv, &cube);
 	cube.mlx = mlx_init();
 	cube.mlx_win = mlx_new_window(cube.mlx, 1920, 1080, "Hello world!");
