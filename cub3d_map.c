@@ -6,40 +6,38 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 17:18:53 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 19:25:47 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    parse_mape(t_cube *cube)
+void    parse_mape(t_cube *cube, char *tmp1, char **tmp2, int i)
 {
-    char    **tmp;
-    int     i;
-
-    i = 6;
-    if (!cube->file[i] || !ft_strchr(cube->file[6], '1'))
-        ft_eraser(cube, NULL, NULL, "Error : invalid map\n");
-    cube->map = (char **)malloc(sizeof(char *) * (cube->file_len + 1));
+    tmp1 = ft_strtrim(cube->file[i], "1 ");
+    if (tmp1 && tmp1[0] != '\0')
+        ft_eraser(cube, NULL, (void *)tmp1, "Error : invalid map\n");
+    (tmp1) && (free (tmp1), tmp1 = NULL);
+    cube->map = (char **)malloc(sizeof(char *) * (cube->file_len - i + 1));
     if (!cube->map)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     take_map(cube, 0, 0, 0);
     i = 0;
-    while (ft_strlen(cube->map[i]) == 0)
+    while (ft_strlen(cube->map[i]) == 0 || just_space(cube->map[i]))
         i++;
-    tmp = (char **)malloc(sizeof(char *) * (cube->file_len + 1));
-    if (!tmp)
+    tmp2 = (char **)malloc(sizeof(char *) * ((cube->file_len - 6 - i) + 1));
+    if (!tmp2)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     int j = 0;
     while (cube->map[i])
     {
-        tmp[j] = ft_strdup(cube->map[i]);
+        tmp2[j] = ft_strdup(cube->map[i]);
         i++;
         j++;
     }
-    tmp[j] = NULL;
+    tmp2[j] = NULL;
     free(cube->map);
-    cube->map = tmp;
+    cube->map = tmp2;
 }
 
 void    parse_textures(t_cube *cube, int i)
@@ -100,14 +98,11 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     while(line)
     {
         cube->file_len++;
-        if (line[0] == '\n' || is_an_element(line))
-            cube->map_len++;
         tmp = ft_strjoin(tmp, line);
         line = get_next_line(cube->fd);
     }
     cube->fd_file = tmp;
     cube->file = ft_split(tmp, '\n');
     if (!cube->file)
-        exit(1);
-        // ft_eraser(cube, NULL, (void *)tmp, "Error : ft_split failed\n");
+        ft_eraser(cube, NULL, (void *)tmp, "Error : ft_split failed\n");
 }

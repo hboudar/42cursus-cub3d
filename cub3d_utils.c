@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 17:10:41 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 17:57:11 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,4 @@ void    get_element(t_cube *cube, char *str, char mode)
     while (tmp[i])
         free(tmp[i++]);
     free(tmp);
-}
-
-int is_an_element(char *element)
-{
-    if (!ft_strncmp(element, "NO ", 3)
-        || !ft_strncmp(element, "SO ", 3)
-        || !ft_strncmp(element, "WE ", 3)
-        || !ft_strncmp(element, "EA ", 3)
-        || !ft_strncmp(element, "F ", 2)
-        || !ft_strncmp(element, "C ", 2))
-        return (1);
-    return (0);
 }

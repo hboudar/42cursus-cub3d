@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 17:05:54 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 19:49:52 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,38 @@ void    ft_init_texture(t_cube *cube)
     cube->texture.c = NULL;
 }
 
+int    skip_line(t_cube *cube, int i, int mode)
+{
+    if (mode)
+    {
+        mode = 0;
+        while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+            (1) && (i++, mode++);
+        if (cube->fd_file[i] == '\n')
+            (1) && (i++, mode++);
+    }
+    else
+    {
+        while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+        {
+            i++;
+            mode++;
+        }
+    }
+    return (mode);
+}
+
 void    take_map(t_cube *cube, int i, int j, int k)
 {
     while (cube->fd_file[i])
     {
         if (cube->fd_file[i] == 'N' || cube->fd_file[i] == 'S' || cube->fd_file[i] == 'W' \
             || cube->fd_file[i] == 'E' || cube->fd_file[i] == 'F' || cube->fd_file[i] == 'C')
-            {
-                while (cube->fd_file[i] != '\n')
-                    i++;
-                if (cube->fd_file[i] == '\n')
-                    i++;
-            }
+                i += skip_line(cube, i, 1);
         else
         {
             k = 0;
-            cube->map[j] = malloc(sizeof(char) * (100));
+            cube->map[j] = malloc(sizeof(char) * (skip_line(cube, i, 0) + 1));
             while (cube->fd_file[i] && cube->fd_file[i] != '\n')
                 (cube->map[j][k] = cube->fd_file[i], (i++, k++));
             if (cube->fd_file[i] == '\n')
