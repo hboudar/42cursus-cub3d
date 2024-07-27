@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void    ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg)
+void    ft_eraser(t_cube *cube, char **tmp, void *rgb, char *msg)
 {
     int i;
     

@@ -11,7 +11,7 @@ LIB = 	./lib/libft.a
 all: pre $(NAME) clean
 
 $(NAME): $(OBJ) $(LIB)
-	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB) -fsanitize=address
+	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB) 
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@

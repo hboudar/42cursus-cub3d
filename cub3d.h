@@ -54,7 +54,7 @@ void    parse_mape(t_cube *cube);
 //utils
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
 void    get_element(t_cube *cube, char *str, char mode);
-void    ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
+void    ft_eraser(t_cube *cube, char **tmp, void *rgb, char *msg);
 int     is_an_element(char *str);
 void    ft_error(char *msg);
 

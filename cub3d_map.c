@@ -116,21 +116,22 @@ void    take_map(t_cube *cube, int i, int j, int k)
 
 void    parse_mape(t_cube *cube)
 {
-    int i;
+    char    **tmp;
+    int     i;
 
     i = 6;
     if (!cube->file[i] || !ft_strchr(cube->file[6], '1'))
         ft_eraser(cube, NULL, NULL, "Error : invalid map\n");
     printf("flie_len = %d\n", cube->file_len);
     printf("map_len = %d\n", cube->map_len);
-    cube->map = malloc(sizeof(char *) * (cube->file_len + 1));
+    cube->map = (char **)malloc(sizeof(char *) * (cube->file_len - 6 + 1));
     if (!cube->map)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     take_map(cube, 0, 0, 0);
     i = 0;
     while (ft_strlen(cube->map[i]) == 0)
         i++;
-    char **tmp = malloc(sizeof(char *) * (cube->file_len + 1));
+    tmp = (char **)malloc(sizeof(char *) * (cube->file_len - 6 + 1));
     if (!tmp)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     int j = 0;
@@ -168,4 +169,6 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     }
     cube->fd_file = tmp;
     cube->file = ft_split(tmp, '\n');
+    if (!cube->file)
+        ft_eraser(cube, NULL, (void *)tmp, "Error : ft_split failed\n");
 }

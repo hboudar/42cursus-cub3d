@@ -43,10 +43,10 @@ int    key_hook(int keycode, void *param)
     return (0);
 }
 
-// void	f(void)
-// {
-// 	system("leaks cub3D");
-// }
+void	f(void)
+{
+	system("leaks cub3D");
+}
 
 int	main(int argc, char **argv)
 {

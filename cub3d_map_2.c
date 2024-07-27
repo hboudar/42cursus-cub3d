@@ -21,6 +21,19 @@ int count_elem(char **map)
         return 1;
     return 0;
 }
+
+int just_space(char *str)
+{
+    int i = 0;
+    while (str[i])
+    {
+        if (str[i] != ' ')
+            return 0;
+        i++;
+    }
+    return 1;
+}
+
 int check_map(char **map)
 {
     int x = 0;
@@ -28,7 +41,7 @@ int check_map(char **map)
     while (map[x])
     {
         y = 0;  
-        if (ft_strlen(map[x]) == 0)
+        if (ft_strlen(map[x]) == 0 || just_space(map[x]))
             return 1;
         while (map[x][y])
         {
