@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 16:46:37 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 17:10:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    get_element(t_cube *cube, char *str, char mode)
     i = 0;
     tmp = ft_split(str, ' ');
     if (!tmp)
-        ft_eraser(cube, NULL, NULL, "Error : ft_split failed\n");
+        ft_eraser(cube, NULL, NULL, "Error : ft_split failed 1\n");
     if (tmp[0] != NULL && tmp[1] != NULL && tmp[2] == NULL)
     {
         (mode == 'N') && (cube->texture.no = ft_strdup(tmp[1]));
@@ -82,21 +82,14 @@ void    get_element(t_cube *cube, char *str, char mode)
     free(tmp);
 }
 
-int is_an_element(char *element, char *is_element, int mode)
+int is_an_element(char *element)
 {
-    
-    if (!mode && ((element[0] == 'N' && element[1] == 'O' && element[2] == ' ')
-        || (element[0] == 'S' && element[1] == 'O' && element[2] == ' ')
-        || (element[0] == 'W' && element[1] == 'E' && element[2] == ' ')
-        || (element[0] == 'E' && element[1] == 'A' && element[2] == ' ')
-        || (element[0] == 'F' && element[1] == ' ')
-        || (element[0] == 'C' && element[1] == ' ')))
-        return (1);
-    if (mode == 1 && element[0] == is_element[0]
-        && element[1] == is_element[1] && element[2] == is_element[2])
-        return (1);
-    else if (mode == 2 && (element[0] == is_element[0]
-        && element[1] == is_element[1]))
+    if (!ft_strncmp(element, "NO ", 3)
+        || !ft_strncmp(element, "SO ", 3)
+        || !ft_strncmp(element, "WE ", 3)
+        || !ft_strncmp(element, "EA ", 3)
+        || !ft_strncmp(element, "F ", 2)
+        || !ft_strncmp(element, "C ", 2))
         return (1);
     return (0);
 }

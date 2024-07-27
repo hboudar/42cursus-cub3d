@@ -1,10 +1,10 @@
 NAME	=	cub3D
-SRC		=	cub3d.c cub3d_map.c cub3d_utils.c cub3d_utils2.c
+SRC		=	cub3d.c cub3d_map.c cub3d_utils.c cub3d_utils2.c cub3d_map2.c
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	cub3d.h
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-LINKS	=	-lmlx -framework OpenGL -framework AppKit
+LINKS	=	-lmlx -framework OpenGL -framework AppKit 
 RM		=	rm -f
 LIB		=	./lib/libft.a
 

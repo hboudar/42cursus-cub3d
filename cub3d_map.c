@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 16:42:01 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 17:18:53 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,32 @@
 
 void    parse_mape(t_cube *cube)
 {
-    int i;
+    char    **tmp;
+    int     i;
 
     i = 6;
     if (!cube->file[i] || !ft_strchr(cube->file[6], '1'))
         ft_eraser(cube, NULL, NULL, "Error : invalid map\n");
-    printf("flie_len = %d\n", cube->file_len);
-    printf("map_len = %d\n", cube->map_len);
-    cube->map = malloc(sizeof(char *) * (cube->map_len + 1));
+    cube->map = (char **)malloc(sizeof(char *) * (cube->file_len + 1));
     if (!cube->map)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
+    take_map(cube, 0, 0, 0);
+    i = 0;
+    while (ft_strlen(cube->map[i]) == 0)
+        i++;
+    tmp = (char **)malloc(sizeof(char *) * (cube->file_len + 1));
+    if (!tmp)
+        ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
+    int j = 0;
+    while (cube->map[i])
+    {
+        tmp[j] = ft_strdup(cube->map[i]);
+        i++;
+        j++;
+    }
+    tmp[j] = NULL;
+    free(cube->map);
+    cube->map = tmp;
 }
 
 void    parse_textures(t_cube *cube, int i)
@@ -32,17 +48,17 @@ void    parse_textures(t_cube *cube, int i)
         ft_error("Error : ft_split failed\n");
     while (cube->file[i] && i < 7)
     {
-        if (is_an_element(cube->file[i], "NO ", 1))
+        if (!ft_strncmp(cube->file[i], "NO ", 3))
             get_element(cube, cube->file[i], 'N');
-        else if (is_an_element(cube->file[i], "SO ", 1))
+        else if (!ft_strncmp(cube->file[i], "SO ", 3))
             get_element(cube, cube->file[i], 'S');
-        else if (is_an_element(cube->file[i], "WE ", 1))
+        else if (!ft_strncmp(cube->file[i], "WE ", 3))
             get_element(cube, cube->file[i], 'W');
-        else if (is_an_element(cube->file[i], "EA ", 1))
+        else if (!ft_strncmp(cube->file[i], "EA ", 3))
             get_element(cube, cube->file[i], 'E');
-        else if (is_an_element(cube->file[i], "F ", 2))
+        else if (!ft_strncmp(cube->file[i], "F ", 2))
             get_element(cube, cube->file[i], 'F');
-        else if (is_an_element(cube->file[i], "C ", 2))
+        else if (!ft_strncmp(cube->file[i], "C ", 2))
             get_element(cube, cube->file[i], 'C');
         i++;
     }
@@ -84,10 +100,14 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     while(line)
     {
         cube->file_len++;
-        if (line[0] == '\n' || is_an_element(line, NULL, 0))
+        if (line[0] == '\n' || is_an_element(line))
             cube->map_len++;
         tmp = ft_strjoin(tmp, line);
         line = get_next_line(cube->fd);
     }
-    (1) && (cube->file = ft_split(tmp, '\n'), free(tmp), tmp = NULL);
+    cube->fd_file = tmp;
+    cube->file = ft_split(tmp, '\n');
+    if (!cube->file)
+        exit(1);
+        // ft_eraser(cube, NULL, (void *)tmp, "Error : ft_split failed\n");
 }

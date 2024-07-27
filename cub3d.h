@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 16:33:31 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/27 17:07:47 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_cube
     void	*mlx;
     char    **file;
     char    **map;
+    char    *fd_file;
     int     map_len;
     int     file_len;
     t_texture texture;
@@ -47,6 +48,7 @@ typedef struct s_cube
 
 void    parse_textures(t_cube *cube, int i);
 void    parse_mape(t_cube *cube);
+int     parse_mape2(t_cube *cube);
 
 
 //utils
@@ -54,7 +56,8 @@ void    ft_init_texture(t_cube *cube);
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
 void    get_element(t_cube *cube, char *str, char mode);
 void    ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
-int     is_an_element(char *element, char *is_element, int mode);
+int     is_an_element(char *element);
+void    take_map(t_cube *cube, int i, int j, int k);
 void    ft_error(char *msg);
 
 //tmp
