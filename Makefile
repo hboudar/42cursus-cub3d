@@ -7,11 +7,12 @@ CFLAGS	=	-Wall -Wextra -Werror
 LINKS	=	-lmlx -framework OpenGL -framework AppKit 
 RM		=	rm -f
 LIB		=	./lib/libft.a
+MLX		=	./MLX42/build/libmlx42.a
 
 all: pre $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
-	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB) -fsanitize=address -g
+	$(CC) $(OBJ) $(LINKS) -o $(NAME) $(LIB) $(MLX) -fsanitize=address -g
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@

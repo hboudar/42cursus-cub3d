@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 18:18:32 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:02:01 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include <mlx.h>
+# include "MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
 typedef struct s_texture
