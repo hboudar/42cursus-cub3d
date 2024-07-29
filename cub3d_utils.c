@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 17:57:11 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:13:58 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ void    get_element(t_cube *cube, char *str, char mode)
         free(tmp[i++]);
     free(tmp);
 }
-

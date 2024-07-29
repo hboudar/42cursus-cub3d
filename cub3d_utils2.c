@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 19:49:52 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:13:59 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,3 @@ void    take_map(t_cube *cube, int i, int j, int k)
     }
     cube->map[j] = NULL;
 }
-

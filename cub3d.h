@@ -6,14 +6,14 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:02:01 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:14:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "./lib/libft.h"
+# include "./utils/libft.h"
 # include <stdio.h> //to be removed
 # include <stdlib.h>
 # include <unistd.h>
@@ -64,4 +64,3 @@ int just_space(char *str);
 void	print_file(t_cube *cube);
 
 #endif
-

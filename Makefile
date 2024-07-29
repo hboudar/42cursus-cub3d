@@ -6,7 +6,7 @@ CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 LINKS	=	-lmlx -framework OpenGL -framework AppKit 
 RM		=	rm -f
-LIB		=	./lib/libft.a
+LIB		=	./utils/libft.a
 MLX		=	./MLX42/build/libmlx42.a
 
 all: pre $(NAME)
@@ -18,17 +18,16 @@ $(NAME): $(OBJ) $(LIB)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 pre:
-	@$(MAKE) -C lib
+	@$(MAKE) -C utils
 
 clean:
-	$(MAKE) -C lib clean
+	$(MAKE) -C utils clean
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(MAKE) -C lib fclean
+	$(MAKE) -C utils fclean
 	$(RM) $(NAME)
 
 bonus:
 
 re: fclean all
-

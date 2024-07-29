@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 14:24:28 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 15:13:55 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,3 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     if (!cube->file)
         ft_eraser(cube, NULL, (void *)tmp, "Error : ft_split failed\n");
 }
-
