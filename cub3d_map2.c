@@ -103,3 +103,4 @@ int parse_mape2(t_cube *cube)
         return (1);
     return (0);
 }
+

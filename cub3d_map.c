@@ -106,3 +106,4 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
     if (!cube->file)
         ft_eraser(cube, NULL, (void *)tmp, "Error : ft_split failed\n");
 }
+

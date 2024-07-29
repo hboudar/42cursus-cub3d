@@ -64,3 +64,4 @@ int just_space(char *str);
 void	print_file(t_cube *cube);
 
 #endif
+
