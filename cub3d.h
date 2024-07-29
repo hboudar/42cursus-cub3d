@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:17:55 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 18:29:37 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
 typedef struct s_texture
@@ -42,6 +42,8 @@ typedef struct s_cube
     int     map_len;
     int     file_len;
     t_texture texture;
+    int     height;
+    int     width;
     int     fd;
 }   t_cube;
 
