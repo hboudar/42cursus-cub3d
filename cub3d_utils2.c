@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:13:59 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 18:30:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void    ft_init_texture(t_cube *cube)
     cube->map_len = 0;
     cube->file_len = 0;
     cube->texture.flag = 0;
+    cube->height = 0;
+    cube->width = 0;
     cube->file = NULL;
     cube->map = NULL;
     cube->texture.no = NULL;

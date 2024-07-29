@@ -6,13 +6,13 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:13:56 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 18:45:44 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int check_elem(char **map)
+int check_elem(char **map, t_cube *cube)
 {
     int x;
     int y;
@@ -34,8 +34,10 @@ int check_elem(char **map)
                 count++;
             y++;
         }
+        (y > cube->width) && (cube->width = y);
         x++;
     }
+    cube->height = x;
     return (count);
 }
 
@@ -77,7 +79,6 @@ int check_map(char **map, int x, int y)
                 return (0);
             y++;
         }
-        printf("map[%d] = %s\n", x, map[x]);
         x++;
     }
     return (x);
@@ -88,7 +89,7 @@ int parse_mape2(t_cube *cube)
     char *tmp;
     int r;
 
-    r = check_elem(cube->map);
+    r = check_elem(cube->map, cube);
     if (!r || r != 1)
         return (1);
     r = check_map(cube->map, 1 , 0);
