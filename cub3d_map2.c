@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int check_elem(char **map)
+int check_elem(char **map, t_cube *cube)
 {
     int x;
     int y;
@@ -34,8 +34,10 @@ int check_elem(char **map)
                 count++;
             y++;
         }
+        (y > cube->width) && (cube->width = y);
         x++;
     }
+    cube->height = x;
     return (count);
 }
 
@@ -77,7 +79,6 @@ int check_map(char **map, int x, int y)
                 return (0);
             y++;
         }
-        printf("map[%d] = %s\n", x, map[x]);
         x++;
     }
     return (x);
@@ -88,7 +89,7 @@ int parse_mape2(t_cube *cube)
     char *tmp;
     int r;
 
-    r = check_elem(cube->map);
+    r = check_elem(cube->map, cube);
     if (!r || r != 1)
         return (1);
     r = check_map(cube->map, 1 , 0);

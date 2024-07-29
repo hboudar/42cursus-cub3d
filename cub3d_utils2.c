@@ -41,6 +41,8 @@ void    ft_init_texture(t_cube *cube)
     cube->map_len = 0;
     cube->file_len = 0;
     cube->texture.flag = 0;
+    cube->height = 0;
+    cube->width = 0;
     cube->file = NULL;
     cube->map = NULL;
     cube->texture.no = NULL;
