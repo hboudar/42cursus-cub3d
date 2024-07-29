@@ -7,7 +7,7 @@ CFLAGS	=	-Wall -Wextra -Werror
 LINKS	=	-lmlx -framework OpenGL -framework AppKit 
 RM		=	rm -f
 LIB		=	./utils/libft.a
-MLX		=	./MLX42/build/libmlx42.a
+MLX		=	../MLX42/build/libmlx42.a
 
 all: pre $(NAME)
 
