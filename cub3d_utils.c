@@ -81,3 +81,4 @@ void    get_element(t_cube *cube, char *str, char mode)
         free(tmp[i++]);
     free(tmp);
 }
+

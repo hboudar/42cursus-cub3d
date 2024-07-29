@@ -93,3 +93,4 @@ void    take_map(t_cube *cube, int i, int j, int k)
     }
     cube->map[j] = NULL;
 }
+
