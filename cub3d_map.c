@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/27 19:25:47 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/07/29 14:24:28 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    parse_mape(t_cube *cube, char *tmp1, char **tmp2, int i)
 {
     tmp1 = ft_strtrim(cube->file[i], "1 ");
-    if (tmp1 && tmp1[0] != '\0')
+    if (!ft_strchr(cube->file[i], '1') || (tmp1 && tmp1[0] != '\0'))
         ft_eraser(cube, NULL, (void *)tmp1, "Error : invalid map\n");
     (tmp1) && (free (tmp1), tmp1 = NULL);
     cube->map = (char **)malloc(sizeof(char *) * (cube->file_len - i + 1));
