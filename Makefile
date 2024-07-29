@@ -4,7 +4,7 @@ OBJ		=	$(SRC:.c=.o)
 HEADER	=	cub3d.h
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-LINKS	=	-Iinclude -lglfw -L/Users/hboudar/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
+LINKS	=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
 RM		=	rm -f
 LIB		=	./utils/libft.a
 MLX		=	../../MLX42/build/libmlx42.a
