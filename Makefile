@@ -1,5 +1,5 @@
 NAME	=	cub3D
-SRC		=	cub3d.c cub3d_map.c cub3d_utils.c cub3d_utils2.c cub3d_map2.c
+SRC		=	cub3d.c cub3d_map.c cub3d_utils.c cub3d_utils2.c cub3d_map2.c 
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	cub3d.h
 CC		=	cc
@@ -25,12 +25,12 @@ $(MLX):
 
 clean:
 	$(MAKE) -C utils clean
-	@cd ../MLX42/build && make clean
 	$(RM) $(OBJ)
 
 fclean: clean
 	$(MAKE) -C utils fclean
 	$(RM) $(NAME)
+	@cd ../MLX42/build && make clean
 
 re: fclean all
 

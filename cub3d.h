@@ -21,8 +21,8 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
-#define WIDTH 1024
-#define HEIGHT 628
+#define WIDTH  1200
+#define HEIGHT 600
 
 typedef struct s_texture
 {
@@ -48,7 +48,14 @@ typedef struct s_cube
     t_texture texture;
     int     height;
     int     width;
-    int     fd;
+    double    x_pixel;
+    double    y_pixel;
+    double     fd;
+    double     playerX;
+    double     playerY;
+    double     player_X_pixel;
+    double     player_Y_pixel;
+    double player_angle;
 }   t_cube;
 
 
