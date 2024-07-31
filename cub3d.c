@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <sys/syslimits.h>
@@ -45,34 +46,34 @@ void get_player_position(t_cube *cube)
         x++;
     }
 }
-
 void ft_render_pixel_player(int32_t color, t_cube *cube)
 {
     int i, j;
-    for (i = 0; i < cube->x_pixel/5; i++)
+    int title;
+    if (cube->x_pixel < cube->y_pixel)
+        title = cube->x_pixel;
+    else
+        title = cube->y_pixel;
+    // Draw a circle for the player
+    for (i = 0; i < title / 4; i++)
     {
-        for (j = 0; j < cube->y_pixel/11; j++)
+        for (j = 0; j < title / 4; j++)
         {
-            mlx_put_pixel(image, cube->player_X_pixel - j, cube->player_Y_pixel - i, color);
-            mlx_put_pixel(image, cube->player_X_pixel + j, cube->player_Y_pixel + i, color);
-            mlx_put_pixel(image, cube->player_X_pixel - j, cube->player_Y_pixel + i, color);
-            mlx_put_pixel(image, cube->player_X_pixel + j, cube->player_Y_pixel - i, color);
+            mlx_put_pixel(image, cube->player_X_pixel + i, cube->player_Y_pixel + j, color);
+            mlx_put_pixel(image, cube->player_X_pixel - i, cube->player_Y_pixel + j, color);
+            mlx_put_pixel(image, cube->player_X_pixel + i, cube->player_Y_pixel - j, color);
+            mlx_put_pixel(image, cube->player_X_pixel - i, cube->player_Y_pixel - j, color);
         }
     }
 
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
-            // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
+    // Draw direction line
+    int length = title / 2;
+    for (i = 0; i < length; i++)
+    {
+        int x = (int)(cube->player_X_pixel + cos(cube->player_angle) * i);
+        int y = (int)(cube->player_Y_pixel + sin(cube->player_angle) * i);
+        mlx_put_pixel(image, x, y, color);
+    }
 }
 
 
@@ -103,7 +104,7 @@ void ft_randomize(void* param)
             else if (cube->map[x][y] == '0' || cube->map[x][y] == ' ')
                ft_render_pixel( y, x, ft_pixel(0x00, 0x00, 0x00, 0xFF), cube); // Black
             else if (cube->map[x][y] == 'W')
-                ft_render_pixel( y, x, ft_pixel(0x0, 0xF0, 0xD0, 0xFF), cube); // Turquoise
+                ft_render_pixel( y, x, ft_pixel(0x00, 0x00, 0x00, 0xFF), cube); // Turquoise
 
             y++;
         }
@@ -111,39 +112,58 @@ void ft_randomize(void* param)
     }
     ft_render_pixel_player(ft_pixel(0xFF, 0x00, 0x00, 0xFF), cube); // Red
 }
+
 void ft_hook(void* param)
 {
     t_cube *cube = (t_cube *)param;
 
     if (mlx_is_key_down(cube->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(cube->mlx);
-    // int x_in_map = cube->playerX / cube->x_pixel;
-    // int y_in_map = cube->playerY / cube->y_pixel;
-    // // Calculate new player position
-    int new_x = cube->player_X_pixel;
-    int new_y = cube->player_Y_pixel;
+
+    // Rotate player
+    if (mlx_is_key_down(cube->mlx, MLX_KEY_LEFT))
+    {
+        cube->player_angle -= 0.05;
+        printf("angle = %f\n", cube->player_angle);
+    }
+    if (mlx_is_key_down(cube->mlx, MLX_KEY_RIGHT))
+        cube->player_angle += 0.05;
+
+    double new_x = cube->player_X_pixel;
+    double new_y = cube->player_Y_pixel;
 
     if (mlx_is_key_down(cube->mlx, MLX_KEY_W))
-        new_y -= 1; // Move left
+    {
+        new_x += cos(cube->player_angle) * 1; // Adjust speed as needed
+        new_y += sin(cube->player_angle) * 1;
+        printf("x %f\n", new_x);
+        printf("y %f\n", new_y);
+    }
     if (mlx_is_key_down(cube->mlx, MLX_KEY_S))
-        new_y += 1; // Move right
+    {
+        new_x -= cos(cube->player_angle) * 1; // Adjust speed as needed
+        new_y -= sin(cube->player_angle) * 1; // Adjust speed as needed
+    }
     if (mlx_is_key_down(cube->mlx, MLX_KEY_A))
-        new_x -= 1; // Move up
+    {
+        new_x += cos(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
+        new_y += sin(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
+        printf("Ax %f\n", new_x);
+    }
     if (mlx_is_key_down(cube->mlx, MLX_KEY_D))
-        new_x += 1; // Move down
-
-    // printf("%c\n", cube->map[(int)(new_y / cube->y_pixel)][(int)(new_x / cube->x_pixel)]);
-    if (cube->map[(int)(new_y  / cube->y_pixel)][(int)(new_x / cube->x_pixel)] == '0' || cube->map[(int)(new_y / cube->y_pixel)][(int)(new_x / cube->x_pixel)] == 'W')
+    {
+        new_x -= cos(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
+        new_y -= sin(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
+        printf("Dx %f\n", new_x);
+    }
+    if (cube->map[(int)(new_y / cube->y_pixel)][(int)(new_x / cube->x_pixel)] != '1')
     {
         cube->player_X_pixel = new_x;
         cube->player_Y_pixel = new_y;
     }
-    // Redraw the map and player
+
     ft_randomize(cube);
-
 }
-
-
 
 
 int main(int argc, char **argv)
@@ -165,6 +185,7 @@ int main(int argc, char **argv)
     printf("x_pixel = %f\n", cube.x_pixel);
     printf("y_pixel = %f\n", cube.y_pixel);
     get_player_position(&cube);
+    
     cube.player_angle = 0;
     // Calculate player's pixel position
     mlx_image_to_window(cube.mlx, image, 0, 0);
