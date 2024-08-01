@@ -67,25 +67,59 @@ void ft_render_pixel_player(int32_t color, t_cube *cube)
     }
 
     // Draw direction line
-    int length = title / 2;
-    for (i = 0; i < length; i++)
+    i = 0;
+    double angle = cube->player_angle;
+    int k = 0;
+    while (k < 160)
     {
-        int x = (int)(cube->player_X_pixel + cos(cube->player_angle) * i);
-        int y = (int)(cube->player_Y_pixel + sin(cube->player_angle) * i);
-        mlx_put_pixel(image, x, y, color);
+        while (1)
+        {
+            int x = (int)(cube->player_X_pixel + cos(angle) * i);
+            int y = (int)(cube->player_Y_pixel + sin(angle) * i);
+            if (cube->map[(int)(y / cube->y_pixel)][(int)(x / cube->x_pixel)] == '1')
+                break;
+            mlx_put_pixel(image, x, y, color);
+            i++;
+        }
+        angle += 0.003;
+        k++;
+        i = 0;
     }
+    angle = cube->player_angle;
+    k = 0;
+    while (k < 160)
+    {
+        while (1)
+        {
+            int x = (int)(cube->player_X_pixel + cos(angle) * i);
+            int y = (int)(cube->player_Y_pixel + sin(angle) * i);
+            if (cube->map[(int)(y / cube->y_pixel)][(int)(x / cube->x_pixel)] == '1')
+                break;
+            mlx_put_pixel(image, x, y, color);
+            i++;
+        }
+        angle -= 0.003;
+        k++;
+        i = 0;
+    }
+    
 }
 
 
 void ft_render_pixel(int32_t x, int32_t y, int32_t color, t_cube *cube)
 {
     int i, j;
-    for (i = 0; i < cube->x_pixel; i++)
+    i = 0;
+    j = 0;
+    while (i < cube->x_pixel - 2)
     {
-        for (j = 0; j < cube->y_pixel; j++)
+        j = 0;
+        while (j < cube->y_pixel - 2)
         {
             mlx_put_pixel(image, x * cube->x_pixel + i, y * cube->y_pixel + j, color);
+            j++;
         }
+        i++;
     }
 }
 
@@ -94,6 +128,10 @@ void ft_randomize(void* param)
     t_cube* cube = (t_cube *)param;
     int x = 0;
     int y = 0;
+    mlx_delete_image(cube->mlx, image);
+    image = mlx_new_image(cube->mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
+    mlx_image_to_window(cube->mlx, image, 0, 0);
+
     while (cube->map[x])
     {
         y = 0;
@@ -123,11 +161,11 @@ void ft_hook(void* param)
     // Rotate player
     if (mlx_is_key_down(cube->mlx, MLX_KEY_LEFT))
     {
-        cube->player_angle -= 0.05;
+        cube->player_angle -= 0.04;
         printf("angle = %f\n", cube->player_angle);
     }
     if (mlx_is_key_down(cube->mlx, MLX_KEY_RIGHT))
-        cube->player_angle += 0.05;
+        cube->player_angle += 0.04;
 
     double new_x = cube->player_X_pixel;
     double new_y = cube->player_Y_pixel;
@@ -146,14 +184,14 @@ void ft_hook(void* param)
     }
     if (mlx_is_key_down(cube->mlx, MLX_KEY_A))
     {
-        new_x += cos(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
-        new_y += sin(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
+        new_x -= cos(M_PI_2 + cube->player_angle) * 1; // Adjust speed as needed
+        new_y -= sin(M_PI_2 + cube->player_angle) * 1; // Adjust speed as needed
         printf("Ax %f\n", new_x);
     }
     if (mlx_is_key_down(cube->mlx, MLX_KEY_D))
     {
-        new_x -= cos(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
-        new_y -= sin(M_PI_2 - cube->player_angle) * 1; // Adjust speed as needed
+        new_x += cos(M_PI_2 + cube->player_angle) * 1; // Adjust speed as needed
+        new_y += sin(M_PI_2 + cube->player_angle) * 1; // Adjust speed as needed
         printf("Dx %f\n", new_x);
     }
     if (cube->map[(int)(new_y / cube->y_pixel)][(int)(new_x / cube->x_pixel)] != '1')
