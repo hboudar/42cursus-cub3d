@@ -12,7 +12,7 @@ MLX		=	../MLX42/build/libmlx42.a
 all: $(LIB) $(MLX) $(NAME)
 
 $(NAME): $(OBJ) $(LIB) $(MLX)
-	$(CC) $(OBJ) $(LIB) $(MLX) $(LINKS) -o $(NAME)
+	$(CC) $(OBJ) $(LIB) $(MLX) $(LINKS) -o $(NAME) -fsanitize=address -g
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 18:29:37 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/08/15 16:45:42 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
-#define WIDTH  1200
-#define HEIGHT 600
+#define WIDTH  1344
+#define HEIGHT 768
+#define TILE_SIZE 64
 
 typedef struct s_texture
 {
@@ -48,8 +49,6 @@ typedef struct s_cube
     t_texture texture;
     int     height;
     int     width;
-    double    x_pixel;
-    double    y_pixel;
     double     fd;
     double     playerX;
     double     playerY;
