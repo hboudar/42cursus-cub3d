@@ -1,9 +1,9 @@
 NAME	=	cub3D
-SRC		=	cub3d.c cub3d_map.c cub3d_utils.c cub3d_utils2.c cub3d_map2.c 
+SRC		=	cub3d.c cub3d_map.c cub3d_utils.c cub3d_utils2.c cub3d_map2.c ray_casting.c map.c
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	cub3d.h
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra
 LINKS	=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
 RM		=	rm -f
 LIB		=	./utils/libft.a
