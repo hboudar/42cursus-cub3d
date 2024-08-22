@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:13:58 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/08/21 16:27:32 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void    get_element(t_cube *cube, char *str, char mode)
         ft_eraser(cube, NULL, NULL, "Error : ft_split failed 1\n");
     if (tmp[0] != NULL && tmp[1] != NULL && tmp[2] == NULL)
     {
-        (mode == 'N') && (cube->texture.no = ft_strdup(tmp[1]));
-        (mode == 'S') && (cube->texture.so = ft_strdup(tmp[1]));
-        (mode == 'W') && (cube->texture.we = ft_strdup(tmp[1]));
-        (mode == 'E') && (cube->texture.ea = ft_strdup(tmp[1]));
-        (mode == 'F') && (cube->texture.f = get_rgb(cube, tmp));
-        (mode == 'C') && (cube->texture.c = get_rgb(cube, tmp));
-        cube->texture.flag++;
+        (mode == 'N') && (cube->textures.no = ft_strdup(tmp[1]));
+        (mode == 'S') && (cube->textures.so = ft_strdup(tmp[1]));
+        (mode == 'W') && (cube->textures.we = ft_strdup(tmp[1]));
+        (mode == 'E') && (cube->textures.ea = ft_strdup(tmp[1]));
+        (mode == 'F') && (cube->textures.f = get_rgb(cube, tmp));
+        (mode == 'C') && (cube->textures.c = get_rgb(cube, tmp));
+        cube->textures.flag++;
     }
     else
         ft_eraser(cube, tmp, NULL, "Error : Wrong format\n");

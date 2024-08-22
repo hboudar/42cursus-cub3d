@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:13:55 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/08/21 16:27:23 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void    parse_textures(t_cube *cube, int i)
             get_element(cube, cube->file[i], 'C');
         i++;
     }
-    if (cube->texture.flag != 6)
+    if (cube->textures.flag != 6)
         ft_error("Error : elements are not valid\n");
-    else if (!cube->texture.no || !cube->texture.so || !cube->texture.we
-        || !cube->texture.ea || !cube->texture.f || !cube->texture.c)
+    else if (!cube->textures.no || !cube->textures.so || !cube->textures.we
+        || !cube->textures.ea || !cube->textures.f || !cube->textures.c)
         ft_error("Error : an element is missing\n");
 }
 

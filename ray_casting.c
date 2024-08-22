@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:11:35 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/18 19:11:48 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:37:47 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,177 +15,116 @@
 #include <stdio.h>
 
 
-// void    right_rays(t_cube *cube, mlx_image_t *image, double angle)
-// {
-//     (void)image;
-//     double y_oriz = 0;
-//     double x_oriz = (int)(cube->player_X_pixel / TILE_SIZE + 1) * TILE_SIZE;
-//     while (1)
-//     {
-//         // horizontal intersection
-//         double h = cube->player_X_pixel - x_oriz;
-//         y_oriz = cube->player_Y_pixel - (tan(angle) * h);
-//         cube->orizontal_position_x = x_oriz;
-//         cube->orizontal_position_y = y_oriz;
-//         // printf("im here\n");
-//         if (y_oriz >= HEIGHT || y_oriz < 0)
-//             break;
-//         // mlx_put_pixel(image, x_oriz, y_oriz, ft_pixel(0x00, 0xFF, 0x0F, 0xFF));
-//         if (cube->map[(int)(y_oriz / TILE_SIZE)][(int)((x_oriz + 4) / TILE_SIZE)] == '1')
-//             break;
-//         x_oriz += TILE_SIZE;
-//         if (x_oriz >= WIDTH)
-//             break;
-//     }
-//     // red color
-//     // mlx_put_pixel(image, cube->orizontal_position_x, cube->orizontal_position_y, ft_pixel(0xFF, 0x00, 0x00, 0xFF)); // red
-//     double x_vert = 0;
-//     double y_vert = (int)(cube->player_Y_pixel / TILE_SIZE) * TILE_SIZE;
-//     while (1)
-//     {
-//         // vertical intersection
-//         double h = cube->player_Y_pixel - y_vert;
-//          x_vert = (cube->player_X_pixel - (h / tan(angle)));
-//         cube->vertical_position_x = x_vert;
-//         cube->vertical_position_y = y_vert;
-//         if (tan(angle) == 0)
-//             break;
-//         if (x_vert >= WIDTH || x_vert < 0) 
-//             break;
-//         // mlx_put_pixel(image, x_vert, y_vert, ft_pixel(0x00, 0xFF, 0x0F, 0xFF));
-//         if (cube->map[(int)(y_vert / TILE_SIZE)][(int)(x_vert / TILE_SIZE)] == '1' || cube->map[(int)((y_vert) / TILE_SIZE)][(int)(x_vert / TILE_SIZE)] == '1')
-//             break;
-//         y_vert -= TILE_SIZE;
-//         if (y_vert <= 0)
-//             break;
-//     }
-//     // mlx_put_pixel(image, cube->vertical_position_x, cube->vertical_position_y, ft_pixel(0xFF, 0xFF, 0x00, 0xFF)); // yellow 
-// }
-
-void    left_right_rays(t_cube *cube, mlx_image_t *image, double angle)
+int check_wall(double x, double y, t_cube *cube)
 {
-    (void)image;
-    double y_oriz = 0;
-    double x_oriz = (int)(cube->player_X_pixel / TILE_SIZE) * TILE_SIZE;
-    if (angle > M_PI + M_PI_2 && angle <= 2 * M_PI)
-        x_oriz += TILE_SIZE;
-    else
-        x_oriz -= 0.0001;
+
+    int map_x = floor(x / TILE_SIZE);
+    int map_y = floor(y / TILE_SIZE);
+    if (map_x < 0 || map_x >= cube->columx || map_y < 0 || map_y >= cube->columy)
+        return (1);
+    return (cube->map[map_y][map_x] == '1');
+}
+
+void get_oriz(t_cube *cube, double angle)
+{
+    double y_intercept = floor(cube->player_Y_pixel / TILE_SIZE) * TILE_SIZE;
+    if (cube->facing_down)
+        y_intercept += TILE_SIZE;
+    double x_intercept = cube->player_X_pixel + (y_intercept - cube->player_Y_pixel) / tan(angle);
+
+    double y_step = TILE_SIZE;
+    double x_step = TILE_SIZE / tan(angle);
+    if (cube->facing_up)
+        y_step *= -1;
+    
+    if (cube->facing_right && x_step < 0)
+        x_step *= -1;
+    if (cube->facing_left && x_step > 0)
+        x_step *= -1;
+    
+    if (cube->facing_up)
+        y_intercept--;
     while (1)
     {
-        // horizontal intersection
-        double h = cube->player_X_pixel - x_oriz;
-         y_oriz = (cube->player_Y_pixel - (tan(angle) * h));
-        cube->orizontal_position_x = x_oriz;
-        cube->orizontal_position_y = y_oriz;
-        if (y_oriz >= HEIGHT || y_oriz < 0)
-            break;;
-        if (cube->map[(int)(y_oriz / TILE_SIZE)][(int)(x_oriz / TILE_SIZE)] == '1')
+        if (check_wall(x_intercept, y_intercept, cube))
+        {
+            cube->orizontal_position_x = x_intercept;
+            cube->orizontal_position_y = y_intercept;
             break;
-        // if (cube->map[(int)(y_oriz / TILE_SIZE)][(int)(x_oriz / TILE_SIZE)] == '1')
-        //     break;
-        if (angle > M_PI + M_PI_2 && angle <= 2 * M_PI)
-            x_oriz += TILE_SIZE;
+        }
         else
-            x_oriz -= TILE_SIZE;
-        if (x_oriz <= 0 || x_oriz >= WIDTH)
-            break;
+        {
+            x_intercept += x_step;
+            y_intercept += y_step;
+        }
     }
-    double x_vert = 0;
-    double y_vert = (int)(cube->player_Y_pixel / TILE_SIZE) * TILE_SIZE - 0.0001;
-    while(1)
+}    
+
+void get_vert(t_cube *cube, double angle)
+{
+    double x_intercept = floor(cube->player_X_pixel / TILE_SIZE) * TILE_SIZE;
+    if (cube->facing_right)
+        x_intercept += TILE_SIZE;
+    double y_intercept = cube->player_Y_pixel + (x_intercept - cube->player_X_pixel) * tan(angle);
+
+    double x_step = TILE_SIZE;
+    double y_step = TILE_SIZE * tan(angle);
+    if (cube->facing_left)
+        x_step *= -1;
+    
+    if (cube->facing_down && y_step < 0)
+        y_step *= -1;
+    if (cube->facing_up && y_step > 0)
+        y_step *= -1;
+
+    if (cube->facing_left)
+        x_intercept--;
+    while (1)
     {
-        double h = cube->player_Y_pixel - y_vert;
-         x_vert = (cube->player_X_pixel - (h / tan(angle)));
-        cube->vertical_position_x = x_vert;
-        cube->vertical_position_y = y_vert;
-        if (tan(angle) == 0)
+        if (check_wall(x_intercept, y_intercept, cube))
+        {
+            cube->vertical_position_x = x_intercept;
+            cube->vertical_position_y = y_intercept;
             break;
-        if (x_vert >= WIDTH || x_vert < 0)
-            break;
-        if (cube->map[(int)(y_vert / TILE_SIZE)][(int)(x_vert / TILE_SIZE)] == '1')
-            break;
-        y_vert -= TILE_SIZE;
-        if (y_vert <= 0)
-            break;
+        }
+        else
+        {
+            x_intercept += x_step;
+            y_intercept += y_step;
+        }
     }
+
 }
 
-void    down_rightrays(t_cube *cube, mlx_image_t *image, double angle)
+double smallest_distance(t_cube *cube)
 {
-    (void)image;
-    double x_ver =   0;
-    double y_ver = (int)(cube->player_Y_pixel / TILE_SIZE + 1) * TILE_SIZE;
-    while (1)
-    {
-        double h = cube->player_Y_pixel - y_ver;
-         x_ver = (cube->player_X_pixel - (h / tan(angle)));
-        cube->orizontal_position_x = x_ver;
-        cube->orizontal_position_y = y_ver;
-        if (x_ver >= WIDTH || x_ver < 0)
-            break;
-        if (cube->map[(int)(y_ver / TILE_SIZE)][(int)(x_ver / TILE_SIZE)] == '1')
-            break;
-        y_ver += TILE_SIZE;
-        if (y_ver >= WIDTH)
-            break;
-    }
-    double y_oriz = 0;
-    double x_oriz = (int)(cube->player_X_pixel / TILE_SIZE + 1) * TILE_SIZE;
-    while (1)
-    {
-        double h = cube->player_X_pixel - x_oriz;
-         y_oriz = (cube->player_Y_pixel - (tan(angle) * h));
-        cube->vertical_position_x = x_oriz;
-        cube->vertical_position_y = y_oriz;
-        if (tan(angle) == 0)
-            break;
-        if (y_oriz >= HEIGHT || y_oriz < 0)
-            return;
-        
-        if (cube->map[(int)(y_oriz / TILE_SIZE)][(int)(x_oriz / TILE_SIZE)] == '1')
-            break;
-        x_oriz += TILE_SIZE;
-        if (x_oriz >= WIDTH)
-            break;
-    }
+    double distance_oriz = sqrt(pow(cube->player_X_pixel - cube->orizontal_position_x, 2) + pow(cube->player_Y_pixel - cube->orizontal_position_y, 2));
+    double distance_vert = sqrt(pow(cube->player_X_pixel - cube->vertical_position_x, 2) + pow(cube->player_Y_pixel - cube->vertical_position_y, 2));
+    if (distance_oriz < distance_vert)
+        return (distance_oriz);
+    return (distance_vert);
+}
+void cast_ray(t_cube *cube, double angle)
+{
+    angle = normalize_angle(angle);
+    cube->facing_down = angle > 0 && angle < M_PI;
+    cube->facing_up = !cube->facing_down;
+    cube->facing_right = angle < 0.5 * M_PI || angle > 1.5 * M_PI;
+    cube->facing_left = !cube->facing_right;
+    get_oriz(cube, angle);
+    get_vert(cube, angle);
+    cube->true_distance = smallest_distance(cube);
 }
 
-void    down_leftrays(t_cube *cube, mlx_image_t *image, double angle)
+void ray_casting(t_cube *cube, mlx_image_t *image)
 {
-    (void)image;
-    double x_oriz = (int)(cube->player_X_pixel / TILE_SIZE) * TILE_SIZE - 0.0001;
-    double y_oriz = 0;
-    while (1)
+    double angle = normalize_angle(cube->player_angle) - (FOV / 2);
+    int rays = -1;
+    while (++rays < WIDTH)
     {
-        double h = cube->player_X_pixel - x_oriz;
-         y_oriz = (cube->player_Y_pixel - (tan(angle) * h));
-        cube->vertical_position_x = x_oriz;
-        cube->vertical_position_y = y_oriz;
-        if (tan(angle) == 0)
-            break;
-        if (y_oriz >= HEIGHT || y_oriz < 0)
-            break;
-        if (cube->map[(int)(y_oriz / TILE_SIZE)][(int)(x_oriz / TILE_SIZE)] == '1' )
-            break;
-        x_oriz -= TILE_SIZE;
-        if (x_oriz < 0)
-            break;
-    }
-    double y_vert = (int)(cube->player_Y_pixel / TILE_SIZE + 1) * TILE_SIZE;
-    double x_vert = 0;
-    while (1)
-    {
-        double h = cube->player_Y_pixel - y_vert;
-         x_vert = (cube->player_X_pixel - (h / tan(angle)));
-        cube->orizontal_position_x = x_vert;
-        cube->orizontal_position_y = y_vert;
-        if (x_vert >= WIDTH || x_vert < 0)
-            break;
-        if (cube->map[(int)(y_vert / TILE_SIZE)][(int)(x_vert / TILE_SIZE)] == '1' )
-            break;
-        y_vert += TILE_SIZE;
-        if (y_vert >= HEIGHT)
-           break;
+        cast_ray(cube, angle);
+        // draw_utils(cube, image, angle);
+        render_wall(cube, image, angle, rays);
+        angle += FOV / WIDTH;
     }
 }
