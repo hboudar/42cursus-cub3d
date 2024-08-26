@@ -6,30 +6,40 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/08/22 16:46:24 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/25 19:49:45 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "./utils/libft.h"
+# include "../utils/libft.h"
 # include <stdio.h> //to be removed
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
-#define WIDTH  1720
-#define HEIGHT 740
+#define WIDTH  1792
+#define HEIGHT 768
 #define TILE_SIZE 64
 #define MINI_MAP_T 14
-#define FOV 60 * (M_PI / 180)
-#define SPEED 3
+#define FOV 60 * (M_PI / 180) //  = 1.0471975511965976,  60 degrees in radians
+#define SPEED 5
+#define ROTATION_SPEED 0.05
 #define SPEED_MINI 1
 #define TURN 3 * (M_PI / 180)
+#define WIDRH_MINI 240
+#define HEIGHT_MINI 176
 
+enum e_direction
+{
+    NORTH = 0,
+    SOUTH = 1,
+    WEST = 2,
+    EAST = 3,
+};
 typedef struct s_texture
 {
     int     flag;
@@ -52,7 +62,11 @@ typedef struct s_cube
     void	*mlx;
     // mlx_image_t *img;
     mlx_image_t* image;
-    mlx_texture_t* texture;
+    mlx_texture_t* wall_1;
+    mlx_texture_t* wall_2;
+    mlx_texture_t* wall_3;
+    mlx_texture_t* wall_4;
+    mlx_texture_t *weapon;
     char    **file;
     char    **map;
     char    *fd_file;
@@ -79,6 +93,11 @@ typedef struct s_cube
     int  LEFT_DOWN_RAYS;
     int  RIGHT_UP_RAYS;
     int  LEFT_UP_RAYS;
+    int32_t mouseX;
+    int32_t mouseY;
+    int up;
+    double ray_intercept;
+    enum e_direction direction;
 }   t_cube;
 
 // Parsing
@@ -114,11 +133,12 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void    rander_map(t_cube *cube, mlx_image_t *image);
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void get_player_position(t_cube *cube);
+void ft_hook(void* param);
 
 
 // ray_casting
 void ray_casting(t_cube *cube, mlx_image_t *image);
 void draw_utils(t_cube *cube, mlx_image_t *image, double angle);
-void render_wall(t_cube *cube, mlx_image_t *image, double angle, int ray);
-
+void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
+int    get_pixel(mlx_texture_t *texture, int x, int y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:17:20 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/21 11:02:57 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/25 19:53:53 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void ft_render_pixel(int32_t x, int32_t y, int32_t color, mlx_image_t *image)
     double i, j;
     i = 0;
     j = 0;
-    while (i < 14 - 1)
+    while (i < TILE_SIZE - 3)
     {
         j = 0;
-        while (j < 14 - 1)
+        while (j < TILE_SIZE - 3)
         {
-            mlx_put_pixel(image, x * 14 + i + 1, y * 14 + j + 1, color);
+            mlx_put_pixel(image, x * TILE_SIZE + i + 1, y * TILE_SIZE + j + 1, color);
             j++;
         }
         i++;
@@ -46,7 +46,6 @@ void    draw_utils(t_cube *cube, mlx_image_t *image, double angle)
          mlx_put_pixel(image, x, y, ft_pixel(0xFF, 0x00, 0x00, 0xFF));
          j++;
      }
-    
 }
 
 
@@ -70,6 +69,5 @@ void rander_map(t_cube *cube, mlx_image_t *image)
         }
         x++;
     }
-    
 }
 
