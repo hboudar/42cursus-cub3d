@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 15:13:56 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/08/26 16:44:44 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void check_player(char c, t_cube *cube)
+{
+    (c == 'W') && (cube->player_init_dir = W);
+    (c == 'N') && (cube->player_init_dir = N);
+    (c == 'S') && (cube->player_init_dir = S);
+    (c == 'E') && (cube->player_init_dir = E);
+}
 int check_elem(char **map, t_cube *cube)
 {
     int x;
@@ -25,19 +32,19 @@ int check_elem(char **map, t_cube *cube)
         y = 0;  
         while (map[x][y])
         {
+            check_player(map[x][y], cube);
             if (map[x][y] != '0' && map[x][y] != '1' && map[x][y] != 'N' 
                 && map[x][y] != 'S' && map[x][y] != 'W' && map[x][y] != 'E'
-                    && map[x][y] != ' ')
+                    && map[x][y] != ' ' && map[x][y] != 'D')
                 return (0);
             else if (map[x][y] == 'N' || map[x][y] == 'S'
                 || map[x][y] == 'W' || map[x][y] == 'E')
                 count++;
             y++;
         }
-        (y > cube->width) && (cube->width = y);
         x++;
     }
-    cube->height = x;
+    printf("direction : %d\n", cube->player_init_dir);
     return (count);
 }
 
@@ -62,20 +69,21 @@ int check_map(char **map, int x, int y)
             return (0);
         while (map[x][y])
         {
-            if ((map[x][y] == '0' || map[x][y] == 'N' || map[x][y] == 'S' || map[x][y] == 'W' || map[x][y] == 'E') \
+            if ((map[x][y] == '0' || map[x][y] == 'N' || map[x][y] == 'S' || map[x][y] == 'W' || map[x][y] == 'E' || map[x][y] == 'D') \
                 && (map[x + 1][y] && map[x - 1][y] && map[x][y + 1] && map[x][y - 1]))
             {
-                if (map[x + 1][y] != '0' && map[x + 1][y] != '1' && map[x + 1][y] != 'N' && map[x + 1][y] != 'S' && map[x + 1][y] != 'W' && map[x + 1][y] != 'E')
+                if (map[x + 1][y] != '0' && map[x + 1][y] != '1' && map[x + 1][y] != 'N' && map[x + 1][y] != 'S' && map[x + 1][y] != 'W' && map[x + 1][y] != 'E' && map[x + 1][y] != 'D')
                     return (0);
-                if (map[x - 1][y] != '0' && map[x - 1][y] != '1' && map[x - 1][y] != 'N' && map[x - 1][y] != 'S' && map[x - 1][y] != 'W' && map[x - 1][y] != 'E')
-                    return (0);
-                if (map[x][y + 1] != '0' && map[x][y + 1] != '1' && map[x][y + 1] != 'N' && map[x][y + 1] != 'S' && map[x][y + 1] != 'W' && map[x][y + 1] != 'E')
-                    return (0);
-                if (map[x][y - 1] != '0' && map[x][y - 1] != '1' && map[x][y - 1] != 'N' && map[x][y - 1] != 'S' && map[x][y - 1] != 'W' && map[x][y - 1] != 'E')
-                    return (0);
+                if (map[x - 1][y] != '0' && map[x - 1][y] != '1' && map[x - 1][y] != 'N' && map[x - 1][y] != 'S' && map[x - 1][y] != 'W' && map[x - 1][y] != 'E' && map[x - 1][y] != 'D')
+                    return (0) ;
+                if (map[x][y + 1] != '0' && map[x][y + 1] != '1' && map[x][y + 1] != 'N' && map[x][y + 1] != 'S' && map[x][y + 1] != 'W' && map[x][y + 1] != 'E' && map[x][y + 1] != 'D')
+                    return (0) ;
+                if (map[x][y - 1] != '0' && map[x][y - 1] != '1' && map[x][y - 1] != 'N' && map[x][y - 1] != 'S' && map[x][y - 1] != 'W' && map[x][y - 1] != 'E' && map[x][y - 1] != 'D')
+                    return (0) ;
             }
+             
             else if (map[x][y] == '0' || map[x][y] == 'N' \
-                || map[x][y] == 'S' || map[x][y] == 'W' || map[x][y] == 'E')
+                || map[x][y] == 'S' || map[x][y] == 'W' || map[x][y] == 'E' || map[x][y] == 'D')
                 return (0);
             y++;
         }

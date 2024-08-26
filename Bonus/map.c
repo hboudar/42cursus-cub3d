@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:17:20 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/25 19:53:53 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:05:23 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void ft_render_pixel(int32_t x, int32_t y, int32_t color, mlx_image_t *image)
     double i, j;
     i = 0;
     j = 0;
-    while (i < TILE_SIZE - 3)
+    while (i < MINI_MAP_T)
     {
         j = 0;
-        while (j < TILE_SIZE - 3)
+        while (j < MINI_MAP_T)
         {
-            mlx_put_pixel(image, x * TILE_SIZE + i + 1, y * TILE_SIZE + j + 1, color);
+            mlx_put_pixel(image, x * MINI_MAP_T + i + 1, y * MINI_MAP_T + j + 1, color);
             j++;
         }
         i++;
@@ -63,7 +63,7 @@ void rander_map(t_cube *cube, mlx_image_t *image)
                ft_render_pixel( y, x, ft_pixel(0xFF, 0xFF, 0xFF, 0xFF), image); // White
             else if (cube->map[x][y] == '0' || cube->map[x][y] == ' ')
                ft_render_pixel( y, x, ft_pixel(0x00, 0x00, 0x00, 0xFF), image); // Black
-            else if (cube->map[x][y] == 'W')
+            else if (cube->map[x][y] == 'W' || cube->map[x][y] == 'N' || cube->map[x][y] == 'S' || cube->map[x][y] == 'E')
                 ft_render_pixel( y, x, ft_pixel(0x00, 0x00, 0x00, 0xFF), image); // Black
             y++;
         }

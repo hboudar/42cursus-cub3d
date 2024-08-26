@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:13:22 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/25 20:24:07 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:37:47 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,51 +38,35 @@ void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray)
     
     int walltop_pixel = (HEIGHT / 2) - (wallstripheight / 2);
     int wallbottom_pixel = (HEIGHT / 2) + (wallstripheight / 2);
-    // wallbottom_pixel += cube->up;
-    // walltop_pixel += cube->up;
-    
     if (wallbottom_pixel > HEIGHT)
         wallbottom_pixel = HEIGHT;
-        
     if (walltop_pixel < 0)
         walltop_pixel = 0;
     if (wallstripheight >= HEIGHT)
         walltop_pixel -= (wallstripheight - HEIGHT) / 2;
-
     int j = 0;
     while (j < walltop_pixel)
     {
         mlx_put_pixel(image, ray, j, ft_pixel(cube->textures.c[0], cube->textures.c[1], cube->textures.c[2], 0xFF)); // Sky blue
         j++;
     }
-    // if (cube->ray_intercept < 0)
-    //     cube->ray_intercept = 0;
-    if (cube->direction == EAST)
-        texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_1->width / TILE_SIZE;
-    else if (cube->direction == WEST)
-        texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_4->width / TILE_SIZE;
-    else if (cube->direction == NORTH)
-        texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_2->width / TILE_SIZE;
-    else if (cube->direction == SOUTH)
-        texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_3->width / TILE_SIZE;
+    (cube->direction == DOOR) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->door->width / TILE_SIZE);
+    (cube->direction == EAST) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_1->width / TILE_SIZE);
+    (cube->direction == WEST) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_2->width / TILE_SIZE);
+    (cube->direction == NORTH) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_3->width / TILE_SIZE);
+    (cube->direction == SOUTH) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_4->width / TILE_SIZE);
     while (j < wallbottom_pixel)
     {
-        if (cube->direction == EAST)
-            texture_y = (j - walltop_pixel) * cube->wall_1->height / wallstripheight;
-        else if (cube->direction == WEST)
-            texture_y = (j - walltop_pixel) * cube->wall_4->height / wallstripheight;
-        else if (cube->direction == NORTH)
-            texture_y = (j - walltop_pixel) * cube->wall_2->height / wallstripheight;
-        else if (cube->direction == SOUTH)
-            texture_y = (j - walltop_pixel) * cube->wall_3->height / wallstripheight;
-        if (cube->direction == EAST)
-            color = get_pixel(cube->wall_1, texture_x, texture_y);
-        else if (cube->direction == WEST)
-            color = get_pixel(cube->wall_4, texture_x, texture_y);
-        else if (cube->direction == NORTH)
-            color = get_pixel(cube->wall_2, texture_x, texture_y);
-        else if (cube->direction == SOUTH)
-            color = get_pixel(cube->wall_3, texture_x, texture_y);
+        (cube->direction == DOOR) && (texture_y = (j - walltop_pixel) * cube->door->height / wallstripheight);
+        (cube->direction == EAST) && (texture_y = (j - walltop_pixel) * cube->wall_1->height / wallstripheight);
+        (cube->direction == WEST) && (texture_y = (j - walltop_pixel) * cube->wall_2->height / wallstripheight);
+        (cube->direction == NORTH) && (texture_y = (j - walltop_pixel) * cube->wall_3->height / wallstripheight);
+        (cube->direction == SOUTH) && (texture_y = (j - walltop_pixel) * cube->wall_4->height / wallstripheight);
+        (cube->direction == DOOR) && (color = get_pixel(cube->door, texture_x, texture_y));
+        (cube->direction == EAST) && (color = get_pixel(cube->wall_1, texture_x, texture_y));
+        (cube->direction == WEST) && (color = get_pixel(cube->wall_2, texture_x, texture_y));
+        (cube->direction == NORTH) && (color = get_pixel(cube->wall_3, texture_x, texture_y));
+        (cube->direction == SOUTH) && (color = get_pixel(cube->wall_4, texture_x, texture_y));
         mlx_put_pixel(image, ray, j, color);
         j++;
     }

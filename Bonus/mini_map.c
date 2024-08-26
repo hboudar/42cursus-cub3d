@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:18:43 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/24 16:25:01 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:01:06 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void draw_mini_map(t_cube *cube, mlx_image_t *image)
         if (end_x > cube->columx) end_x = cube->columx;
         while(start_x < end_x)
         {
-            if (!cube->map[start_y][start_x] || cube->map[start_y][start_x] != '1')
+            if (!cube->map[start_y][start_x] || (cube->map[start_y][start_x] != '1'))
             {
                 if (!cube->map[start_y][start_x])
                     break;

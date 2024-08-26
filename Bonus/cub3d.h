@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/08/25 19:49:45 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:48:30 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,26 @@
 #define MINI_MAP_T 14
 #define FOV 60 * (M_PI / 180) //  = 1.0471975511965976,  60 degrees in radians
 #define SPEED 5
-#define ROTATION_SPEED 0.05
+#define ROTATION_SPEED 0.06
 #define SPEED_MINI 1
-#define TURN 3 * (M_PI / 180)
+// #define TURN 3 * (M_PI / 180)
 #define WIDRH_MINI 240
 #define HEIGHT_MINI 176
 
+enum e_deir
+{
+    N = 0,
+    S = 1,
+    W = 2,
+    E = 3
+};
 enum e_direction
 {
     NORTH = 0,
     SOUTH = 1,
     WEST = 2,
     EAST = 3,
+    DOOR = 4
 };
 typedef struct s_texture
 {
@@ -67,6 +75,7 @@ typedef struct s_cube
     mlx_texture_t* wall_3;
     mlx_texture_t* wall_4;
     mlx_texture_t *weapon;
+    mlx_texture_t *door;
     char    **file;
     char    **map;
     char    *fd_file;
@@ -98,6 +107,13 @@ typedef struct s_cube
     int up;
     double ray_intercept;
     enum e_direction direction;
+    double last_shot_time;
+    double weapon_pos;
+    int door_ray;
+    enum e_deir player_init_dir;
+    int x_ray;
+    int y_ray;
+    int flag_door;
 }   t_cube;
 
 // Parsing
@@ -137,8 +153,9 @@ void ft_hook(void* param);
 
 
 // ray_casting
-void ray_casting(t_cube *cube, mlx_image_t *image);
-void draw_utils(t_cube *cube, mlx_image_t *image, double angle);
-void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
-int    get_pixel(mlx_texture_t *texture, int x, int y);
+void    ray_casting(t_cube *cube, mlx_image_t *image);
+void    draw_utils(t_cube *cube, mlx_image_t *image, double angle);
+void    render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
+int     get_pixel(mlx_texture_t *texture, int x, int y);
+void cast_ray(t_cube *cube, double angle, int i);
 #endif

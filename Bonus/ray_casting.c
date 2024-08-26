@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:11:35 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/26 11:15:43 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:53:40 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 
-int check_wall(double x, double y, t_cube *cube)
+int check_wall(double x, double y, t_cube *cube, int i)
 {
 
     int map_x = floor(x / TILE_SIZE);
@@ -24,12 +24,17 @@ int check_wall(double x, double y, t_cube *cube)
         return (1);
     if ((int)ft_strlen(cube->map[map_y]) <= map_x)
         return (1);
-    if (cube->map[map_y][map_x] == '1')
+    if (cube->map[map_y][map_x] == '2' && i == 1)
+    {
+        cube->flag_door = 1;
+        cube->map[map_y][map_x] = 'D';
+    }
+    if (cube->map[map_y][map_x] == '1' || cube->map[map_y][map_x] == 'D')
         return (1);
     return (0);
 }
 
-void get_oriz(t_cube *cube, double angle)
+void get_oriz(t_cube *cube, double angle, int i)
 {
     double y_intercept = floor(cube->player_Y_pixel / TILE_SIZE) * TILE_SIZE;
     if (cube->facing_down)
@@ -50,7 +55,7 @@ void get_oriz(t_cube *cube, double angle)
         y_intercept -= 0.0001;
     while (1)
     {
-        if (check_wall(x_intercept, y_intercept, cube))
+        if (check_wall(x_intercept, y_intercept, cube, i))
         {
             cube->orizontal_position_x = x_intercept;
             cube->orizontal_position_y = y_intercept;
@@ -64,7 +69,7 @@ void get_oriz(t_cube *cube, double angle)
     }
 }    
 
-void get_vert(t_cube *cube, double angle)
+void get_vert(t_cube *cube, double angle, int i)
 {
     double x_intercept = floor(cube->player_X_pixel / TILE_SIZE) * TILE_SIZE;
     if (cube->facing_right)
@@ -85,7 +90,7 @@ void get_vert(t_cube *cube, double angle)
         x_intercept -= 0.0001; 
     while (1)
     {
-        if (check_wall(x_intercept, y_intercept, cube))
+        if (check_wall(x_intercept, y_intercept, cube, i))
         {
             cube->vertical_position_x = x_intercept;
             cube->vertical_position_y = y_intercept;
@@ -101,32 +106,42 @@ void get_vert(t_cube *cube, double angle)
 
 double smallest_distance(t_cube *cube, double angle)
 {
+    (void)angle;
     double distance_oriz = sqrt(pow(cube->player_X_pixel - cube->orizontal_position_x, 2) + pow(cube->player_Y_pixel - cube->orizontal_position_y, 2));
     double distance_vert = sqrt(pow(cube->player_X_pixel - cube->vertical_position_x, 2) + pow(cube->player_Y_pixel - cube->vertical_position_y, 2));
     if (distance_oriz < distance_vert)
     {
+        // if (cube->x_ray != -0&& 
+        cube->x_ray = cube->orizontal_position_x;
+        cube->y_ray = cube->orizontal_position_y;
         cube->ray_intercept = cube->orizontal_position_x;
-        if (cube->facing_up)
+        if (cube->map[(int)(cube->orizontal_position_y / TILE_SIZE)][(int)(cube->orizontal_position_x / TILE_SIZE)] == 'D')
+            cube->direction = DOOR;
+        else if (cube->facing_up)
             cube->direction = WEST;
         else if (cube->facing_down)
             cube->direction = EAST;
         return (distance_oriz);
     }
     cube->ray_intercept = cube->vertical_position_y;
-    if (cube->facing_left)
+    if (cube->map[(int)(cube->vertical_position_y / TILE_SIZE)][(int)(cube->vertical_position_x / TILE_SIZE)] == 'D')
+        cube->direction = DOOR;
+    else if (cube->facing_left)
         cube->direction = NORTH;
     else if (cube->facing_right)
         cube->direction = SOUTH;
+    cube->x_ray = cube->vertical_position_x;
+    cube->y_ray = cube->vertical_position_y;
     return (distance_vert);
 }
-void cast_ray(t_cube *cube, double angle)
+void cast_ray(t_cube *cube, double angle, int i)
 {
     cube->facing_down = angle > 0 && angle < M_PI;
     cube->facing_up = !cube->facing_down;
     cube->facing_right = angle < (0.5 * M_PI) || angle > (1.5 * M_PI);
     cube->facing_left = !cube->facing_right;
-    get_oriz(cube, angle);
-    get_vert(cube, angle);
+    get_oriz(cube, angle, i);
+    get_vert(cube, angle, i);
     cube->true_distance = smallest_distance(cube, angle);
 }
 
@@ -134,10 +149,10 @@ void ray_casting(t_cube *cube, mlx_image_t *image)
 {
     double angle = normalize_angle(cube->player_angle) - (FOV / 2);
     int rays = -1;
-    rander_map(cube, image);
+    // rander_map(cube, image);
     while (++rays < WIDTH)
     {
-        cast_ray(cube, angle);
+        cast_ray(cube, angle, 0);
         // draw_utils(cube, image, angle);
         render_wall(cube, image, angle, rays);
         angle += FOV / WIDTH;

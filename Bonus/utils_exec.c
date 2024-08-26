@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:19:44 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/22 16:20:17 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:12:23 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void get_player_position(t_cube *cube)
         x = 0;
         while (cube->map[y][x])
         {
-            if (cube->map[y][x] == 'W')
+            if (cube->map[y][x] == 'W' || cube->map[y][x] == 'N' || cube->map[y][x] == 'S' || cube->map[y][x] == 'E')
             {
                 cube->player_X_pixel = x * TILE_SIZE + TILE_SIZE / 2;
                 cube->player_Y_pixel = y * TILE_SIZE + TILE_SIZE / 2;
