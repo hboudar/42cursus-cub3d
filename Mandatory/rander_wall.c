@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:13:22 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/28 11:37:24 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:55:33 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int    get_pixel(mlx_texture_t *texture, int x, int y)
     int    index;
 
     index = (y * texture->width + x) * texture->bytes_per_pixel;
-    // if (index < 0 || index >= (texture->width * texture->height * texture->bytes_per_pixel))
-    //     return (0);
     return (ft_pixel(texture->pixels[index], texture->pixels[index + 1],
             texture->pixels[index + 2], texture->pixels[index + 3]));
 }
@@ -47,19 +45,15 @@ void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray)
         mlx_put_pixel(image, ray, j, ft_pixel(cube->textures.c[0], cube->textures.c[1], cube->textures.c[2], 0xFF)); // Sky blue
         j++;
     }
-    (cube->direction == DOOR) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->door->width / TILE_SIZE);
     (cube->direction == EAST) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_1->width / TILE_SIZE);
     (cube->direction == WEST) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_2->width / TILE_SIZE);
     (cube->direction == NORTH) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_3->width / TILE_SIZE);
     (cube->direction == SOUTH) && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_4->width / TILE_SIZE);
     while (j < wallbottom_pixel)
-    {
-        (cube->direction == DOOR) && (texture_y = (j - walltop_pixel) * cube->door->height / wallstripheight);
-        (cube->direction == EAST) && (texture_y = (j - walltop_pixel) * cube->wall_1->height / wallstripheight);
+    {        (cube->direction == EAST) && (texture_y = (j - walltop_pixel) * cube->wall_1->height / wallstripheight);
         (cube->direction == WEST) && (texture_y = (j - walltop_pixel) * cube->wall_2->height / wallstripheight);
         (cube->direction == NORTH) && (texture_y = (j - walltop_pixel) * cube->wall_3->height / wallstripheight);
         (cube->direction == SOUTH) && (texture_y = (j - walltop_pixel) * cube->wall_4->height / wallstripheight);
-        (cube->direction == DOOR) && (color = get_pixel(cube->door, texture_x, texture_y));
         (cube->direction == EAST) && (color = get_pixel(cube->wall_1, texture_x, texture_y));
         (cube->direction == WEST) && (color = get_pixel(cube->wall_2, texture_x, texture_y));
         (cube->direction == NORTH) && (color = get_pixel(cube->wall_3, texture_x, texture_y));

@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/08/28 14:40:27 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:53:11 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ enum e_deir
 	W = 2,
 	E = 3
 };
+
 enum e_direction
 {
 	NORTH = 0,
@@ -74,9 +75,6 @@ typedef struct s_cube
 	mlx_texture_t		*wall_2;
 	mlx_texture_t		*wall_3;
 	mlx_texture_t		*wall_4;
-	mlx_texture_t		*weapon;
-	mlx_texture_t		*door;
-	mlx_texture_t		*sprite;
 	char				**file;
 	char				**map;
 	char				*fd_file;
@@ -103,13 +101,9 @@ typedef struct s_cube
 	int32_t				mouse_y;
 	double				ray_intercept;
 	enum e_direction	direction;
-	double				last_shot_time;
-	double				weapon_pos;
-	int					door_ray;
 	enum e_deir			player_init_dir;
-	int					x_ray;
-	int					y_ray;
-	int					flag_door;
+	// int					x_ray;
+	// int					y_ray;
 	int					map_x;
 	int					map_y;
 	int					map_x_left;
@@ -158,6 +152,6 @@ void	ray_casting(t_cube *cube, mlx_image_t *image);
 void	draw_utils(t_cube *cube, mlx_image_t *image, double angle);
 void	render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
 int		get_pixel(mlx_texture_t *texture, int x, int y);
-void	cast_ray(t_cube *cube, double angle, int i);
+void	cast_ray(t_cube *cube, double angle);
 
 #endif
