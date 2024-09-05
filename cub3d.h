@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/31 14:53:11 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/05 13:32:02 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,19 @@ typedef struct s_cube
 }   t_cube;
 
 
+//parsing functions
+void    is_map_valid(int argc, char *argv[], t_cube *cube);
+
+void    check_map_name(int argc, char *name, int i);
+void    initialize_list(t_cube *cube, char *map);
+void    get_element_test_version(t_cube *cube, char *element);
+
 void    parse_textures(t_cube *cube, int i);
 void    parse_mape(t_cube *cube, char *tmp1, char **tmp2, int i);
 int     parse_mape2(t_cube *cube);
 
 
 //utils
-void    ft_init_texture(t_cube *cube);
-void	is_map_valid(int argc, char *argv[], t_cube *cube);
 void    get_element(t_cube *cube, char *str, char mode);
 void    ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
 void    take_map(t_cube *cube, int i, int j, int k);

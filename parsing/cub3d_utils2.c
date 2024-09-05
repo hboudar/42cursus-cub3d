@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/05 11:06:59 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:25:13 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ void    ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg)
     (tmp) && (free(tmp), tmp = NULL);
     (rgb) && (free(rgb), rgb = NULL);
     ft_error(msg);
-}
-
-void    ft_init_texture(t_cube *cube)
-{
-    cube->map_len = 0;
-    cube->file_len = 0;
-    cube->texture.flag = 0;
-    cube->height = 0;
-    cube->width = 0;
-    cube->file = NULL;
-    cube->map = NULL;
-    cube->texture.no = NULL;
-    cube->texture.so = NULL;
-    cube->texture.we = NULL;
-    cube->texture.ea = NULL;
-    cube->texture.f = NULL;
-    cube->texture.c = NULL;
 }
 
 int    skip_line(t_cube *cube, int i, int mode)

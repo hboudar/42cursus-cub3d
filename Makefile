@@ -5,7 +5,7 @@ OBJ		=	$(SRC:.c=.o)
 HEADER	=	cub3d.h
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-LINKS	=	-Iinclude -lglfw -L/Users/hboudar/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
+LINKS	=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
 RM		=	rm -f
 LIB		=	./utils/libft.a
 MLX		=	../../MLX42/build/libmlx42.a
@@ -21,7 +21,7 @@ $(NAME): $(OBJ) $(LIB) $(MLX)
 $(LIB):
 	@$(MAKE) -C utils
 $(MLX):
-	@cd ../../MLX42/build && make
+	@cd ../MLX42 && cmake -B build && cmake --build build -j4
 
 clean:
 	$(MAKE) -C utils clean
@@ -29,7 +29,6 @@ clean:
 
 fclean: clean
 	@cd utils && make fclean
-# 	@cd ../../MLX42/build && make clean
 	$(RM) $(NAME)
 
 re: fclean all

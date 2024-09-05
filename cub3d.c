@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:57 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/05 11:07:13 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:47:35 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 // {
 //     return (r << 24 | g << 16 | b << 8 | a);
 // }
-
-
 // void get_player_position(t_cube *cube)
 // {
 //     int x = 0;
@@ -40,7 +38,6 @@
 //         x++;
 //     }
 // }
-
 // void ft_render_pixel_player(int32_t color, t_cube *cube)
 // {
 //     int i, j;
@@ -54,7 +51,6 @@
 //             mlx_put_pixel(image, cube->player_X_pixel + j, cube->player_Y_pixel - i, color);
 //         }
 //     }
-
 //             // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
 //             // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
 //             // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
@@ -69,8 +65,6 @@
 //             // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
 //             // mlx_put_pixel(image, cube->player_X_pixel + j--, cube->player_Y_pixel + i++ , color);
 // }
-
-
 // void ft_render_pixel(int32_t x, int32_t y, int32_t color, t_cube *cube)
 // {
 //     int i, j;
@@ -82,7 +76,6 @@
 //         }
 //     }
 // }
-
 // void ft_randomize(void* param)
 // {
 //     t_cube* cube = (t_cube *)param;
@@ -99,7 +92,6 @@
 //                ft_render_pixel( y, x, ft_pixel(0x00, 0x00, 0x00, 0xFF), cube); // Black
 //             else if (cube->map[x][y] == 'W')
 //                 ft_render_pixel( y, x, ft_pixel(0x0, 0xF0, 0xD0, 0xFF), cube); // Turquoise
-
 //             y++;
 //         }
 //         x++;
@@ -109,7 +101,6 @@
 // void ft_hook(void* param)
 // {
 //     t_cube *cube = (t_cube *)param;
-
 //     if (mlx_is_key_down(cube->mlx, MLX_KEY_ESCAPE))
 //         mlx_close_window(cube->mlx);
 //     // int x_in_map = cube->playerX / cube->x_pixel;
@@ -117,7 +108,6 @@
 //     // // Calculate new player position
 //     int new_x = cube->player_X_pixel;
 //     int new_y = cube->player_Y_pixel;
-
 //     if (mlx_is_key_down(cube->mlx, MLX_KEY_W))
 //         new_y -= 1; // Move left
 //     if (mlx_is_key_down(cube->mlx, MLX_KEY_S))
@@ -126,7 +116,6 @@
 //         new_x -= 1; // Move up
 //     if (mlx_is_key_down(cube->mlx, MLX_KEY_D))
 //         new_x += 1; // Move down
-
 //     // printf("%c\n", cube->map[(int)(new_y / cube->y_pixel)][(int)(new_x / cube->x_pixel)]);
 //     if (cube->map[(int)(new_y  / cube->y_pixel)][(int)(new_x / cube->x_pixel)] == '0' || cube->map[(int)(new_y / cube->y_pixel)][(int)(new_x / cube->x_pixel)] == 'W')
 //     {
@@ -135,26 +124,18 @@
 //     }
 //     // Redraw the map and player
 //     ft_randomize(cube);
-
 // }
-
-
-
 
 int main(int argc, char **argv)
 {
     t_cube cube;
 
     is_map_valid(argc, argv, &cube);
-    parse_textures(&cube, 0);
-    parse_mape(&cube, NULL, NULL, 6);
     int a = parse_mape2(&cube);
     if (a == 1)                                              
         ft_error("Error : Map is invalid 2\n");
-
     // cube.mlx = mlx_init((int32_t)WIDTH , (int32_t)HEIGHT, "MLX42", false);
     // image = mlx_new_image(cube.mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
-	
     // cube.x_pixel = (float)WIDTH / (float)cube.width;
     // cube.y_pixel = (float)HEIGHT / (float)cube.height;
     // printf("x_pixel = %f\n", cube.x_pixel);
@@ -168,3 +149,15 @@ int main(int argc, char **argv)
     // mlx_loop(cube.mlx);
     return (EXIT_SUCCESS);
 }
+
+/*
+        libft used :
+    ft_strlen
+    ft_strjoin
+    get_next_line
+    ft_split
+    ft_substr
+    ft_strdup
+    ft_memcpy
+    ft_strncmp
+*/
