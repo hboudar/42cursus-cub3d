@@ -6,11 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/07/29 18:30:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/05 11:06:59 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void    ft_error(char *msg)
 {
