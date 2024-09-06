@@ -1,10 +1,10 @@
-NO ./path_to_the_north_texture.cub
+NO ./path_to_the_north_texture  .cub
 
-SO ./path_to_the_south_texture.cub
+SO     ./path_to_the_south_texture  .cub
 
-WE ./path_to_the_west_texture.cub
+WE ./path_to_the_west_texture                    .cub
 
-EA ./path_to_the_east_texture.cub
+EA ./path_to_the_east_texture   . cub   
 
 F 220,250,0
 

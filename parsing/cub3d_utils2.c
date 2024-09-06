@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/05 11:25:13 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/06 15:52:42 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,14 @@ void    take_map(t_cube *cube, int i, int j, int k)
         }
     }
     cube->map[j] = NULL;
+}
+
+int skip_space(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i] && str[i] == ' ')
+        i++;
+    return (i);
 }

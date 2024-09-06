@@ -6,13 +6,13 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/05 13:42:46 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/06 15:56:38 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    parse_mape(t_cube *cube, char *tmp1, char **tmp2, int i)
+void    parse_map(t_cube *cube, char *tmp1, char **tmp2, int i)
 {
     tmp1 = ft_strtrim(cube->file[i], "1 ");
     if (!ft_strchr(cube->file[i], '1') || (tmp1 && tmp1[0] != '\0'))
@@ -23,7 +23,7 @@ void    parse_mape(t_cube *cube, char *tmp1, char **tmp2, int i)
         ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
     take_map(cube, 0, 0, 0);
     i = 0;
-    while (ft_strlen(cube->map[i]) == 0 || just_space(cube->map[i]))
+    while (ft_strlen(cube->map[i]) == 0 || skip_space(cube->map[i]))
         i++;
     tmp2 = (char **)malloc(sizeof(char *) * ((cube->file_len - 6 - i) + 1));
     if (!tmp2)
@@ -47,17 +47,17 @@ void    parse_textures(t_cube *cube, int i)
     while (cube->file[i] && i < 7)
     {
         if (!ft_strncmp(cube->file[i], "NO ", 3))
-            get_element_test_version(cube, cube->file[i]);
+            get_element(cube, cube->file[i], 'N');
         else if (!ft_strncmp(cube->file[i], "SO ", 3))
-            get_element_test_version(cube, cube->file[i]);
+            get_element(cube, cube->file[i], 'S');
         else if (!ft_strncmp(cube->file[i], "WE ", 3))
-            get_element_test_version(cube, cube->file[i]);
+            get_element(cube, cube->file[i], 'W');
         else if (!ft_strncmp(cube->file[i], "EA ", 3))
-            get_element_test_version(cube, cube->file[i]);
+            get_element(cube, cube->file[i], 'E');
         else if (!ft_strncmp(cube->file[i], "F ", 2))
-            get_element_test_version(cube, cube->file[i]);
+            get_element(cube, cube->file[i], 'F');
         else if (!ft_strncmp(cube->file[i], "C ", 2))
-            get_element_test_version(cube, cube->file[i]);
+            get_element(cube, cube->file[i], 'C');
         i++;
     }
     if (cube->texture.flag != 6)
@@ -88,5 +88,7 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
         ft_eraser(cube, NULL,
             (void *)tmp, "Error : ft_split failed\n");
     parse_textures(cube, 0);
-    parse_mape(cube, NULL, NULL, 6);
+    parse_map(cube, NULL, NULL, 6);
+    if (parse_mape2(cube) == 1)                                     
+        ft_error("Error : Map is invalid 2\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/05 13:38:52 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/06 15:52:58 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ static int    costum_atoi(char *str, int *index)
     return (res);
 }
 
-static int    *get_rgb(t_cube *cube, char **tmp)
+static int    *get_rgb(t_cube *cube, char **tmp,  int *rgb)
 {
     int f;
     int j;
     int i;
-    int *rgb;
 
+    if (!tmp)
+        ft_eraser(cube, NULL, NULL, "Error : ft_split failed 1\n");
     (1) && (i = 0, f = 0, j = 0, rgb = malloc(sizeof(int) * 3));
     if (!rgb)
         ft_eraser(cube, tmp, NULL, "Error : malloc failed\n");
@@ -54,33 +55,11 @@ static int    *get_rgb(t_cube *cube, char **tmp)
     }
     if (f != 2 || rgb[0] == -1 || rgb[1] == -1 || rgb[2] == -1)
         ft_eraser(cube, tmp, rgb, "Error : Wrong RGB format\n");
-    return (rgb);
-}
-
-void    get_element(t_cube *cube, char *str, char mode)
-{
-    int i;
-    char **tmp;
-
     i = 0;
-    tmp = ft_split(str, ' ');
-    if (!tmp)
-        ft_eraser(cube, NULL, NULL, "Error : ft_split failed 1\n");
-    if (tmp[0] != NULL && tmp[1] != NULL && tmp[2] == NULL)
-    {
-        (mode == 'N') && (cube->texture.no = ft_strdup(tmp[1]));
-        (mode == 'S') && (cube->texture.so = ft_strdup(tmp[1]));
-        (mode == 'W') && (cube->texture.we = ft_strdup(tmp[1]));
-        (mode == 'E') && (cube->texture.ea = ft_strdup(tmp[1]));
-        (mode == 'F') && (cube->texture.f = get_rgb(cube, tmp));
-        (mode == 'C') && (cube->texture.c = get_rgb(cube, tmp));
-        cube->texture.flag++;
-    }
-    else
-        ft_eraser(cube, tmp, NULL, "Error : Wrong format\n");
     while (tmp[i])
         free(tmp[i++]);
     free(tmp);
+    return (rgb);
 }
 
 void    initialize_list(t_cube *cube, char *map)
@@ -121,25 +100,24 @@ void check_map_name(int argc, char *name, int i)
         ft_error("Error : File is not readable\n");
 }
 
-void    get_element_test_version(t_cube *cube, char *element)
+void    get_element(t_cube *cube, char *element, char mode)
 {
-    char *tmp = NULL;
-    int *tmp2 = NULL;
+    int start;
 
-    if (element[0] == 'N' && element[1] == 'O')
-        tmp = ft_substr(element, 3, ft_strlen(element) - 3);
-    else if (element[0] == 'S' && element[1] == 'O')
-        tmp = ft_substr(element, 3, ft_strlen(element) - 3);
-    else if (element[0] == 'W' && element[1] == 'E')
-        tmp = ft_substr(element, 3, ft_strlen(element) - 3);
-    else if (element[0] == 'E' && element[1] == 'A')
-        tmp = ft_substr(element, 3, ft_strlen(element) - 3);
-    else if (element[0] == 'F')
-        tmp2 = get_rgb(cube, ft_split(element, ' '));
-    else if (element[0] == 'C')
-        tmp2 = get_rgb(cube, ft_split(element, ' '));
-    if (element[0] == 'F' || element[0] == 'C')
-        printf ("tmp2 : {%d, %d, %d}\n", tmp2[0], tmp2[1], tmp2[2]);
+    (mode != 'F' && mode != 'C') && (start = skip_space(element + 3));
+    if (mode == 'N')
+        cube->texture.no = ft_substr(element, start, ft_strlen(element) - 3);
+    else if (mode == 'S')
+        cube->texture.so = ft_substr(element, start, ft_strlen(element) - 3);
+    else if (mode == 'W')
+        cube->texture.we = ft_substr(element, start, ft_strlen(element) - 3);
+    else if (mode == 'E')
+        cube->texture.ea = ft_substr(element, start, ft_strlen(element) - 3);
+    else if (mode == 'F')
+        cube->texture.f = get_rgb(cube, ft_split(element, ' '), NULL);
+    else if (mode == 'C')
+        cube->texture.c = get_rgb(cube, ft_split(element, ' '), NULL);
     else
-        printf ("tmp : {%s}\n", tmp);
+        ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
+    cube->texture.flag++;
 }
