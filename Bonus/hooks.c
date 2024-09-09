@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:07:33 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/28 11:38:31 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:25:27 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,11 @@ void	ft_hook(void *param)
 	}
 	else
 		tab_key_f = 0;
+
+	if (mlx_is_key_down(cube->mlx, MLX_KEY_END))
+	{
+		if (cube->init_screen == 0)
+			cube->init_screen = 1;
+	}
 }
 

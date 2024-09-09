@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:17:23 by aghounam          #+#    #+#             */
-/*   Updated: 2024/08/30 10:58:10 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:16:24 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,34 @@ void	rander_weapons(mlx_image_t *image, mlx_texture_t *picture)
 void	ft_randomize(void *param)
 {
 	t_cube	*cube;
-
+	static int i = 0;
 	cube = (t_cube *)param;
 	ft_hook(cube);
 	ft_mouse_hook(cube);
 	weapon_shoot(cube);
 	mlx_delete_image(cube->mlx, cube->image);
 	cube->image = mlx_new_image(cube->mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
-	ray_casting(cube, cube->image);
-	draw_mini_map(cube, cube->image);
-	rander_weapons(cube->image, cube->weapon);
-	// rander_weapons(cube, cube->image, cube->sprite);
-	sprite_animation(cube, cube->image);
+	if (cube->init_screen == 0)
+	{
+		if (i == 0)
+			cube->start_screen = mlx_load_png("textures/start2.png");
+		else if (i == 20)
+			cube->start_screen = mlx_load_png("textures/start1.png");
+		i++;
+		if (i == 30)
+			i = 0;
+		if (cube->start_screen)
+			start_image(cube);
+		else
+			ft_error("Error\nFailed to load start screen");
+	}
+	else
+	{
+		ray_casting(cube, cube->image);
+		draw_mini_map(cube, cube->image);
+		rander_weapons(cube->image, cube->weapon);
+		// rander_weapons(cube, cube->image, cube->sprite);
+		sprite_animation(cube, cube->image);
+	}	
 	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
 }

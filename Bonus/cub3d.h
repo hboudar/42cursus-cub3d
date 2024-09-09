@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/08/28 14:40:27 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/09/05 19:02:39 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
-# define WIDTH  1792
-# define HEIGHT 768
+# define WIDTH  1536
+# define HEIGHT 700
 # define TILE_SIZE 64
 # define MINI_MAP_T 14
 # define FOV 1.0471975511965976 // 60 degrees
@@ -77,6 +77,7 @@ typedef struct s_cube
 	mlx_texture_t		*weapon;
 	mlx_texture_t		*door;
 	mlx_texture_t		*sprite;
+	mlx_texture_t		*start_screen;
 	char				**file;
 	char				**map;
 	char				*fd_file;
@@ -116,6 +117,7 @@ typedef struct s_cube
 	int					map_x_right;
 	int					map_y_up;
 	int					map_y_down;
+	int					init_screen;
 }	t_cube;
 
 // Parsing
@@ -159,5 +161,7 @@ void	draw_utils(t_cube *cube, mlx_image_t *image, double angle);
 void	render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
 int		get_pixel(mlx_texture_t *texture, int x, int y);
 void	cast_ray(t_cube *cube, double angle, int i);
+
+void start_image(t_cube *cube);
 
 #endif

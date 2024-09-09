@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/08/30 12:53:11 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:41:00 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		parse_mape2(t_cube *cube);
 //utils parsing
 void	ft_init_texture(t_cube *cube);
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
-void	get_element(t_cube *cube, char *str, char mode);
+void	get_element(t_cube *cube, char *str);
 void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
 void	take_map(t_cube *cube, int i, int j, int k);
 void	ft_error(char *msg);

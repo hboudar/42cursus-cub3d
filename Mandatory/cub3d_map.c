@@ -6,7 +6,7 @@
 /*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/08/27 12:14:07 by aghounam         ###   ########.fr       */
+/*   Updated: 2024/09/05 20:47:46 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ void	parse_textures(t_cube *cube, int i)
 	while (cube->file[i] && i < 7)
 	{
 		if (!ft_strncmp(cube->file[i], "NO ", 3))
-			get_element(cube, cube->file[i], 'N');
+			get_element(cube, cube->file[i]);
 		else if (!ft_strncmp(cube->file[i], "SO ", 3))
-			get_element(cube, cube->file[i], 'S');
+			get_element(cube, cube->file[i]);
 		else if (!ft_strncmp(cube->file[i], "WE ", 3))
-			get_element(cube, cube->file[i], 'W');
+			get_element(cube, cube->file[i]);
 		else if (!ft_strncmp(cube->file[i], "EA ", 3))
-			get_element(cube, cube->file[i], 'E');
+			get_element(cube, cube->file[i]);
 		else if (!ft_strncmp(cube->file[i], "F ", 2))
-			get_element(cube, cube->file[i], 'F');
+			get_element(cube, cube->file[i]);
 		else if (!ft_strncmp(cube->file[i], "C ", 2))
-			get_element(cube, cube->file[i], 'C');
+			get_element(cube, cube->file[i]);
 		i++;
 	}
 	if (cube->textures.flag != 6)
