@@ -6,17 +6,32 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:57 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 11:23:38 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:37:53 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
+
 
 void	key_press(void *arg)
 {
 	t_cube	*cube;
 
 	cube = (t_cube *)arg;
+	if (mlx_is_key_down(cube->mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(cube->mlx);
+		exit(EXIT_SUCCESS);
+	}
+	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
+}
+
+void	ft_render(void *arg)
+{
+	t_cube	*cube;
+
+	cube = (t_cube *)arg;
+	// player_position(cube);
 	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
 }
 
@@ -25,8 +40,8 @@ void	init_exec(t_cube *cube)
 	cube->mlx = mlx_init((int32_t)WIDTH, (int32_t)HEIGHT, "MLX42", false);
 	cube->image = mlx_new_image(cube->mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
 	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
-	mlx_loop_hook(cube->mlx, key_press, cube);
-	// mlx_loop(cube->mlx);
+	mlx_loop_hook(cube->mlx, ft_render, cube);
+	mlx_loop(cube->mlx);
 	// get_player_position(cube);
 	// cube->wall_1 = mlx_load_png(cube->textures.no);
 	// cube->wall_2 = mlx_load_png(cube->textures.so);
@@ -47,7 +62,5 @@ int	main(int argc, char *argv[])
 
 	is_map_valid(argc, argv, &cube);
 	init_exec(&cube);
-	// mlx_loop_hook(cube.mlx, ft_randomize, &cube);
-	// mlx_loop(cube.mlx);
 	return (EXIT_SUCCESS);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_utils2.c                                     :+:      :+:    :+:   */
+/*   utils_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/27 16:26:27 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/08 15:52:54 by hboudar          ###   ########.fr       */
+/*   Created: 2024/09/10 14:36:47 by hboudar           #+#    #+#             */
+/*   Updated: 2024/09/10 14:37:03 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 void	ft_error(char *msg)
 {
@@ -34,58 +34,4 @@ void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg)
 	(tmp) && (free(tmp), tmp = NULL);
 	(rgb) && (free(rgb), rgb = NULL);
 	ft_error(msg);
-}
-
-int	skip_line(t_cube *cube, int i, int mode)
-{
-	if (mode)
-	{
-		mode = 0;
-		while (cube->fd_file[i] && cube->fd_file[i] != '\n')
-			(1) && (i++, mode++);
-		if (cube->fd_file[i] == '\n')
-			(1) && (i++, mode++);
-	}
-	else
-	{
-		while (cube->fd_file[i] && cube->fd_file[i] != '\n')
-		{
-			i++;
-			mode++;
-		}
-	}
-	return (mode);
-}
-
-void	take_map(t_cube *cube, int i, int j, int k)
-{
-	while (cube->fd_file[i])
-	{
-		if (cube->fd_file[i] == 'N' || cube->fd_file[i] == 'S'
-			|| cube->fd_file[i] == 'W' || cube->fd_file[i] == 'E'
-			|| cube->fd_file[i] == 'F' || cube->fd_file[i] == 'C')
-			i += skip_line(cube, i, 1);
-		else
-		{
-			k = 0;
-			cube->map[j] = malloc(sizeof(char) * (skip_line(cube, i, 0) + 1));
-			while (cube->fd_file[i] && cube->fd_file[i] != '\n')
-				(1) && (cube->map[j][k] = cube->fd_file[i], i++, k++);
-			if (cube->fd_file[i] == '\n')
-				i++;
-			cube->map[j][k] = '\0';
-			j++;
-		}
-	}
-	cube->map[j] = NULL;
-}
-
-int	skip_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	return (i);
 }

@@ -6,18 +6,18 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/08 17:05:53 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:49:16 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "./utils/libft.h"
+# include "../utils/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include "../../MLX42/include/MLX42/MLX42.h"
+# include "../../../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
 # define WIDTH 800
@@ -52,15 +52,14 @@ typedef struct s_cube
 }	t_cube;
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube);//parsing
-void	parse_textures(t_cube *cube, int i);//parsing
-void	parse_map(t_cube *cube, char *tmp1, char **tmp2, int i);//parsing
-int		parse_mape2(t_cube *cube);//parsing
 
-void	initialize_list(t_cube *cube, char *map);//parsing utils
 void	check_map_name(int argc, char *name, int i);//parsing utils
+void	initialize_list(t_cube *cube, char *map);//parsing utils
+int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);//parsing utils
-void	take_map(t_cube *cube, int i, int j, int k);//parsing utils
+int		check_map(char **map, int x, int y);//parsing utils
 int		skip_space(char *str);//parsing utils
+int		skip_line(t_cube *cube, int i, int mode);//parsing utils
 
 void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);//utils
 void	ft_error(char *msg);//utils

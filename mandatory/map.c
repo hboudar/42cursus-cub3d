@@ -1,18 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_map.c                                        :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/08 15:50:52 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:48:12 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
-void	parse_map(t_cube *cube, char *tmp1, char **tmp2, int i)
+static void	take_map(t_cube *cube, int i, int j, int k)
+{
+	while (cube->fd_file[i])
+	{
+		if (cube->fd_file[i] == 'N' || cube->fd_file[i] == 'S'
+			|| cube->fd_file[i] == 'W' || cube->fd_file[i] == 'E'
+			|| cube->fd_file[i] == 'F' || cube->fd_file[i] == 'C')
+			i += skip_line(cube, i, 1);
+		else
+		{
+			k = 0;
+			cube->map[j] = malloc(sizeof(char) * (skip_line(cube, i, 0) + 1));
+			while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+				(1) && (cube->map[j][k] = cube->fd_file[i], i++, k++);
+			if (cube->fd_file[i] == '\n')
+				i++;
+			cube->map[j][k] = '\0';
+			j++;
+		}
+	}
+	cube->map[j] = NULL;
+}
+
+static int	parse_mape2(t_cube *cube)
+{
+	char	*tmp;
+	int		r;
+
+	r = check_elem(cube->map, cube);
+	if (!r || r != 1)
+		return (1);
+	r = check_map(cube->map, 1, 0);
+	if (r)
+	{
+		tmp = ft_strtrim(cube->map[r], "1 ");
+		if ((tmp && tmp[0] != '\0') || !ft_strlen(cube->map[r]))
+			ft_eraser(cube, NULL, (void *)tmp, "Error : invalid map\n");
+		(tmp) && (free (tmp), tmp = NULL);
+	}
+	else
+		return (1);
+	return (0);
+}
+
+static void	parse_map(t_cube *cube, char *tmp1, char **tmp2, int i)
 {
 	int	j;
 
@@ -41,7 +85,7 @@ void	parse_map(t_cube *cube, char *tmp1, char **tmp2, int i)
 	cube->map = tmp2;
 }
 
-void	parse_textures(t_cube *cube, int i)
+static void	parse_textures(t_cube *cube, int i)
 {
 	if (!cube->file)
 		ft_error("Error : ft_split failed\n");

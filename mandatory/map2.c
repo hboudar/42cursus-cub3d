@@ -1,46 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_map2.c                                       :+:      :+:    :+:   */
+/*   map2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/08 15:44:01 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:49:20 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
-int	check_elem(char **map, t_cube *cube)
+int	skip_space(char *str)
 {
-	int	count;
-	int	x;
-	int	y;
+	int	i;
 
-	(1) && (count = 0, x = 0);
-	while (map[x])
-	{
-		y = 0;
-		while (map[x][y])
-		{
-			if (map[x][y] != '0' && map[x][y] != '1' && map[x][y] != 'N'
-					&& map[x][y] != 'S' && map[x][y] != 'W' && map[x][y] != 'E'
-					&& map[x][y] != ' ')
-				return (0);
-			else if (map[x][y] == 'N' || map[x][y] == 'S'
-					|| map[x][y] == 'W' || map[x][y] == 'E')
-				count++;
-			y++;
-		}
-		(y > cube->width) && (cube->width = y);
-		x++;
-	}
-	cube->height = x;
-	return (count);
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	return (i);
 }
 
-int	next_check(char **map, int x, int y)
+int	skip_line(t_cube *cube, int i, int mode)
+{
+	if (mode)
+	{
+		mode = 0;
+		while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+			(1) && (i++, mode++);
+		if (cube->fd_file[i] == '\n')
+			(1) && (i++, mode++);
+	}
+	else
+	{
+		while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+		{
+			i++;
+			mode++;
+		}
+	}
+	return (mode);
+}
+
+static int	next_check(char **map, int x, int y)
 {
 	if (map[x + 1][y] != '0' && map[x + 1][y] != '1' &&
 			map[x + 1][y] != 'N' && map[x + 1][y] != 'S' &&
@@ -89,23 +92,30 @@ int	check_map(char **map, int x, int y)
 	return (x);
 }
 
-int	parse_mape2(t_cube *cube)
+int	check_elem(char **map, t_cube *cube)
 {
-	char	*tmp;
-	int		r;
+	int	count;
+	int	x;
+	int	y;
 
-	r = check_elem(cube->map, cube);
-	if (!r || r != 1)
-		return (1);
-	r = check_map(cube->map, 1, 0);
-	if (r)
+	(1) && (count = 0, x = 0);
+	while (map[x])
 	{
-		tmp = ft_strtrim(cube->map[r], "1 ");
-		if ((tmp && tmp[0] != '\0') || !ft_strlen(cube->map[r]))
-			ft_eraser(cube, NULL, (void *)tmp, "Error : invalid map\n");
-		(tmp) && (free (tmp), tmp = NULL);
+		y = 0;
+		while (map[x][y])
+		{
+			if (map[x][y] != '0' && map[x][y] != '1' && map[x][y] != 'N'
+					&& map[x][y] != 'S' && map[x][y] != 'W' && map[x][y] != 'E'
+					&& map[x][y] != ' ')
+				return (0);
+			else if (map[x][y] == 'N' || map[x][y] == 'S'
+					|| map[x][y] == 'W' || map[x][y] == 'E')
+				count++;
+			y++;
+		}
+		(y > cube->width) && (cube->width = y);
+		x++;
 	}
-	else
-		return (1);
-	return (0);
+	cube->height = x;
+	return (count);
 }

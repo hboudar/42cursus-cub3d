@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_utils.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/08 15:53:26 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:46:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 static int	costum_atoi(char *str, int *index)
 {
@@ -61,6 +61,28 @@ static int	*get_rgb(t_cube *cube, char **tmp, int *rgb)
 	return (rgb);
 }
 
+void	get_element(t_cube *cube, char *element, char mode)
+{
+	int	start;
+
+	(mode != 'F' && mode != 'C') && (start = skip_space(element + 3));
+	if (mode == 'N')
+		cube->texture.no = ft_substr(element, start, ft_strlen(element) - 3);
+	else if (mode == 'S')
+		cube->texture.so = ft_substr(element, start, ft_strlen(element) - 3);
+	else if (mode == 'W')
+		cube->texture.we = ft_substr(element, start, ft_strlen(element) - 3);
+	else if (mode == 'E')
+		cube->texture.ea = ft_substr(element, start, ft_strlen(element) - 3);
+	else if (mode == 'F')
+		cube->texture.f = get_rgb(cube, ft_split(element, ' '), NULL);
+	else if (mode == 'C')
+		cube->texture.c = get_rgb(cube, ft_split(element, ' '), NULL);
+	else
+		ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
+	cube->texture.flag++;
+}
+
 void	initialize_list(t_cube *cube, char *map)
 {
 	cube->fd = open(map, O_RDONLY);
@@ -96,26 +118,4 @@ void	check_map_name(int argc, char *name, int i)
 		ft_error("Error : File doesn't exist\n");
 	else if (access(name, R_OK) == -1)
 		ft_error("Error : File is not readable\n");
-}
-
-void	get_element(t_cube *cube, char *element, char mode)
-{
-	int	start;
-
-	(mode != 'F' && mode != 'C') && (start = skip_space(element + 3));
-	if (mode == 'N')
-		cube->texture.no = ft_substr(element, start, ft_strlen(element) - 3);
-	else if (mode == 'S')
-		cube->texture.so = ft_substr(element, start, ft_strlen(element) - 3);
-	else if (mode == 'W')
-		cube->texture.we = ft_substr(element, start, ft_strlen(element) - 3);
-	else if (mode == 'E')
-		cube->texture.ea = ft_substr(element, start, ft_strlen(element) - 3);
-	else if (mode == 'F')
-		cube->texture.f = get_rgb(cube, ft_split(element, ' '), NULL);
-	else if (mode == 'C')
-		cube->texture.c = get_rgb(cube, ft_split(element, ' '), NULL);
-	else
-		ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
-	cube->texture.flag++;
 }
