@@ -1,6 +1,6 @@
 NAME	=	cub3D
 SRC		=	cub3d.c \
-			mandatory/map.c mandatory/map2.c mandatory/utils.c mandatory/utils_error.c
+			mandatory/parsing1.c mandatory/parsing2.c mandatory/parsing_utils.c mandatory/error.c
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	cub3d.h
 CC		=	cc
