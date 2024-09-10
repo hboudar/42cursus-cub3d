@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:57 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:37:53 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:58:12 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ void	key_press(void *arg)
 		mlx_close_window(cube->mlx);
 		exit(EXIT_SUCCESS);
 	}
-	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
-}
-
-void	ft_render(void *arg)
-{
-	t_cube	*cube;
-
-	cube = (t_cube *)arg;
-	// player_position(cube);
 	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
 }
 

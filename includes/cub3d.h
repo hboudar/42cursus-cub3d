@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:49:16 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:58:48 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ int		check_map(char **map, int x, int y);//parsing utils
 int		skip_space(char *str);//parsing utils
 int		skip_line(t_cube *cube, int i, int mode);//parsing utils
 
-void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);//utils
-void	ft_error(char *msg);//utils
+void	ft_render(void *arg);//render
+
+void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);//error
+void	ft_error(char *msg);//error
 
 #endif
