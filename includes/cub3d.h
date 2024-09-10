@@ -6,13 +6,14 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:58:48 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 15:18:17 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdio.h>
 # include "../utils/libft.h"
 # include <stdlib.h>
 # include <unistd.h>

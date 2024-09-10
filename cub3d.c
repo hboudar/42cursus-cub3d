@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:57 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:58:12 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/10 15:25:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_exec(t_cube *cube)
 {
 	cube->mlx = mlx_init((int32_t)WIDTH, (int32_t)HEIGHT, "MLX42", false);
 	cube->image = mlx_new_image(cube->mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
-	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
 	mlx_loop_hook(cube->mlx, ft_render, cube);
 	mlx_loop(cube->mlx);
 	// get_player_position(cube);
@@ -52,6 +51,13 @@ int	main(int argc, char *argv[])
 	t_cube	cube;
 
 	is_map_valid(argc, argv, &cube);
-	init_exec(&cube);
+	// init_exec(&cube);
+	//print map :
+	int i = 0;
+	while (cube.map[i])
+	{
+		printf("%s\n", cube.map[i]);
+		i++;
+	}
 	return (EXIT_SUCCESS);
 }
