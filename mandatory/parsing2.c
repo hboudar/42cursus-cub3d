@@ -6,11 +6,12 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:56:16 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/12 11:50:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include <stdint.h>
 
 int	skip_space(char *str)
 {
@@ -20,6 +21,20 @@ int	skip_space(char *str)
 	while (str[i] && str[i] == ' ')
 		i++;
 	return (i);
+}
+
+int	just_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	skip_line(t_cube *cube, int i, int mode)
@@ -69,7 +84,7 @@ int	check_map(char **map, int x, int y)
 	while (map[x + 1] != NULL)
 	{
 		y = 0;
-		if (ft_strlen(map[x]) == 0 || skip_space(map[x]))
+		if (ft_strlen(map[x]) == 0 || just_space(map[x]))
 			return (0);
 		while (map[x][y])
 		{
@@ -113,7 +128,7 @@ int	check_elem(char **map, t_cube *cube)
 				count++;
 			y++;
 		}
-		(y > cube->width) && (cube->width = y);
+		((uint32_t)y > cube->width) && (cube->width = y);
 		x++;
 	}
 	cube->height = x;

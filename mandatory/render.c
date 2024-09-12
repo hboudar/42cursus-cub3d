@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 15:25:19 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/12 11:47:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,16 @@ static void render_map(t_cube *cube)
     int y;
 
     y = 0;
-    while (cube->map[y])
+    while (y < 10)
     {
-        printf("[%s]\n", cube->map[y]);
         x = 0;
-        // while (cube->map[y][x])
-        // {
-        //     printf("[%c]", cube->map[y][x]);
-        //     if (cube->map[y][x] == '1')
-        //         mlx_image_to_window(cube->mlx, cube->image, x, y);
-        //     else if (cube->map[y][x] == '0')
-        //         mlx_image_to_window(cube->mlx, cube->image, x, y);
-        //     else if (cube->map[y][x] == 'W')
-        //         mlx_image_to_window(cube->mlx, cube->image, x, y);
-        //     x++;
-        // }
+        while (x < 10)
+        {
+            mlx_put_pixel(cube->image, x * 100, y * 10, 0x00FF0000);
+            x++;
+        }
         y++;
     }
-    printf ("\n\n");
 }
 
 static void    hooks(t_cube *cube)
@@ -54,5 +46,4 @@ void	ft_render(void *arg)
 	cube = (t_cube *)arg;
 	hooks(cube);
     render_map(cube);
-	mlx_image_to_window(cube->mlx, cube->image, 0, 0);
 }

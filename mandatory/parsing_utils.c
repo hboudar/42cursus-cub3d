@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:54:48 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/12 11:42:39 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ void	get_element(t_cube *cube, char *element, char mode)
 void	initialize_list(t_cube *cube, char *map)
 {
 	cube->fd = open(map, O_RDONLY);
-	if (cube->fd == -1)
-		ft_error("Error : open failed\n");
+	(cube->fd == -1) && (ft_error("Error : open failed\n"));
 	cube->map_len = 0;
 	cube->len_file = 0;
 	cube->texture.flag = 0;

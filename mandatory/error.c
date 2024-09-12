@@ -6,13 +6,13 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:36:47 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/10 14:55:13 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/12 11:41:27 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_error(char *msg)
+int	ft_error(char *msg)
 {
 	ft_putstr_fd(msg, 2);
 	exit (EXIT_FAILURE);
