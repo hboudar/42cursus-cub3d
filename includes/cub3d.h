@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/12 11:50:22 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/12 15:34:30 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define WIDTH 1000
 # define HEIGHT 600
+# define TILE_SIZE 25
 
 typedef struct s_texture
 {
@@ -34,6 +35,12 @@ typedef struct s_texture
 	int		*f;
 	int		*c;
 }	t_texture;
+
+typedef struct s_vector
+{
+	int		x_map;
+	int		y_map;
+}	t_vector;
 
 typedef struct s_cube
 {
@@ -50,6 +57,7 @@ typedef struct s_cube
 	uint32_t	width;
 	int			fd;
 	t_texture	texture;
+	t_vector	player;
 }	t_cube;
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube);//parsing

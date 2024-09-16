@@ -6,12 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/12 11:50:40 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/12 15:22:12 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdint.h>
 
 int	skip_space(char *str)
 {
@@ -125,7 +124,7 @@ int	check_elem(char **map, t_cube *cube)
 				return (0);
 			else if (map[x][y] == 'N' || map[x][y] == 'S'
 					|| map[x][y] == 'W' || map[x][y] == 'E')
-				count++;
+				(1) && (count++, cube->player.x_map = x, cube->player.y_map = y);
 			y++;
 		}
 		((uint32_t)y > cube->width) && (cube->width = y);
