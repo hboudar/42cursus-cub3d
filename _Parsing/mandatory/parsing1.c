@@ -6,11 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/12 11:43:13 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 09:20:32 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	take_map(t_cube *cube, int i, int j, int k)
 {

@@ -6,11 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/12 15:00:54 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 09:20:29 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	costum_atoi(char *str, int *index)
 {

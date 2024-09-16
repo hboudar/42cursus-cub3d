@@ -6,11 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/12 11:47:41 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 09:27:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void render_map(t_cube *cube)
 {

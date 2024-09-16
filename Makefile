@@ -1,14 +1,15 @@
 NAME	=	cub3D
 SRC		=	cub3d.c \
-			mandatory/parsing1.c mandatory/parsing2.c mandatory/parsing_utils.c mandatory/error.c \
-			mandatory/render.c
+			_Parsing/mandatory/parsing1.c _Parsing/mandatory/parsing2.c _Parsing/mandatory/parsing_utils.c \
+			_Execution/mandatory/render.c \
+			error.c
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	includes/cub3d.h
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g
 LINKS	=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
 RM		=	rm -f
-LIB		=	./utils/libft.a
+LIB		=	./_Utils/libft.a
 MLX		=	../../MLX42/build/libmlx42.a
 
 all: $(LIB) $(MLX) $(NAME)
@@ -20,16 +21,16 @@ $(NAME): $(OBJ) $(LIB) $(MLX)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB):
-	@$(MAKE) -C utils
+	@$(MAKE) -C _Utils
 $(MLX):
 	@cd ../../MLX42 && cmake -B build && cmake --build build -j4
 
 clean:
-	$(MAKE) -C utils clean
+	$(MAKE) -C _Utils clean
 	$(RM) $(OBJ)
 
 fclean: clean
-	@cd utils && make fclean
+	@cd _Utils && make fclean
 	$(RM) $(NAME)
 #@cd ../../MLX42 && rm -rf build
 

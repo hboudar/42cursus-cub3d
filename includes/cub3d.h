@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/12 15:34:30 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 09:33:38 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include <stdio.h>
-# include "../utils/libft.h"
+# include "../_Utils/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
