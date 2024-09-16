@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/16 09:20:29 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:49:01 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	get_element(t_cube *cube, char *element, char mode)
 {
 	int	start;
 
-	(mode != 'F' && mode != 'C') && (start = skip_space(element + 3));
+	(mode != 'F' && mode != 'C') && (start = skip_space(element + 3, 0));
 	if (mode == 'N')
 		cube->texture.no = ft_substr(element, start, ft_strlen(element) - 3);
 	else if (mode == 'S')
@@ -100,8 +100,8 @@ void	initialize_list(t_cube *cube, char *map)
 	cube->texture.ea = NULL;
 	cube->texture.f = NULL;
 	cube->texture.c = NULL;
-	cube->player.x_map = 0;
-	cube->player.y_map = 0;
+	cube->player.x = 0;
+	cube->player.y = 0;
 }
 
 void	check_map_name(int argc, char *name, int i)

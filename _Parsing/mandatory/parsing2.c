@@ -6,34 +6,33 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/16 09:20:34 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:51:27 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	skip_space(char *str)
+int	skip_space(char *str, int mode)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	return (i);
-}
-
-int	just_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
+	if (!mode)
 	{
-		if (str[i] != ' ')
-			return (0);
-		i++;
+		while (str[i] && str[i] == ' ')
+			i++;
 	}
-	return (1);
+	else
+	{
+		while (str[i])
+		{
+			if (str[i] != ' ')
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+	return (i);
 }
 
 int	skip_line(t_cube *cube, int i, int mode)
@@ -83,7 +82,7 @@ int	check_map(char **map, int x, int y)
 	while (map[x + 1] != NULL)
 	{
 		y = 0;
-		if (ft_strlen(map[x]) == 0 || just_space(map[x]))
+		if (ft_strlen(map[x]) == 0 || skip_space(map[x], 1))
 			return (0);
 		while (map[x][y])
 		{
@@ -112,24 +111,24 @@ int	check_elem(char **map, t_cube *cube)
 	int	x;
 	int	y;
 
-	(1) && (count = 0, x = 0);
-	while (map[x])
+	(1) && (count = 0, y = 0);
+	while (map[y])
 	{
-		y = 0;
-		while (map[x][y])
+		x = 0;
+		while (map[y][x])
 		{
-			if (map[x][y] != '0' && map[x][y] != '1' && map[x][y] != 'N'
-					&& map[x][y] != 'S' && map[x][y] != 'W' && map[x][y] != 'E'
-					&& map[x][y] != ' ')
+			if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'N'
+					&& map[y][x] != 'S' && map[y][x] != 'W' && map[y][x] != 'E'
+					&& map[y][x] != ' ')
 				return (0);
-			else if (map[x][y] == 'N' || map[x][y] == 'S'
-					|| map[x][y] == 'W' || map[x][y] == 'E')
-				(1) && (count++, cube->player.x_map = x, cube->player.y_map = y);
-			y++;
+			else if (map[y][x] == 'N' || map[y][x] == 'S'
+					|| map[y][x] == 'W' || map[y][x] == 'E')
+				(1) && (count++, cube->player.x = x, cube->player.y = y);
+			x++;
 		}
-		((uint32_t)y > cube->width) && (cube->width = y);
-		x++;
+		((uint32_t)y > cube->width) && (cube->width = x);
+		y++;
 	}
-	cube->height = x;
+	cube->height = y;
 	return (count);
 }

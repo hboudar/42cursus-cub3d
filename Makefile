@@ -1,8 +1,8 @@
 NAME	=	cub3D
 SRC		=	cub3d.c \
 			_Parsing/mandatory/parsing1.c _Parsing/mandatory/parsing2.c _Parsing/mandatory/parsing_utils.c \
-			_Execution/mandatory/render.c \
-			error.c
+			_Execution/mandatory/render.c _Execution/mandatory/render_utils.c \
+			_Utils/error.c
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	includes/cub3d.h
 CC		=	cc
@@ -32,6 +32,6 @@ clean:
 fclean: clean
 	@cd _Utils && make fclean
 	$(RM) $(NAME)
-	@cd ../../MLX42 && rm -rf build
+# @cd ../../MLX42 && rm -rf build
 
 re: fclean all

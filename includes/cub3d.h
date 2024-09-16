@@ -6,18 +6,18 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/16 09:33:38 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:48:27 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
+// # include <stdio.h>
+// # include <stdlib.h>
+// # include <math.h>
 # include "../_Utils/libft.h"
-# include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 # include "../../../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 
@@ -38,8 +38,8 @@ typedef struct s_texture
 
 typedef struct s_vector
 {
-	int		x_map;
-	int		y_map;
+	uint32_t	x;
+	uint32_t	y;
 }	t_vector;
 
 typedef struct s_cube
@@ -67,11 +67,12 @@ void	initialize_list(t_cube *cube, char *map);//parsing utils
 int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);//parsing utils
 int		check_map(char **map, int x, int y);//parsing utils
-int		skip_space(char *str);//parsing utils
-int		just_space(char *str);//parsing utils
+int		skip_space(char *str, int mode);//parsing utils
 int		skip_line(t_cube *cube, int i, int mode);//parsing utils
 
-void	ft_render(void *arg);//render
+void	mini_map(void *arg);//render
+
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);//render utils
 
 void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);//error
 int		ft_error(char *msg);//error
