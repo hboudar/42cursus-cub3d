@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/17 12:20:04 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:59:38 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 32
+# define TILE_SIZE 60
+# define ROTATION_SPEED 5
+# define DEG_TO_RAD
+# define MOVE_SPEED 5
 
 typedef struct s_texture
 {
@@ -37,14 +40,15 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-	uint32_t	x;
-	uint32_t	y;
-	int			radius;//radius 3
-	double		turn_direction;//turn direction 0     //left -1 right +1
-	double		walk_direction;//walk direction 0     //back -1 front +1
-	double		rotation_angle;//rotation angle math.pi/2
-	double		move_speed;//move speed 3.0
-	double		rotation_speed;//rotation speed 3 * (math.pi / 180)
+	char	player;
+	double	x;
+	double	y;
+	int		radius;//radius 3
+	double	turn_direction;//turn direction 0     //left -1 right +1
+	double	walk_direction;//walk direction 0     //back -1 front +1
+	double	rotation_angle;//rotation angle math.pi/2
+	double	move_speed;//move speed 3.0
+	double	rotation_speed;//rotation speed 3 * (math.pi / 180)
 }	t_player;
 
 typedef struct s_cube
@@ -58,8 +62,8 @@ typedef struct s_cube
 	char		**file;
 	int			len_file;
 	char		*fd_file;
-	uint32_t	height;
-	uint32_t	width;
+	int			height;
+	int			width;
 	int			fd;
 	t_texture	texture;
 	t_player	player;

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/16 17:51:27 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/19 13:02:37 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,11 @@ int	check_elem(char **map, t_cube *cube)
 				return (0);
 			else if (map[y][x] == 'N' || map[y][x] == 'S'
 					|| map[y][x] == 'W' || map[y][x] == 'E')
-				(1) && (count++, cube->player.x = x, cube->player.y = y);
+				(1) && (count++, cube->player.x = x, cube->player.y = y,
+					cube->player.player = map[y][x]);
 			x++;
 		}
-		((uint32_t)y > cube->width) && (cube->width = x);
+		(y > cube->width) && (cube->width = x);
 		y++;
 	}
 	cube->height = y;
