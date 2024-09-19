@@ -6,24 +6,23 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/16 17:48:27 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/17 12:20:04 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// # include <stdio.h>
-// # include <stdlib.h>
-// # include <math.h>
-# include "../_Utils/libft.h"
-# include <unistd.h>
-# include "../../../MLX42/include/MLX42/MLX42.h"
+# include <math.h>
+# include <stdio.h>//remove
 # include <fcntl.h>
+# include <unistd.h>
+# include "../_Utils/libft.h"
+# include "../../../MLX42/include/MLX42/MLX42.h"
 
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 25
+# define TILE_SIZE 32
 
 typedef struct s_texture
 {
@@ -36,11 +35,17 @@ typedef struct s_texture
 	int		*c;
 }	t_texture;
 
-typedef struct s_vector
+typedef struct s_player
 {
 	uint32_t	x;
 	uint32_t	y;
-}	t_vector;
+	int			radius;//radius 3
+	double		turn_direction;//turn direction 0     //left -1 right +1
+	double		walk_direction;//walk direction 0     //back -1 front +1
+	double		rotation_angle;//rotation angle math.pi/2
+	double		move_speed;//move speed 3.0
+	double		rotation_speed;//rotation speed 3 * (math.pi / 180)
+}	t_player;
 
 typedef struct s_cube
 {
@@ -57,7 +62,7 @@ typedef struct s_cube
 	uint32_t	width;
 	int			fd;
 	t_texture	texture;
-	t_vector	player;
+	t_player	player;
 }	t_cube;
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube);//parsing

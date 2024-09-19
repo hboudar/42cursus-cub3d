@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/16 17:42:17 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/19 08:49:58 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,27 @@ void	ft_pixel_to_image(t_cube *cube, int x, int y, uint32_t color)
 	}
 }
 
-void	render_map(void	*param)
+void	draw_circle(t_cube *cube, int xc, int yc, uint32_t color)
+{
+	int	x;
+	int	y;
+
+	y = -cube->player.radius;
+	while (y <= cube->player.radius)
+	{
+		x = -cube->player.radius;
+		while (x <= cube->player.radius)
+		{
+			if ((x * x) + (y * y)
+				<= (cube->player.radius * cube->player.radius))
+				mlx_put_pixel(cube->image, xc + x, yc + y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	render_map(void *param)
 {
 	t_cube		*cube;
 	uint32_t	color;
@@ -49,18 +69,23 @@ void	render_map(void	*param)
 		}
 		y++;
 	}
-	y = cube->player.y * TILE_SIZE + TILE_SIZE / 2;
 	x = cube->player.x * TILE_SIZE + TILE_SIZE / 2;
-	mlx_put_pixel(cube->image, x, y, ft_pixel(255, 0, 0, 255));
+	y = cube->player.y * TILE_SIZE + TILE_SIZE / 2;
+	draw_circle(cube, x, y, ft_pixel(0, 255, 0, 255));
 }
 
-void	hooks(t_cube *cube)
+void	hooks(void *mlx, t_player *player)
 {
-	if (mlx_is_key_down(cube->mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_close_window(cube->mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		exit(EXIT_SUCCESS);
-	}
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		player->walk_direction = 1;
+	else if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		player->walk_direction = -1;
+	else if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		player->turn_direction = 1;
+	else if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		player->turn_direction = -1;
 }
 
 void	mini_map(void *arg)
@@ -68,39 +93,6 @@ void	mini_map(void *arg)
 	t_cube	*cube;
 
 	cube = (t_cube *)arg;
-	hooks(cube);
+	hooks(cube->mlx, &cube->player);
 	render_map(cube);
 }
-/*
-else if (mlx_is_key_down(cube->mlx, MLX_KEY_UP))
-{
-	if (cube->map[cube->player.y - 1][cube->player.x] == '1')
-		return ;
-	cube->map[cube->player.y][cube->player.x] = '0';
-	cube->map[cube->player.y - 1][cube->player.x] = 'W';
-	cube->player.y--;
-}
-else if (mlx_is_key_down(cube->mlx, MLX_KEY_DOWN))
-{
-	if (cube->map[cube->player.y + 1][cube->player.x] == '1')
-		return ;
-	cube->map[cube->player.y][cube->player.x] = '0';
-	cube->map[cube->player.y + 1][cube->player.x] = 'W';
-	cube->player.y++;
-}
-else if (mlx_is_key_down(cube->mlx, MLX_KEY_LEFT))
-{
-	if (cube->map[cube->player.y][cube->player.x - 1] == '1')
-		return ;
-	cube->map[cube->player.y][cube->player.x] = '0';
-	cube->map[cube->player.y][cube->player.x - 1] = 'W';
-	cube->player.x--;
-}
-else if (mlx_is_key_down(cube->mlx, MLX_KEY_RIGHT))
-{
-	if (cube->map[cube->player.y][cube->player.x + 1] == '1')
-		return ;
-	cube->map[cube->player.y][cube->player.x] = '0';
-	cube->map[cube->player.y][cube->player.x + 1] = 'W';
-	cube->player.x++;
-}*/
