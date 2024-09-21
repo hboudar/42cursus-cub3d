@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/19 15:59:38 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/21 20:54:37 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE_SIZE 60
-# define ROTATION_SPEED 5
+# define ROTATION_SPEED 3.5
 # define DEG_TO_RAD
-# define MOVE_SPEED 5
+# define MOVE_SPEED 3.5
 
 typedef struct s_texture
 {
