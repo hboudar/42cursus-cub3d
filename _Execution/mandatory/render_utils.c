@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 16:41:31 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/22 16:56:22 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 
 void	check_move(t_cube *cube, double move_x, double move_y)
 {
-	int index_x;
-	int index_y;
+	int	index_x;
+	int	index_y;
 	int	to_x;
 	int	to_y;
 

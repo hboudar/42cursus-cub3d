@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 16:38:07 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/22 16:59:45 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	hooks(t_cube *cube, t_player *player, double move_x, double move_y)
 	}
 	check_move(cube, move_x, move_y);
 }
-
 
 void	execution(void *arg)
 {

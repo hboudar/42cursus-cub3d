@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 16:38:17 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/22 16:55:54 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,31 @@ typedef struct s_cube
 	t_player	player;
 }	t_cube;
 
-void	is_map_valid(int argc, char *argv[], t_cube *cube);//parsing
+//parsing
+void	is_map_valid(int argc, char *argv[], t_cube *cube);
 
-void	check_map_name(int argc, char *name, int i);//parsing utils
-void	initialize_list(t_cube *cube, char *map);//parsing utils
+//parsing utils
+void	check_map_name(int argc, char *name, int i);
+void	initialize_list(t_cube *cube, char *map);
 int		check_elem(char **map, t_cube *cube);
-void	get_element(t_cube *cube, char *str, char mode);//parsing utils
-int		check_map(char **map, int x, int y);//parsing utils
-int		skip_space(char *str, int mode);//parsing utils
-int		skip_line(t_cube *cube, int i, int mode);//parsing utils
+void	get_element(t_cube *cube, char *str, char mode);
+int		check_map(char **map, int x, int y);
+int		skip_space(char *str, int mode);
+int		skip_line(t_cube *cube, int i, int mode);
 
-void	execution(void *arg);//execution
+//execution
+void	execution(void *arg);
 
-void	render_map(void *param);//render
+//render
+void	render_map(void *param);
 
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);//render utils
-void	check_move(t_cube *cube, double move_x, double move_y);//render utils
-void	ft_pixel_to_image(t_cube *cube, int x, int y, uint32_t color);//render utils
+//render utils
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+void	check_move(t_cube *cube, double move_x, double move_y);
+void	ft_pixel_to_image(t_cube *cube, int x, int y, uint32_t color);
 
-void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);//error
-int		ft_error(char *msg);//error
+//error
+void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
+int		ft_error(char *msg);
 
 #endif

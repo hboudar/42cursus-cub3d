@@ -6,13 +6,13 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 16:52:59 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/22 17:00:34 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	draw_direction_line(t_cube *cube, int length, int curr_x, int curr_y)
+static void	draw_line(t_cube *cube, int length, int curr_x, int curr_y)
 {
 	uint32_t	color;
 	int	x_end;
@@ -24,7 +24,7 @@ static void	draw_direction_line(t_cube *cube, int length, int curr_x, int curr_y
 	color = ft_pixel(255, 255, 0, 255);
 	x_end = curr_x + cos(cube->player.rotation_angle) * length;
 	y_end = curr_y + sin(cube->player.rotation_angle) * length;
-	int dx = abs(x_end - curr_x);//Drawing the line (simple Bresenham's line algorithm could be used here)
+	int dx = abs(x_end - curr_x);
 	int dy = abs(y_end - curr_y);
 	(1) && (sx = -1, sy = -1, err = dx - dy);
 
@@ -40,22 +40,22 @@ static void	draw_direction_line(t_cube *cube, int length, int curr_x, int curr_y
 	}
 }
 
-static void	draw_circle(t_cube *cube)
+static void	draw_circle(mlx_image_t *image, t_player *player)
 {
 	uint32_t	color;
 	int			x;
 	int			y;
 
 	color = ft_pixel(255, 0, 0, 255);
-	y = -cube->player.radius;
-	while (y <= cube->player.radius)
+	y = -player->radius;
+	while (y <= player->radius)
 	{
-		x = -cube->player.radius;
-		while (x <= cube->player.radius)
+		x = -player->radius;
+		while (x <= player->radius)
 		{
 			if ((x * x) + (y * y)
-				<= (cube->player.radius * cube->player.radius))
-				mlx_put_pixel(cube->image, cube->player.x + x, cube->player.y + y, color);
+				<= (player->radius * player->radius))
+				mlx_put_pixel(image, player->x + x, player->y + y, color);
 			x++;
 		}
 		y++;
@@ -84,6 +84,6 @@ void	render_map(void *param)
 		}
 		y++;
 	}
-	draw_circle(cube);
-	draw_direction_line(cube, 50, cube->player.x, cube->player.y);
+	draw_circle(cube->image, &cube->player);
+	draw_line(cube, 50, cube->player.x, cube->player.y);
 }
