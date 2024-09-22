@@ -1,7 +1,7 @@
 NAME	=	cub3D
 SRC		=	cub3d.c \
 			_Parsing/mandatory/parsing1.c _Parsing/mandatory/parsing2.c _Parsing/mandatory/parsing_utils.c \
-			_Execution/mandatory/render.c _Execution/mandatory/render_utils.c \
+			_Execution/mandatory/execution.c _Execution/mandatory/render.c _Execution/mandatory/render_utils.c \
 			_Utils/error.c
 OBJ		=	$(SRC:.c=.o)
 HEADER	=	includes/cub3d.h
