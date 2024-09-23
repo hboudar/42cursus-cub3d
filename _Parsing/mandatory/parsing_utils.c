@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/17 12:00:22 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 12:35:13 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ void	initialize_list(t_cube *cube, char *map)
 	cube->player.turn_direction = 0;
 	cube->player.walk_direction = 0;
 	cube->player.rotation_angle = M_PI / 2;
-	cube->player.move_speed = 3.0;
-	cube->player.rotation_speed = 3 * (M_PI / 180);
 }
 
 void	check_map_name(int argc, char *name, int i)

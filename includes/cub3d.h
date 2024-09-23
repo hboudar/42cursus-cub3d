@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/23 09:52:52 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 15:55:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE_SIZE 60
-# define ROTATION_SPEED 3.5
-# define DEG_TO_RAD
+# define ROTATION_SPEED 3.5 * (M_PI / 180)
 # define MOVE_SPEED 3.5
+# define FOV 1.0471975511965976
+# define FOV_ANGLE 60 * (M_PI / 180)
 
 typedef struct s_texture
 {
@@ -41,18 +42,32 @@ typedef struct s_texture
 typedef struct s_player
 {
 	char	player;
+	int		radius;
 	double	x;
 	double	y;
-	int		radius;//radius 3
-	double	turn_direction;//turn direction 0     //left -1 right +1
-	double	walk_direction;//walk direction 0     //back -1 front +1
-	double	rotation_angle;//rotation angle math.pi/2
-	double	move_speed;//move speed 3.0
-	double	rotation_speed;//rotation speed 3 * (math.pi / 180)
+	double	turn_direction;
+	double	walk_direction;
+	double	rotation_angle;
+	double	horizontal_x;
+	double	horizontal_y;
+	double	vertical_x;
+	double	vertical_y;
 }	t_player;
 
 typedef struct s_cube
 {
+	int			facing_down;
+	int			facing_up;
+	int			facing_right;
+	int			facing_left;
+	double	true_distance;
+	double	orizontal_position_x;
+	double	orizontal_position_y;
+	double	vertical_position_x;
+	double	vertical_position_y;
+	
+	int			columx;
+	int			columy;
 	char		**map;
 	int			map_len;
 	void		*mlx;
@@ -91,6 +106,8 @@ void	render_map(t_cube *cube, t_player *player, char **map);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	check_move(t_cube *cube, double move_x, double move_y);
 void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
+double	normalize_angle(double angle);
+void	draw_line(t_cube *cube, int length, int curr_x, int curr_y);
 
 //error
 void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);

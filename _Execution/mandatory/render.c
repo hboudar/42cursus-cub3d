@@ -6,13 +6,13 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/23 10:19:37 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:04:20 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	draw_line(t_cube *cube, int length, int curr_x, int curr_y)
+void	draw_line(t_cube *cube, int length, int curr_x, int curr_y)
 {
 	uint32_t	color;
 	int	x_end;
@@ -84,5 +84,5 @@ void	render_map(t_cube *cube, t_player *player, char **map)
 		y++;
 	}
 	draw_circle(cube->image, player);
-	draw_line(cube, 50, player->x, player->y);
+	// draw_line(cube, 50, player->x, player->y);
 }

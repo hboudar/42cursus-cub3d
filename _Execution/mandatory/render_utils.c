@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 17:25:49 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 15:46:45 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+double	normalize_angle(double angle)
+{
+	angle = remainder(angle, 2 * M_PI);
+	if (angle < 0)
+		angle += (2 * M_PI);
+	return (angle);
 }
 
 void	check_move(t_cube *cube, double move_x, double move_y)

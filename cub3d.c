@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:57 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 17:22:29 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 12:36:49 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_exec(t_cube *cube, t_player *player)
 	(player->player == 'S') && (player->rotation_angle = M_PI / 2);
 	(player->player == 'W') && (player->rotation_angle = M_PI);
 	(player->player == 'N') && (player->rotation_angle = 3 * M_PI / 2);
-	player->rotation_speed = ROTATION_SPEED * (M_PI / 180);
 	player->x = (player->x * TILE_SIZE) + 30;
 	player->y = (player->y * TILE_SIZE) + 30;
 	mlx_loop_hook(cube->mlx, execution, cube);
