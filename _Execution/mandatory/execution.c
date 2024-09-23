@@ -6,11 +6,20 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/23 09:53:09 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 10:20:34 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/*
+
+void	raycasting(t_cube *cube, t_player *player)
+{
+	
+}
+
+*/
 
 void	rotations(void *mlx, t_player *player)
 {
@@ -57,6 +66,7 @@ void	execution(void *arg)
 	hooks(cube, &cube->player, 0.0, 0.0);
 	rotations(cube->mlx, &cube->player);
 	render_map(cube, &cube->player, cube->map);
+	//raycasting(cube, &cube->player);
 	if (mlx_image_to_window(cube->mlx, cube->image, 0, 0) == -1)
 		ft_error("Error : Image not found\n");
 }
