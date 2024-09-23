@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 16:56:22 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/22 17:25:49 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_move(t_cube *cube, double move_x, double move_y)
 	cube->player.y += move_y;
 }
 
-void	ft_pixel_to_image(t_cube *cube, int x, int y, uint32_t color)
+void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 {
 	int	i;
 	int	j;
@@ -51,7 +51,7 @@ void	ft_pixel_to_image(t_cube *cube, int x, int y, uint32_t color)
 	{
 		j = -1;
 		while (++j < TILE_SIZE - 1)
-			mlx_put_pixel(cube->image, x + i, y + j, color);
+			mlx_put_pixel(image, x + i, y + j, color);
 		i++;
 	}
 }

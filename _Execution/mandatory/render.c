@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 17:00:34 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/22 18:01:35 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,27 @@ static void	draw_circle(mlx_image_t *image, t_player *player)
 	}
 }
 
-void	render_map(void *param)
+void	render_map(t_cube *cube, t_player *player, char **map)
 {
-	t_cube		*cube;
 	uint32_t	color;
 	int			x;
 	int			y;
 
 	y = 0;
-	cube = (t_cube *)param;
-	while (cube->map[y] != NULL)
+	while (map[y] != NULL)
 	{
 		x = 0;
-		while (cube->map[y][x] != '\0')
+		while (map[y][x] != '\0')
 		{
-			(cube->map[y][x] != '1') && (color = ft_pixel(0, 0, 0, 255));
-			(cube->map[y][x] == '1') && (color = ft_pixel(255, 255, 255, 255));
-			if (cube->map[y][x] != ' ')
-				ft_pixel_to_image(cube, x * TILE_SIZE, y * TILE_SIZE, color);
+			(map[y][x] != '1') && (color = ft_pixel(0, 0, 0, 255));
+			(map[y][x] == '1') && (color = ft_pixel(255, 255, 255, 255));
+			if (map[y][x] != ' ')
+				ft_pixel_to_image(cube->image,
+					x * TILE_SIZE, y * TILE_SIZE, color);
 			x++;
 		}
 		y++;
 	}
-	draw_circle(cube->image, &cube->player);
-	draw_line(cube, 50, cube->player.x, cube->player.y);
+	draw_circle(cube->image, player);
+	draw_line(cube, 50, player->x, player->y);
 }

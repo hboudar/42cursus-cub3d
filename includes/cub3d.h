@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/22 16:55:54 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/23 09:52:52 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int		skip_line(t_cube *cube, int i, int mode);
 void	execution(void *arg);
 
 //render
-void	render_map(void *param);
+void	render_map(t_cube *cube, t_player *player, char **map);
 
 //render utils
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	check_move(t_cube *cube, double move_x, double move_y);
-void	ft_pixel_to_image(t_cube *cube, int x, int y, uint32_t color);
+void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
 
 //error
 void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
