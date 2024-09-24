@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/23 16:04:20 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/24 16:04:48 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 void	draw_line(t_cube *cube, int length, int curr_x, int curr_y)
 {
 	uint32_t	color;
-	int	x_end;
-	int	y_end;
-	int	sx;
-	int	sy;
-	int err;
+	int			x_end;
+	int			y_end;
+	int			sx;
+	int			sy;
+	int			err;
+	int			dx;
+	int			dy;
 
 	color = ft_pixel(255, 255, 0, 255);
 	x_end = curr_x + cos(cube->player.rotation_angle) * length;
 	y_end = curr_y + sin(cube->player.rotation_angle) * length;
-	int dx = abs(x_end - curr_x);
-	int dy = abs(y_end - curr_y);
+	dx = abs(x_end - curr_x);
+	dy = abs(y_end - curr_y);
 	(1) && (sx = -1, sy = -1, err = dx - dy);
-
 	(curr_x < x_end) && (sx = 1);
 	(curr_y < y_end) && (sy = 1);
 
@@ -37,6 +38,24 @@ void	draw_line(t_cube *cube, int length, int curr_x, int curr_y)
 		int e2 = 2 * err;
 		if (e2 > -dy) { err -= dy; curr_x += sx; }
 		if (e2 < dx) { err += dx; curr_y += sy; }
+	}
+}
+
+void	draw_rays(t_cube *cube, mlx_image_t *image, double angle)
+{
+	int	j;
+	int	x;
+	int	y;
+
+	j = 0;
+	while (j < cube->true_distance)
+	{
+		x = cube->player.x + j * cos(angle);
+		y = cube->player.y + j * sin(angle);
+		if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+			break ;
+		mlx_put_pixel(image, x, y, ft_pixel(0x80, 0x00, 0x00, 0xFF));
+		j++;
 	}
 }
 
@@ -53,8 +72,7 @@ static void	draw_circle(mlx_image_t *image, t_player *player)
 		x = -player->radius;
 		while (x <= player->radius)
 		{
-			if ((x * x) + (y * y)
-				<= (player->radius * player->radius))
+			if ((x * x) + (y * y) <= (player->radius * player->radius))
 				mlx_put_pixel(image, player->x + x, player->y + y, color);
 			x++;
 		}
@@ -84,5 +102,4 @@ void	render_map(t_cube *cube, t_player *player, char **map)
 		y++;
 	}
 	draw_circle(cube->image, player);
-	// draw_line(cube, 50, player->x, player->y);
 }
