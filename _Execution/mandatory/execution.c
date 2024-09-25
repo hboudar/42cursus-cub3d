@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/24 15:50:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 21:55:29 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	execution(void *arg)
 	key_rotations(cube->mlx, &cube->player);
 	render_map(cube, &cube->player, cube->map);
 	ray_casting(cube);
-	draw_line(cube, 50, cube->player.x, cube->player.y);
+	draw_line(cube, 35, cube->player.x, cube->player.y);
 	if (mlx_image_to_window(cube->mlx, cube->image, 0, 0) == -1)
 		ft_error("Error : Image not found\n");
 }

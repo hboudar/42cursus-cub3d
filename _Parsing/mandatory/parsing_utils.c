@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/23 12:35:13 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 21:54:33 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,39 @@ static int	costum_atoi(char *str, int *index)
 	return (res);
 }
 
-static int	*get_rgb(t_cube *cube, char **tmp, int *rgb)
+static int	*get_rgb(t_cube *cube, char *tmp, int *rgb, int f)
 {
-	int	f;
 	int	j;
 	int	i;
 
 	if (!tmp)
-		ft_eraser(cube, NULL, NULL, "Error : ft_split failed 1\n");
-	(1) && (i = 0, f = 0, j = 0, rgb = malloc(sizeof(int) * 3));
+		ft_eraser(cube, NULL, NULL, "Error : ft_split failed\n");
+	(1) && (i = 1, f = 0, j = 0, rgb = malloc(sizeof(int) * 3));
 	if (!rgb)
 		ft_eraser(cube, tmp, NULL, "Error : malloc failed\n");
-	while (tmp[1][i])
+	while (tmp[i])
 	{
-		if (tmp[1][i] <= '9' && tmp[1][i] >= '0')
-			rgb[j++] = costum_atoi(tmp[1] + i, &i);
-		else if (tmp[1][i] == ',')
+		if (tmp[i] == ' ')
+			i++;
+		else if (tmp[i] <= '9' && tmp[i] >= '0')
+			rgb[j++] = costum_atoi(tmp + i, &i);
+		else if (tmp[i] == ',')
 			(1) && (f++, i++);
 		else
 			ft_eraser(cube, tmp, rgb, "Error : Wrong RGB format\n");
 	}
-	if (f != 2 || rgb[0] == -1 || rgb[1] == -1 || rgb[2] == -1)
+	while (tmp[i] && tmp[i] == ' ')
+		i++;
+	if (tmp[i] || j != 3 || f != 2
+		|| rgb[0] == -1 || rgb[1] == -1 || rgb[2] == -1)
 		ft_eraser(cube, tmp, rgb, "Error : Wrong RGB format\n");
-	i = 0;
-	while (tmp[i])
-		free(tmp[i++]);
-	free(tmp);
 	return (rgb);
 }
 
 void	get_element(t_cube *cube, char *element, char mode)
 {
-	int	start;
+	char	*tmp;
+	int		start;
 
 	(mode != 'F' && mode != 'C') && (start = skip_space(element + 3, 0));
 	if (mode == 'N')
@@ -74,10 +75,13 @@ void	get_element(t_cube *cube, char *element, char mode)
 		cube->texture.we = ft_substr(element, start, ft_strlen(element) - 3);
 	else if (mode == 'E')
 		cube->texture.ea = ft_substr(element, start, ft_strlen(element) - 3);
-	else if (mode == 'F')
-		cube->texture.f = get_rgb(cube, ft_split(element, ' '), NULL);
-	else if (mode == 'C')
-		cube->texture.c = get_rgb(cube, ft_split(element, ' '), NULL);
+	else if (mode == 'F' || mode == 'C')
+	{
+		tmp = ft_strtrim(element, " ");
+		(mode == 'F') && (cube->texture.c = get_rgb(cube, tmp, NULL, 0));
+		(mode == 'C') && (cube->texture.f = get_rgb(cube, tmp, NULL, 0));
+		free(tmp);
+	}
 	else
 		ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
 	cube->texture.flag++;

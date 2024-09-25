@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/24 17:44:24 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 21:42:58 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ROTATION_SPEED 0.06108652382
 # define MOVE_SPEED 3.5
 # define FOV 1.0471975511965976
+// # define FOV 60 * (M_PI / 180)
 # define FOV_ANGLE 1.0471975512
 
 typedef struct s_texture
@@ -117,7 +118,7 @@ double	normalize_angle(double angle);
 void	draw_line(t_cube *cube, int length, int curr_x, int curr_y);
 
 //error
-void	ft_eraser(t_cube *cube, char **tmp, int *rgb, char *msg);
+void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 
 #endif

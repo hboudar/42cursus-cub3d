@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/24 15:54:06 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:30:59 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,22 +100,22 @@ static void	get_vert(t_cube *cube, double angle, double x_step, double y_step)
 
 void	ray_casting(t_cube *cube)
 {
-	double	angle;
+	double	ray_angle;
 	int		ray;
 
 	ray = -1;
-	angle = normalize_angle(cube->player.rotation_angle) - (FOV / 2);
+	ray_angle = normalize_angle(cube->player.rotation_angle) - (FOV / 2);
 	while (++ray < WIDTH)
 	{
-		cube->facing_down = (angle > 0 && angle < M_PI) * 1;
+		cube->facing_down = (ray_angle > 0 && ray_angle < M_PI);
 		cube->facing_up = !cube->facing_down;
-		cube->facing_right = (angle < (0.5 * M_PI) || angle > (1.5 * M_PI));
+		cube->facing_right = (ray_angle < (0.5 * M_PI) || ray_angle > (1.5 * M_PI));
 		cube->facing_left = !cube->facing_right;
-		get_oriz(cube, angle, TILE_SIZE / tan(angle), TILE_SIZE);
-		get_vert(cube, angle, TILE_SIZE, TILE_SIZE * tan(angle));
+		get_oriz(cube, ray_angle, TILE_SIZE / tan(ray_angle), TILE_SIZE);
+		get_vert(cube, ray_angle, TILE_SIZE, TILE_SIZE * tan(ray_angle));
 		cube->true_distance = smallest_distance(cube);
-		draw_rays(cube, cube->image, angle);
-		angle += FOV / WIDTH;
-		angle = normalize_angle(angle);
+		draw_rays(cube, cube->image, ray_angle);
+		ray_angle += FOV / WIDTH;
+		ray_angle = normalize_angle(ray_angle);
 	}
 }
