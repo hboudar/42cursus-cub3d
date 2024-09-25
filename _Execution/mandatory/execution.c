@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:20:22 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:24:52 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	init_exec(t_cube *cube, t_player *player)
 	(player->direction == 'N') && (player->rotation_angle = 3 * M_PI / 2);
 	player->x = (player->x * TILE_SIZE) + 30;
 	player->y = (player->y * TILE_SIZE) + 30;
-	cube->wall_1 = mlx_load_png(cube->window.no);
-	cube->wall_2 = mlx_load_png(cube->window.so);
-	cube->wall_3 = mlx_load_png(cube->window.ea);
-	cube->wall_4 = mlx_load_png(cube->window.we);
-	if (!cube->wall_1 || !cube->wall_2 || !cube->wall_3 || !cube->wall_4)
-		ft_error("Error : Texture not found\n");
+	// cube->wall_1 = mlx_load_png(cube->window.no);
+	// cube->wall_2 = mlx_load_png(cube->window.so);
+	// cube->wall_3 = mlx_load_png(cube->window.ea);
+	// cube->wall_4 = mlx_load_png(cube->window.we);
+	// if (!cube->wall_1 || !cube->wall_2 || !cube->wall_3 || !cube->wall_4)
+	// 	ft_error("Error : Texture not found\n");
 	mlx_loop_hook(cube->mlx, execution, cube);
 	mlx_loop(cube->mlx);
 }

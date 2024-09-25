@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:15:26 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:25:01 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,59 +104,59 @@ void	render_map(t_cube *cube, t_player *player, char **map)
 	draw_circle(cube->image, player);
 }
 //render wall :
-int    get_pixel(mlx_texture_t *texture, int x, int y)
-{
-    int    index;
+// int    get_pixel(mlx_texture_t *texture, int x, int y)
+// {
+//     int    index;
 
-    index = (y * texture->width + x) * texture->bytes_per_pixel;
-    return (ft_pixel(texture->pixels[index], texture->pixels[index + 1],
-            texture->pixels[index + 2], texture->pixels[index + 3]));
-}
+//     index = (y * texture->width + x) * texture->bytes_per_pixel;
+//     return (ft_pixel(texture->pixels[index], texture->pixels[index + 1],
+//             texture->pixels[index + 2], texture->pixels[index + 3]));
+// }
 
-void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray)
-{
-    uint32_t color = 0;
-    uint32_t texture_x = 0;
-     uint32_t texture_y = 0;
-    double wallstripheight;
-    double correct_distance = cube->player.true_distance * cos(cube->player.rotation_angle - angle);
-    double distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
-    wallstripheight = (TILE_SIZE / correct_distance) * distance_proj_plane;
+// void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray)
+// {
+//     uint32_t color = 0;
+//     uint32_t texture_x = 0;
+//      uint32_t texture_y = 0;
+//     double wallstripheight;
+//     double correct_distance = cube->player.true_distance * cos(cube->player.rotation_angle - angle);
+//     double distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
+//     wallstripheight = (TILE_SIZE / correct_distance) * distance_proj_plane;
     
-    int walltop_pixel = (HEIGHT / 2) - (wallstripheight / 2);
-    int wallbottom_pixel = (HEIGHT / 2) + (wallstripheight / 2);
-    if (wallbottom_pixel > HEIGHT)
-        wallbottom_pixel = HEIGHT;
-    if (walltop_pixel < 0)
-        walltop_pixel = 0;
-    if (wallstripheight >= HEIGHT)
-        walltop_pixel -= (wallstripheight - HEIGHT) / 2;
-    int j = 0;
-    while (j < walltop_pixel)
-    {
-        mlx_put_pixel(image, ray, j, ft_pixel(cube->window.c[0], cube->window.c[1], cube->window.c[2], 0xFF)); // Sky blue
-        j++;
-    }
-    (cube->player.direction == 'E') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_1->width / TILE_SIZE);
-    (cube->player.direction == 'W') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_2->width / TILE_SIZE);
-    (cube->player.direction == 'N') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_3->width / TILE_SIZE);
-    (cube->player.direction == 'S') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_4->width / TILE_SIZE);
-    while (j < wallbottom_pixel)
-    {        (cube->player.direction == 'E') && (texture_y = (j - walltop_pixel) * cube->wall_1->height / wallstripheight);
-        (cube->player.direction == 'W') && (texture_y = (j - walltop_pixel) * cube->wall_2->height / wallstripheight);
-        (cube->player.direction == 'N') && (texture_y = (j - walltop_pixel) * cube->wall_3->height / wallstripheight);
-        (cube->player.direction == 'S') && (texture_y = (j - walltop_pixel) * cube->wall_4->height / wallstripheight);
-        (cube->player.direction == 'E') && (color = get_pixel(cube->wall_1, texture_x, texture_y));
-        (cube->player.direction == 'W') && (color = get_pixel(cube->wall_2, texture_x, texture_y));
-        (cube->player.direction == 'N') && (color = get_pixel(cube->wall_3, texture_x, texture_y));
-        (cube->player.direction == 'S') && (color = get_pixel(cube->wall_4, texture_x, texture_y));
-        mlx_put_pixel(image, ray, j, color);
-        j++;
-    }
-    j = wallbottom_pixel;
-    while (j < HEIGHT)
-    {
-        mlx_put_pixel(image, ray, j, ft_pixel(cube->window.f[0], cube->window.f[1], cube->window.f[2], 0xFF)); // Floor white
-        j++;
-    }
-}
+//     int walltop_pixel = (HEIGHT / 2) - (wallstripheight / 2);
+//     int wallbottom_pixel = (HEIGHT / 2) + (wallstripheight / 2);
+//     if (wallbottom_pixel > HEIGHT)
+//         wallbottom_pixel = HEIGHT;
+//     if (walltop_pixel < 0)
+//         walltop_pixel = 0;
+//     if (wallstripheight >= HEIGHT)
+//         walltop_pixel -= (wallstripheight - HEIGHT) / 2;
+//     int j = 0;
+//     while (j < walltop_pixel)
+//     {
+//         mlx_put_pixel(image, ray, j, ft_pixel(cube->window.c[0], cube->window.c[1], cube->window.c[2], 0xFF)); // Sky blue
+//         j++;
+//     }
+//     (cube->player.direction == 'E') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_1->width / TILE_SIZE);
+//     (cube->player.direction == 'W') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_2->width / TILE_SIZE);
+//     (cube->player.direction == 'N') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_3->width / TILE_SIZE);
+//     (cube->player.direction == 'S') && (texture_x = fmod(cube->ray_intercept, TILE_SIZE) * cube->wall_4->width / TILE_SIZE);
+//     while (j < wallbottom_pixel)
+//     {        (cube->player.direction == 'E') && (texture_y = (j - walltop_pixel) * cube->wall_1->height / wallstripheight);
+//         (cube->player.direction == 'W') && (texture_y = (j - walltop_pixel) * cube->wall_2->height / wallstripheight);
+//         (cube->player.direction == 'N') && (texture_y = (j - walltop_pixel) * cube->wall_3->height / wallstripheight);
+//         (cube->player.direction == 'S') && (texture_y = (j - walltop_pixel) * cube->wall_4->height / wallstripheight);
+//         (cube->player.direction == 'E') && (color = get_pixel(cube->wall_1, texture_x, texture_y));
+//         (cube->player.direction == 'W') && (color = get_pixel(cube->wall_2, texture_x, texture_y));
+//         (cube->player.direction == 'N') && (color = get_pixel(cube->wall_3, texture_x, texture_y));
+//         (cube->player.direction == 'S') && (color = get_pixel(cube->wall_4, texture_x, texture_y));
+//         mlx_put_pixel(image, ray, j, color);
+//         j++;
+//     }
+//     j = wallbottom_pixel;
+//     while (j < HEIGHT)
+//     {
+//         mlx_put_pixel(image, ray, j, ft_pixel(cube->window.f[0], cube->window.f[1], cube->window.f[2], 0xFF)); // Floor white
+//         j++;
+//     }
+// }

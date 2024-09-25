@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:16:07 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:25:31 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ static double	smallest_distance(t_cube *cube)
 			+ pow(cube->player.y - cube->player.vertical_y, 2));
 	if (distance_oriz < distance_vert)
 	{
-		cube->ray_intercept = cube->player.orizontal_x;
-        if (cube->player.facing_up)
-            cube->player.direction = 'W';
-        else if (cube->player.facing_down)
-            cube->player.direction = 'E';
+		// cube->ray_intercept = cube->player.orizontal_x;
+        // if (cube->player.facing_up)
+        //     cube->player.direction = 'W';
+        // else if (cube->player.facing_down)
+        //     cube->player.direction = 'E';
 		return (distance_oriz);
 	}
-	cube->ray_intercept = cube->player.vertical_y;
-    if (cube->player.facing_left)
-        cube->player.direction = 'N';
-    else if (cube->player.facing_right)
-        cube->player.direction = 'S';
+	// cube->ray_intercept = cube->player.vertical_y;
+    // if (cube->player.facing_left)
+    //     cube->player.direction = 'N';
+    // else if (cube->player.facing_right)
+    //     cube->player.direction = 'S';
 	return (distance_vert);
 }
 
@@ -126,8 +126,8 @@ void	ray_casting(t_cube *cube, t_player *player)
 		get_oriz(cube, ray_angle, TILE_SIZE / tan(ray_angle), TILE_SIZE);
 		get_vert(cube, ray_angle, TILE_SIZE, TILE_SIZE * tan(ray_angle));
 		player->true_distance = smallest_distance(cube);
-		// draw_rays(cube, cube->image, ray_angle);
-		render_wall(cube, cube->image, ray_angle, player->true_distance);
+		draw_rays(cube, cube->image, ray_angle);
+		// render_wall(cube, cube->image, ray_angle, player->true_distance);
 		ray_angle += FOV / WIDTH;
 		ray_angle = normalize_angle(ray_angle);
 	}

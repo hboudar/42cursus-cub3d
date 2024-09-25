@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:15:08 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:24:43 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ typedef struct s_cube
 	t_player	player;
 	t_window	window;
 	t_parsing	parsing;
-	double	ray_intercept;
-	mlx_texture_t		*wall_1;
-	mlx_texture_t		*wall_2;
-	mlx_texture_t		*wall_3;
-	mlx_texture_t		*wall_4;
+	// double	ray_intercept;
+	// mlx_texture_t		*wall_1;
+	// mlx_texture_t		*wall_2;
+	// mlx_texture_t		*wall_3;
+	// mlx_texture_t		*wall_4;
 }	t_cube;
 
 //parsing
