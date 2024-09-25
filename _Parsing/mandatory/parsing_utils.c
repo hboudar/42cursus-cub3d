@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 21:54:33 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 22:59:57 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,54 +61,53 @@ static int	*get_rgb(t_cube *cube, char *tmp, int *rgb, int f)
 	return (rgb);
 }
 
-void	get_element(t_cube *cube, char *element, char mode)
+void	get_element(t_cube *cube, char *elm, char mode)
 {
 	char	*tmp;
 	int		start;
 
-	(mode != 'F' && mode != 'C') && (start = skip_space(element + 3, 0));
+	(mode != 'F' && mode != 'C') && (start = skip_space(elm + 3, 0));
 	if (mode == 'N')
-		cube->texture.no = ft_substr(element, start, ft_strlen(element) - 3);
+		cube->window.no = ft_substr(elm, start, ft_strlen(elm) - 3);
 	else if (mode == 'S')
-		cube->texture.so = ft_substr(element, start, ft_strlen(element) - 3);
+		cube->window.so = ft_substr(elm, start, ft_strlen(elm) - 3);
 	else if (mode == 'W')
-		cube->texture.we = ft_substr(element, start, ft_strlen(element) - 3);
+		cube->window.we = ft_substr(elm, start, ft_strlen(elm) - 3);
 	else if (mode == 'E')
-		cube->texture.ea = ft_substr(element, start, ft_strlen(element) - 3);
+		cube->window.ea = ft_substr(elm, start, ft_strlen(elm) - 3);
 	else if (mode == 'F' || mode == 'C')
 	{
-		tmp = ft_strtrim(element, " ");
-		(mode == 'F') && (cube->texture.c = get_rgb(cube, tmp, NULL, 0));
-		(mode == 'C') && (cube->texture.f = get_rgb(cube, tmp, NULL, 0));
+		tmp = ft_strtrim(elm, " ");
+		(mode == 'F') && (cube->window.c = get_rgb(cube, tmp, NULL, 0));
+		(mode == 'C') && (cube->window.f = get_rgb(cube, tmp, NULL, 0));
 		free(tmp);
 	}
 	else
 		ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
-	cube->texture.flag++;
+	cube->window.flag++;
 }
 
 void	initialize_list(t_cube *cube, char *map)
 {
-	cube->fd = open(map, O_RDONLY);
-	(cube->fd == -1) && (ft_error("Error : open failed\n"));
-	cube->map_len = 0;
-	cube->len_file = 0;
-	cube->texture.flag = 0;
-	cube->height = 0;
-	cube->width = 0;
-	cube->file = NULL;
-	cube->map = NULL;
-	cube->texture.no = NULL;
-	cube->texture.so = NULL;
-	cube->texture.we = NULL;
-	cube->texture.ea = NULL;
-	cube->texture.f = NULL;
-	cube->texture.c = NULL;
+	cube->parsing.fd = open(map, O_RDONLY);
+	if (cube->parsing.fd == -1)
+		ft_error("Error : open failed\n");
+	cube->parsing.map = NULL;
+	cube->parsing.file = NULL;
+	cube->parsing.map_len = 0;
+	cube->parsing.len_file = 0;
+	cube->window.flag = 0;
+	cube->window.f = NULL;
+	cube->window.c = NULL;
+	cube->window.width = 0;
+	cube->window.no = NULL;
+	cube->window.so = NULL;
+	cube->window.we = NULL;
+	cube->window.ea = NULL;
+	cube->window.height = 0;
 	cube->player.x = 0;
 	cube->player.y = 0;
 	cube->player.radius = 3;
-	cube->player.turn_direction = 0;
-	cube->player.walk_direction = 0;
 	cube->player.rotation_angle = M_PI / 2;
 }
 

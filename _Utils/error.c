@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:36:47 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 21:43:18 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 22:59:31 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ int	ft_error(char *msg)
 
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg)
 {
-	int	i;
+	int			i;
+	t_window	*window;
 
 	i = -1;
-	(cube->texture.no) && (free(cube->texture.no), cube->texture.no = NULL);
-	(cube->texture.so) && (free(cube->texture.so), cube->texture.so = NULL);
-	(cube->texture.we) && (free(cube->texture.we), cube->texture.we = NULL);
-	(cube->texture.ea) && (free(cube->texture.ea), cube->texture.ea = NULL);
-	(cube->texture.f) && (free(cube->texture.f), cube->texture.f = NULL);
-	(cube->texture.c) && (free(cube->texture.c), cube->texture.c = NULL);
+	window = &cube->window;
+	(window->no) && (free(window->no), window->no = NULL);
+	(window->so) && (free(window->so), window->so = NULL);
+	(window->we) && (free(window->we), window->we = NULL);
+	(window->ea) && (free(window->ea), window->ea = NULL);
+	(window->f) && (free(window->f), window->f = NULL);
+	(window->c) && (free(window->c), window->c = NULL);
 	(tmp) && (free(tmp), tmp = NULL);
 	(rgb) && (free(rgb), rgb = NULL);
 	ft_error(msg);

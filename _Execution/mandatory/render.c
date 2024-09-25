@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/24 16:04:48 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:05:34 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_rays(t_cube *cube, mlx_image_t *image, double angle)
 	int	y;
 
 	j = 0;
-	while (j < cube->true_distance)
+	while (j < cube->player.true_distance)
 	{
 		x = cube->player.x + j * cos(angle);
 		y = cube->player.y + j * sin(angle);
