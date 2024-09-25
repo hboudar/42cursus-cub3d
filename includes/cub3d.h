@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 22:59:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:15:08 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_player
 	double	x;
 	double	y;
 	int		radius; //for draw_circle function in render.c (remove)
-	char	deriction;
+	char	direction;
 	double	rotation_angle;
 	int		facing_up;
 	int		facing_down;
@@ -76,6 +76,11 @@ typedef struct s_cube
 	t_player	player;
 	t_window	window;
 	t_parsing	parsing;
+	double	ray_intercept;
+	mlx_texture_t		*wall_1;
+	mlx_texture_t		*wall_2;
+	mlx_texture_t		*wall_3;
+	mlx_texture_t		*wall_4;
 }	t_cube;
 
 //parsing
@@ -114,5 +119,7 @@ void	draw_line(t_cube *cube, int length, int curr_x, int curr_y);
 //error
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
+
+void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
 
 #endif
