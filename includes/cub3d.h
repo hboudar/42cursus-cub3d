@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 21:42:58 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:24:43 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,62 +26,61 @@
 # define ROTATION_SPEED 0.06108652382
 # define MOVE_SPEED 3.5
 # define FOV 1.0471975511965976
-// # define FOV 60 * (M_PI / 180)
 # define FOV_ANGLE 1.0471975512
 
-typedef struct s_texture
+typedef struct s_player
 {
-	int		flag;
+	double	x;
+	double	y;
+	int		radius; //for draw_circle function in render.c (remove)
+	char	direction;
+	double	rotation_angle;
+	int		facing_up;
+	int		facing_down;
+	int		facing_left;
+	int		facing_right;
+	double	true_distance;
+	double	vertical_x;
+	double	vertical_y;
+	double	orizontal_y;
+	double	orizontal_x;
+}	t_player;
+
+typedef struct s_window
+{
+	int		*c;
+	int		*f;
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
-	int		*f;
-	int		*c;
-}	t_texture;
+	int		flag;
+	int		width;
+	int		height;
+}	t_window;
 
-typedef struct s_player
+typedef struct s_parsing
 {
-	char	player;
-	int		radius;
-	double	x;
-	double	y;
-	double	turn_direction;
-	double	walk_direction;
-	double	rotation_angle;
-	double	horizontal_x;
-	double	horizontal_y;
-	double	vertical_x;
-	double	vertical_y;
-}	t_player;
+	int			fd;
+	char		**map;
+	char		**file;
+	int			map_len;
+	char		*fd_file;
+	int			len_file;
+}	t_parsing;
 
 typedef struct s_cube
 {
-	int			facing_down;
-	int			facing_up;
-	int			facing_right;
-	int			facing_left;
-	double		true_distance;
-	double		orizontal_position_x;
-	double		orizontal_position_y;
-	double		vertical_position_x;
-	double		vertical_position_y;
-	int			columx;
-	int			columy;
-	char		**map;
-	int			map_len;
 	void		*mlx;
-	void		*mlx_win;
-	void		*mlx_img;
 	mlx_image_t	*image;
-	char		**file;
-	int			len_file;
-	char		*fd_file;
-	int			height;
-	int			width;
-	int			fd;
-	t_texture	texture;
 	t_player	player;
+	t_window	window;
+	t_parsing	parsing;
+	// double	ray_intercept;
+	// mlx_texture_t		*wall_1;
+	// mlx_texture_t		*wall_2;
+	// mlx_texture_t		*wall_3;
+	// mlx_texture_t		*wall_4;
 }	t_cube;
 
 //parsing
@@ -94,7 +93,7 @@ int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);
 int		check_map(char **map, int x, int y);
 int		skip_space(char *str, int mode);
-int		skip_line(t_cube *cube, int i, int mode);
+int		skip_line(t_parsing *parsing, int i, int mode);
 
 //execution
 void	init_exec(t_cube *cube, t_player *player);
@@ -105,7 +104,7 @@ void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y);
 void	key_rotations(void *mlx, t_player *player);
 
 //ray casting
-void	ray_casting(t_cube *cube);
+void	ray_casting(t_cube *cube, t_player *player);
 
 //render
 void	render_map(t_cube *cube, t_player *player, char **map);
@@ -120,5 +119,7 @@ void	draw_line(t_cube *cube, int length, int curr_x, int curr_y);
 //error
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
+
+void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
 
 #endif

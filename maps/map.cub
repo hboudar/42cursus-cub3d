@@ -1,20 +1,19 @@
-NO ./path_to_the_north_texture.cub
+NO ./textures/wall1.png
+
+SO ./textures/wall2.png
+
+WE ./textures/wall3.png
+
+EA ./textures/wall4.png
+
+F 99,101,44
+
+C 77,23,255
 
 
-SO  ./path_to_the_south_texture.cub 
-
-WE ./path_to_the_west_texture.cub
-
-EA ./path_to_the_east_texture. cub   
-
-F   1,1,1
-
-C 225,30,0
-
-
-11111111111111111111
-1N000000000000001001
-10001000000010001001   
-10010000001000001001   
-10000000000000001001 
-11111111111111111111
+11111111111111111
+1N000000000001001
+10001000000011001   
+10010000001000001   
+10000000000001001 
+11111111111111111

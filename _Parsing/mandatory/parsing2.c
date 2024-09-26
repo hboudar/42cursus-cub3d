@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/19 13:02:37 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/25 23:15:26 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ int	skip_space(char *str, int mode)
 	return (i);
 }
 
-int	skip_line(t_cube *cube, int i, int mode)
+int	skip_line(t_parsing *parsing, int i, int mode)
 {
 	if (mode)
 	{
 		mode = 0;
-		while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+		while (parsing->fd_file[i] && parsing->fd_file[i] != '\n')
 			(1) && (i++, mode++);
-		if (cube->fd_file[i] == '\n')
+		if (parsing->fd_file[i] == '\n')
 			(1) && (i++, mode++);
 	}
 	else
 	{
-		while (cube->fd_file[i] && cube->fd_file[i] != '\n')
+		while (parsing->fd_file[i] && parsing->fd_file[i] != '\n')
 		{
 			i++;
 			mode++;
@@ -124,12 +124,12 @@ int	check_elem(char **map, t_cube *cube)
 			else if (map[y][x] == 'N' || map[y][x] == 'S'
 					|| map[y][x] == 'W' || map[y][x] == 'E')
 				(1) && (count++, cube->player.x = x, cube->player.y = y,
-					cube->player.player = map[y][x]);
+					cube->player.direction = map[y][x]);
 			x++;
 		}
-		(y > cube->width) && (cube->width = x);
+		(y > cube->window.width) && (cube->window.width = x);
 		y++;
 	}
-	cube->height = y;
+	cube->window.height = y;
 	return (count);
 }
