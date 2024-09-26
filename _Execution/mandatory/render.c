@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/26 11:56:32 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:03:29 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_line(t_cube *cube, int length, int curr_x, int curr_y)
 
 	while (curr_x != x_end || curr_y != y_end)
 	{
-		mlx_put_pixel(cube->image, curr_x + 160, curr_y + 160,
+		mlx_put_pixel(cube->image, curr_x + 170, curr_y + 130,
 			ft_pixel(rand() % 255, rand() % 255, rand() % 255, 255));
 		int e2 = 2 * err;
 		if (e2 > -dy) { err -= dy; curr_x += sx; }
@@ -53,7 +53,7 @@ void	draw_rays(t_cube *cube, mlx_image_t *image, double angle)
 		y = cube->player.y + j * sin(angle);
 		if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 			break ;
-		mlx_put_pixel(image, x + 160, y + 160, ft_pixel(0, 0, 100, 255));
+		mlx_put_pixel(image, x + 170, y + 130, ft_pixel(0, 0, 100, 255));
 		j++;
 	}
 }
@@ -70,7 +70,7 @@ static void	draw_circle(mlx_image_t *image, t_player *player)
 		while (x <= player->radius)
 		{
 			if ((x * x) + (y * y) <= (player->radius * player->radius))
-				mlx_put_pixel(image, player->x + x + 160, player->y + y + 160,
+				mlx_put_pixel(image, player->x + x + 170, player->y + y + 130,
 				ft_pixel(rand() % 255, rand() % 255, rand() % 255, 255));
 			x++;
 		}

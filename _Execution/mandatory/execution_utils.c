@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/26 11:56:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:03:37 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 	{
 		j = -1;
 		while (++j < TILE_SIZE - 1)
-			mlx_put_pixel(image, x + i + 160, y + j + 160, color);
+			mlx_put_pixel(image, x + i + 170, y + j + 130, color);
 		i++;
 	}
 }
