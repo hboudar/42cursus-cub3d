@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 22:57:18 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:43:16 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	key_rotations(void *mlx, t_player *player)
 	player->rotation_angle = remainder(player->rotation_angle, 2 * M_PI);
 	if (player->rotation_angle < 0)
 		player->rotation_angle = (2 * M_PI) + player->rotation_angle;
+	player->rotation_angle = normalize_angle(player->rotation_angle);
 }
 
 void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y)

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 22:59:57 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:19:01 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	get_element(t_cube *cube, char *elm, char mode)
 
 	(mode != 'F' && mode != 'C') && (start = skip_space(elm + 3, 0));
 	if (mode == 'N')
-		cube->window.no = ft_substr(elm, start, ft_strlen(elm) - 3);
+		cube->window.no = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
 	else if (mode == 'S')
-		cube->window.so = ft_substr(elm, start, ft_strlen(elm) - 3);
+		cube->window.so = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
 	else if (mode == 'W')
-		cube->window.we = ft_substr(elm, start, ft_strlen(elm) - 3);
+		cube->window.we = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
 	else if (mode == 'E')
-		cube->window.ea = ft_substr(elm, start, ft_strlen(elm) - 3);
+		cube->window.ea = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
 	else if (mode == 'F' || mode == 'C')
 	{
 		tmp = ft_strtrim(elm, " ");

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:24:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/26 16:06:31 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 40
+# define TILE_SIZE 15
 # define ROTATION_SPEED 0.06108652382
-# define MOVE_SPEED 3.5
+# define MOVE_SPEED 1
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
 
@@ -71,16 +71,17 @@ typedef struct s_parsing
 
 typedef struct s_cube
 {
-	void		*mlx;
-	mlx_image_t	*image;
-	t_player	player;
-	t_window	window;
-	t_parsing	parsing;
-	// double	ray_intercept;
-	// mlx_texture_t		*wall_1;
-	// mlx_texture_t		*wall_2;
-	// mlx_texture_t		*wall_3;
-	// mlx_texture_t		*wall_4;
+	void			*mlx;
+	mlx_image_t		*image;
+	t_player		player;
+	t_window		window;
+	t_parsing		parsing;
+	mlx_texture_t	*wall_1;
+	mlx_texture_t	*wall_2;
+	mlx_texture_t	*wall_3;
+	mlx_texture_t	*wall_4;
+	double			ray_intercept;
+	double			ray_index;
 }	t_cube;
 
 //parsing
@@ -120,6 +121,6 @@ void	draw_line(t_cube *cube, int length, int curr_x, int curr_y);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 
-void render_wall(t_cube *cube, mlx_image_t *image, double angle, double ray);
+void	render_wall(t_cube *cube, double angle);
 
 #endif
