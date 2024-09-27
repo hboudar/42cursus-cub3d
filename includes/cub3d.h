@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/26 16:06:31 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:22:32 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include <math.h>
-# include <stdio.h>//remove
 # include <fcntl.h>
 # include <unistd.h>
 # include "../_Utils/libft.h"
@@ -32,8 +31,7 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	int		radius; //for draw_circle function in render.c (remove)
-	char	direction;
+	char	way;
 	double	rotation_angle;
 	int		facing_up;
 	int		facing_down;
@@ -48,16 +46,21 @@ typedef struct s_player
 
 typedef struct s_window
 {
-	int		*c;
-	int		*f;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		flag;
-	int		width;
-	int		height;
-}	t_window;
+	int				*c;
+	int				*f;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	int				flag;
+	int				width;
+	int				height;
+	mlx_texture_t	*t1;
+	mlx_texture_t	*t2;
+	mlx_texture_t	*t3;
+	mlx_texture_t	*t4;
+	double			ray_intercept;
+}	t_win;
 
 typedef struct s_parsing
 {
@@ -67,60 +70,54 @@ typedef struct s_parsing
 	int			map_len;
 	char		*fd_file;
 	int			len_file;
-}	t_parsing;
+}	t_pars;
+
+typedef struct s_execution
+{
+	int		i;
+	int		ray;
+	int		color;
+	double	ray_angle;
+	int		texture_x;
+	int		texture_y;
+	int		walltop_pixel;
+	int		wallbottom_pixel;
+	double	wallstripheight;
+	double	correct_distance;
+	double	distance_proj_plane;
+}	t_exec;
 
 typedef struct s_cube
 {
-	void			*mlx;
-	mlx_image_t		*image;
-	t_player		player;
-	t_window		window;
-	t_parsing		parsing;
-	mlx_texture_t	*wall_1;
-	mlx_texture_t	*wall_2;
-	mlx_texture_t	*wall_3;
-	mlx_texture_t	*wall_4;
-	double			ray_intercept;
-	double			ray_index;
+	void		*mlx;
+	mlx_image_t	*image;
+	t_player	player;
+	t_win		window;
+	t_pars		parsing;
+	t_exec		exec;
 }	t_cube;
 
-//parsing
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
-
-//parsing utils
 void	check_map_name(int argc, char *name, int i);
 void	initialize_list(t_cube *cube, char *map);
 int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);
 int		check_map(char **map, int x, int y);
 int		skip_space(char *str, int mode);
-int		skip_line(t_parsing *parsing, int i, int mode);
-
-//execution
+int		skip_line(t_pars *parsing, int i, int mode);
 void	init_exec(t_cube *cube, t_player *player);
 void	execution(void *arg);
-
-//key pressed
 void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y);
 void	key_rotations(void *mlx, t_player *player);
-
-//ray casting
 void	ray_casting(t_cube *cube, t_player *player);
-
-//render
 void	render_map(t_cube *cube, t_player *player, char **map);
 void	draw_rays(t_cube *cube, mlx_image_t *image, double angle);
-
-//render utils
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
 double	normalize_angle(double angle);
 void	draw_line(t_cube *cube, int length, int curr_x, int curr_y);
-
-//error
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
-
-void	render_wall(t_cube *cube, double angle);
+void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 
 #endif

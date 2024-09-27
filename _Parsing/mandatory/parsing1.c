@@ -6,13 +6,13 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 13:01:36 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:01:07 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 10:59:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	take_map(t_parsing *parsing, int i, int j, int k)
+static void	take_map(t_pars *parsing, int i, int j, int k)
 {
 	while (parsing->fd_file[i])
 	{
@@ -36,7 +36,7 @@ static void	take_map(t_parsing *parsing, int i, int j, int k)
 	parsing->map[j] = NULL;
 }
 
-static int	parse_mape2(t_cube *cube, t_parsing *parsing)
+static int	parse_mape2(t_cube *cube, t_pars *parsing)
 {
 	char	*tmp;
 	int		r;
@@ -57,7 +57,7 @@ static int	parse_mape2(t_cube *cube, t_parsing *parsing)
 	return (0);
 }
 
-static void	parse_map(t_cube *cube, t_parsing *parsing, char *tmp1, char **tmp2)
+static void	parse_map(t_cube *cube, t_pars *parsing, char *tmp1, char **tmp2)
 {
 	int	i;
 	int	j;
@@ -85,7 +85,7 @@ static void	parse_map(t_cube *cube, t_parsing *parsing, char *tmp1, char **tmp2)
 	parsing->map = tmp2;
 }
 
-void	parse_textures(t_cube *cube, t_parsing *parsing, t_window *window)
+void	parse_textures(t_cube *cube, t_pars *parsing, t_win *window)
 {
 	int	i;
 
