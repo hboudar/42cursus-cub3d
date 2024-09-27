@@ -6,20 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 11:27:54 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 12:45:20 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	get_pixel(mlx_texture_t *texture, int x, int y)
-{
-	int	index;
-
-	index = (y * texture->width + x) * texture->bytes_per_pixel;
-	return (ft_pixel(texture->pixels[index], texture->pixels[index + 1],
-			texture->pixels[index + 2], texture->pixels[index + 3]));
-}
 
 void	render_sky(t_cube *cube, t_exec *exec, t_player *player, t_win *win)
 {

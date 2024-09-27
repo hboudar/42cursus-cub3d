@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:45:48 by hboudar          ###   ########.fr       */
+/*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
+/*   Updated: 2024/09/27 12:57:24 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
-# include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include "../_Utils/libft.h"
 # include "../../../MLX42/include/MLX42/MLX42.h"
 
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 15
+# define TILE_SIZE 12
 # define ROTATION_SPEED 0.06108652382
 # define MOVE_SPEED 1
 # define FOV 1.0471975511965976
@@ -32,6 +32,7 @@ typedef struct s_player
 	double	x;
 	double	y;
 	char	way;
+	double	radius;
 	double	rotation_angle;
 	int		facing_up;
 	int		facing_down;
@@ -110,6 +111,7 @@ void	execution(void *arg);
 void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y);
 void	key_rotations(void *mlx, t_player *player);
 void	ray_casting(t_cube *cube, t_player *player);
+void	render_map(t_cube *cube, t_player *player, char **map);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int		get_pixel(mlx_texture_t *texture, int x, int y);
 void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
