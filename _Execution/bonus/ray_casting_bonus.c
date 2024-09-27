@@ -6,11 +6,12 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 10:12:05 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 12:51:18 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
+
 
 static double	smallest_distance(t_cube *cube)
 {
@@ -23,22 +24,22 @@ static double	smallest_distance(t_cube *cube)
 			+ pow(cube->player.y - cube->player.vertical_y, 2));
 	if (distance_oriz < distance_vert)
 	{
-		cube->ray_intercept = cube->player.orizontal_x;
+		cube->window.ray_intercept = cube->player.orizontal_x;
 		if (cube->player.facing_up)
-			cube->player.direction = 'W';
+			cube->player.way = 'W';
 		else if (cube->player.facing_down)
-			cube->player.direction = 'E';
+			cube->player.way = 'E';
 		return (distance_oriz);
 	}
-	cube->ray_intercept = cube->player.vertical_y;
+	cube->window.ray_intercept = cube->player.vertical_y;
 	if (cube->player.facing_left)
-		cube->player.direction = 'N';
+		cube->player.way = 'N';
 	else if (cube->player.facing_right)
-		cube->player.direction = 'S';
+		cube->player.way = 'S';
 	return (distance_vert);
 }
 
-static int	check_wall(double x, double y, t_cube *cube, t_window *window)
+static int	check_wall(double x, double y, t_cube *cube, t_win *window)
 {
 	int	map_x;
 	int	map_y;
@@ -129,8 +130,9 @@ void	ray_casting(t_cube *cube, t_player *player)
 		get_oriz(cube, ray_angle, TILE_SIZE / tan(ray_angle), TILE_SIZE);
 		get_vert(cube, ray_angle, TILE_SIZE, TILE_SIZE * tan(ray_angle));
 		player->true_distance = smallest_distance(cube);
-		cube->ray_index = ray;
-		render_wall(cube, ray_angle);
+		cube->exec.ray_angle = ray_angle;
+		cube->exec.ray = ray;
+		render_window(cube, &cube->exec, player, &cube->window);
 		ray_angle += FOV / WIDTH;
 		ray_angle = normalize_angle(ray_angle);
 	}

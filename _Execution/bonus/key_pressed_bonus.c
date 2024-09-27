@@ -6,11 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 10:12:02 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 12:51:13 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 static void	check_move(t_cube *cube, double move_x, double move_y)
 {
