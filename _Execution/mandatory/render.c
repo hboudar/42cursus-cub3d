@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 11:25:13 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:27:54 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *wind)
 {
 	exec->correct_distance = cube->player.true_distance
 		* cos(cube->player.rotation_angle - exec->ray_angle);
-	exec->distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
+	exec->distance_proj_plane = ((double)WIDTH / 2) / tan(FOV / 2);
 	exec->wallstripheight = (TILE_SIZE / exec->correct_distance)
 		* exec->distance_proj_plane;
-	exec->walltop_pixel = (HEIGHT / 2) - (exec->wallstripheight / 2);
-	exec->wallbottom_pixel = (HEIGHT / 2) + (exec->wallstripheight / 2);
+	exec->walltop_pixel = ((double)HEIGHT / 2) - (exec->wallstripheight / 2);
+	exec->wallbottom_pixel = ((double)HEIGHT / 2) + (exec->wallstripheight / 2);
 	if (exec->wallbottom_pixel > HEIGHT)
 		exec->wallbottom_pixel = HEIGHT;
 	if (exec->walltop_pixel < 0)
