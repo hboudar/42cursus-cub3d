@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 11:43:55 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/26 12:19:01 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 10:14:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	initialize_list(t_cube *cube, char *map)
 	cube->window.height = 0;
 	cube->player.x = 0;
 	cube->player.y = 0;
-	cube->player.radius = 3;
 	cube->player.rotation_angle = M_PI / 2;
 }
 

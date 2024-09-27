@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   execution_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 11:23:15 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 10:11:55 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,15 @@ void	init_exec(t_cube *cube, t_player *player)
 		ft_error("Error : MLX not found\n");
 	player->x = (player->x * TILE_SIZE) + (TILE_SIZE / 2);
 	player->y = (player->y * TILE_SIZE) + (TILE_SIZE / 2);
-	(player->way == 'E') && (player->rotation_angle = 0);
-	(player->way == 'S') && (player->rotation_angle = M_PI / 2);
-	(player->way == 'W') && (player->rotation_angle = M_PI);
-	(player->way == 'N') && (player->rotation_angle = 3 * M_PI / 2);
-	cube->window.t1 = mlx_load_png(cube->window.no);
-	cube->window.t2 = mlx_load_png(cube->window.so);
-	cube->window.t3 = mlx_load_png(cube->window.ea);
-	cube->window.t4 = mlx_load_png(cube->window.we);
-	if (!cube->window.t1 || !cube->window.t2
-		|| !cube->window.t3 || !cube->window.t4)
+	(player->direction == 'E') && (player->rotation_angle = 0);
+	(player->direction == 'S') && (player->rotation_angle = M_PI / 2);
+	(player->direction == 'W') && (player->rotation_angle = M_PI);
+	(player->direction == 'N') && (player->rotation_angle = 3 * M_PI / 2);
+	cube->wall_1 = mlx_load_png(cube->window.no);
+	cube->wall_2 = mlx_load_png(cube->window.so);
+	cube->wall_3 = mlx_load_png(cube->window.ea);
+	cube->wall_4 = mlx_load_png(cube->window.we);
+	if (!cube->wall_1 || !cube->wall_2 || !cube->wall_3 || !cube->wall_4)
 		ft_error("Error : Texture not found\n");
 	mlx_loop_hook(cube->mlx, execution, cube);
 	mlx_loop(cube->mlx);

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/25 23:15:26 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 11:19:31 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	skip_space(char *str, int mode)
 	return (i);
 }
 
-int	skip_line(t_parsing *parsing, int i, int mode)
+int	skip_line(t_pars *parsing, int i, int mode)
 {
 	if (mode)
 	{
@@ -124,7 +124,7 @@ int	check_elem(char **map, t_cube *cube)
 			else if (map[y][x] == 'N' || map[y][x] == 'S'
 					|| map[y][x] == 'W' || map[y][x] == 'E')
 				(1) && (count++, cube->player.x = x, cube->player.y = y,
-					cube->player.direction = map[y][x]);
+					cube->player.way = map[y][x]);
 			x++;
 		}
 		(y > cube->window.width) && (cube->window.width = x);
