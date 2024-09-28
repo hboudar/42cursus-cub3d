@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:57:24 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/27 16:49:05 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 12
+# define TILE_SIZE 50
 # define ROTATION_SPEED 0.06108652382
 # define MOVE_SPEED 1
 # define FOV 1.0471975511965976
