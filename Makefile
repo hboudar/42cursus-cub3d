@@ -51,6 +51,8 @@ clean:
 fclean: clean
 	@cd _Utils && make fclean
 	$(RM) $(NAME) $(NAME_BONUS)
-	@cd ../../MLX42 && rm -rf build
+# @cd ../../MLX42 && rm -rf build
 
 re: fclean all
+
+be: fclean bonus
