@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 16:49:05 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 11:16:51 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 # define CUB3D_BONUS_H
 
 # include <fcntl.h>
+# include <stdio.h>//DELETE
 # include <unistd.h>
 # include <math.h>
 # include "../_Utils/libft.h"
 # include "../../../MLX42/include/MLX42/MLX42.h"
 
+# define PI 3.14159265
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE_SIZE 50
-# define ROTATION_SPEED 0.06108652382
-# define MOVE_SPEED 1
+# define ROTATION_SPEED 0.06030382858
+# define MOVE_SPEED 2.5
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
 
@@ -32,6 +34,8 @@ typedef struct s_player
 	double	x;
 	double	y;
 	char	way;
+	int		x_map;
+	int		y_map;
 	double	radius;
 	double	rotation_angle;
 	int		facing_up;
@@ -117,6 +121,7 @@ int		get_pixel(mlx_texture_t *texture, int x, int y);
 void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
 double	normalize_angle(double angle);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
+void	minimap_backround(t_cube *cube, t_player *player, double x, double y);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 
