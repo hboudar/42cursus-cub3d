@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/30 11:31:04 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 11:54:47 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void draw_player(t_cube *cube, int radius)
     draw_line(cube, 15, 90, 90);
 }
 
+void	draw_mini_map(t_cube *cube)
+{
+	
+}
+
 void minimap_backround(t_cube *cube, t_player *player, double x, double y)
 {
 	(1) && (player->radius = 65, y = -player->radius - 1);
@@ -82,5 +87,6 @@ void minimap_backround(t_cube *cube, t_player *player, double x, double y)
                 90 + x, 90 + y,ft_pixel(0, 0, 0, 255));
 		}
 	}
+	draw_mini_map(cube);
     draw_player(cube, 3);
 }
