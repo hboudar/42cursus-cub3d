@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:45:48 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 16:36:56 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "../_Utils/libft.h"
+# include "../Utils/libft.h"
 # include "../../../MLX42/include/MLX42/MLX42.h"
 
 # define WIDTH 1000

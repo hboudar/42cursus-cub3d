@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/30 11:54:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 16:42:55 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 # define CUB3D_BONUS_H
 
 # include <fcntl.h>
-# include <stdio.h>//DELETE
 # include <unistd.h>
 # include <math.h>
-# include "../_Utils/libft.h"
+# include "../Utils/libft.h"
 # include "../../../MLX42/include/MLX42/MLX42.h"
 
 # define PI 3.14159265
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 50
+# define TILE_SIZE 30
 # define ROTATION_SPEED 0.06030382858
-# define MOVE_SPEED 2.5
+# define MOVE_SPEED 1.6
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
 
@@ -90,6 +89,14 @@ typedef struct s_execution
 	double	wallstripheight;
 	double	correct_distance;
 	double	distance_proj_plane;
+	int		sx;
+	int		sy;
+	int		dx;
+	int		dy;
+	int		x_end;
+	int		y_end;
+	int		err;
+	int		e2;
 }	t_exec;
 
 typedef struct s_cube

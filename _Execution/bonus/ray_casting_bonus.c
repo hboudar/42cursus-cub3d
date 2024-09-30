@@ -6,12 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:51:18 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 16:48:50 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
 
 static double	smallest_distance(t_cube *cube)
 {
