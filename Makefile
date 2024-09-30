@@ -11,7 +11,7 @@ NAME_BONUS		=	cub3D_bonus
 SRC_BONUS		=	cub3d_bonus.c \
 					_Parsing/bonus/parsing1_bonus.c _Parsing/bonus/parsing2_bonus.c _Parsing/bonus/parsing_utils_bonus.c \
 					_Execution/bonus/execution_bonus.c _Execution/bonus/key_pressed_bonus.c _Execution/bonus/ray_casting_bonus.c \
-					_Execution/bonus/render_bonus.c _Execution/bonus/execution_utils_bonus.c \
+					_Execution/bonus/render_bonus.c _Execution/bonus/mini_map_bonus.c _Execution/bonus/execution_utils_bonus.c \
 					_Utils/error_bonus.c
 OBJ_BONUS		=	$(SRC_BONUS:.c=.o)
 HEADER_BONUS	=	includes/cub3d_bonus.h
