@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/30 11:15:40 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 11:31:04 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,6 @@ void draw_player(t_cube *cube, int radius)
     draw_line(cube, 15, 90, 90);
 }
 
-// void    render_minimap(t_cube *cube, t_player *player)
-// {
-//     int x;
-//     int y;
-
-    
-// }
-
 void minimap_backround(t_cube *cube, t_player *player, double x, double y)
 {
 	(1) && (player->radius = 65, y = -player->radius - 1);
@@ -90,8 +82,5 @@ void minimap_backround(t_cube *cube, t_player *player, double x, double y)
                 90 + x, 90 + y,ft_pixel(0, 0, 0, 255));
 		}
 	}
-    //render_minimap(cube, player);
     draw_player(cube, 3);
-    printf("player->x = %f\n", player->x);
-    printf("player->y = %f\n", player->y);
 }
