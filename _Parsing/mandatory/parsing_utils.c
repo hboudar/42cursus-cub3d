@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   pars_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -89,13 +89,13 @@ void	get_element(t_cube *cube, char *elm, char mode)
 
 void	initialize_list(t_cube *cube, char *map)
 {
-	cube->parsing.fd = open(map, O_RDONLY);
-	if (cube->parsing.fd == -1)
+	cube->pars.fd = open(map, O_RDONLY);
+	if (cube->pars.fd == -1)
 		ft_error("Error : open failed\n");
-	cube->parsing.map = NULL;
-	cube->parsing.file = NULL;
-	cube->parsing.map_len = 0;
-	cube->parsing.len_file = 0;
+	cube->pars.map = NULL;
+	cube->pars.file = NULL;
+	cube->pars.map_len = 0;
+	cube->pars.len_file = 0;
 	cube->window.flag = 0;
 	cube->window.f = NULL;
 	cube->window.c = NULL;

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/30 16:42:55 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 10:50:24 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define PI 3.14159265
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE_SIZE 30
-# define ROTATION_SPEED 0.06030382858
-# define MOVE_SPEED 1.6
+# define TILE_SIZE 25
+# define ROTATION_SPEED 0.06030302258
+# define MOVE_SPEED 1.4
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
 
@@ -42,10 +42,10 @@ typedef struct s_player
 	int		facing_left;
 	int		facing_right;
 	double	true_distance;
-	double	vertical_x;
-	double	vertical_y;
-	double	orizontal_y;
-	double	orizontal_x;
+	double	vr_x;
+	double	vr_y;
+	double	or_y;
+	double	or_x;
 }	t_player;
 
 typedef struct s_window
@@ -63,10 +63,12 @@ typedef struct s_window
 	mlx_texture_t	*t2;
 	mlx_texture_t	*t3;
 	mlx_texture_t	*t4;
+	mlx_texture_t	*door;
 	double			ray_intercept;
+	double			mid_ray_distance;
 }	t_win;
 
-typedef struct s_parsing
+typedef struct s_pars
 {
 	int			fd;
 	char		**map;
@@ -82,8 +84,8 @@ typedef struct s_execution
 	int		ray;
 	int		color;
 	double	ray_angle;
-	int		texture_x;
-	int		texture_y;
+	int		tx;
+	int		ty;
 	int		walltop_pixel;
 	int		wallbottom_pixel;
 	double	wallstripheight;
@@ -105,7 +107,7 @@ typedef struct s_cube
 	mlx_image_t	*image;
 	t_player	player;
 	t_win		window;
-	t_pars		parsing;
+	t_pars		pars;
 	t_exec		exec;
 }	t_cube;
 
@@ -116,7 +118,7 @@ int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);
 int		check_map(char **map, int x, int y);
 int		skip_space(char *str, int mode);
-int		skip_line(t_pars *parsing, int i, int mode);
+int		skip_line(t_pars *pars, int i, int mode);
 void	init_exec(t_cube *cube, t_player *player);
 void	execution(void *arg);
 void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y);

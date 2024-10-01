@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/30 16:50:07 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 11:00:44 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	draw_line(t_cube *cube, t_player *player, t_exec *exec)
 	int	curr_x;
 	int	curr_y;
 
-	curr_x = 90;
-	curr_y = 90;
+	curr_x = 95;
+	curr_y = 95;
 	exec->x_end = curr_x + cos(player->rotation_angle) * 15;
 	exec->y_end = curr_y + sin(player->rotation_angle) * 15;
 	exec->dx = abs(exec->x_end - curr_x);
@@ -36,11 +36,8 @@ void	draw_line(t_cube *cube, t_player *player, t_exec *exec)
 	}
 }
 
-void	draw_player(t_cube *cube, int radius)
+void	draw_player(t_cube *cube, int radius, int x, int y)
 {
-	int	x;
-	int	y;
-
 	y = -radius - 1;
 	while (++y <= radius)
 	{
@@ -49,10 +46,23 @@ void	draw_player(t_cube *cube, int radius)
 		{
 			if ((x * x) + (y * y) <= (radius * radius))
 				mlx_put_pixel(cube->image,
-					90 + x, 90 + y, ft_pixel(255, 20, 0, 180));
+					95 + x, 95 + y, ft_pixel(255, 20, 0, 180));
 		}
 	}
-	draw_line(cube, &cube->player, &cube->exec);
+	y = -3;
+	while (++y <= 2)
+	{
+		x = -3;
+		while (++x <= 2)
+		{
+			if ((x * x) + (y * y) <= 9 && x <= 0 && y <= 0)
+				mlx_put_pixel(cube->image, 95 + x, 95 + y,
+					ft_pixel(255, 255, 255, 255));
+			else if ((x * x) + (y * y) <= 9)
+				mlx_put_pixel(cube->image, 95 + x, 95 + y,
+					ft_pixel(0, 0, 0, 255));
+		}
+	}
 }
 
 int	is_a_wall(t_cube *cube, double x, double y)
@@ -65,12 +75,15 @@ int	is_a_wall(t_cube *cube, double x, double y)
 	if (map_x < 0 || map_x >= cube->window.width
 		|| map_y < 0 || map_y >= cube->window.height)
 		return (1);
-	return (cube->parsing.map[map_y][map_x] == '1');
+	return ((cube->pars.map[map_y][map_x] == '1')
+			+ (cube->pars.map[map_y][map_x] == 'D') * 2);
 }
 
 void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 {
-	(1) && (player->radius = 62, y = -player->radius - 1);
+	int	i;
+
+	(1) && (player->radius = 77, y = -player->radius - 1);
 	while (++y <= player->radius)
 	{
 		x = -player->radius - 1;
@@ -78,20 +91,28 @@ void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 		{
 			if ((x * x) + (y * y) <= (player->radius * player->radius))
 			{
-				if (is_a_wall(cube, x, y))
+				i = is_a_wall(cube, x, y);
+				if (i == 1)
 					mlx_put_pixel(cube->image,
-						90 + x, 90 + y, ft_pixel(255, 255, 10, 200));
+						95 + x, 95 + y, ft_pixel(255, 255, 10, 200));
+				else if (i == 2)
+					mlx_put_pixel(cube->image,
+						95 + x, 95 + y, ft_pixel(255, 0, 0, 255));
 				else
 					mlx_put_pixel(cube->image,
-						90 + x, 90 + y, ft_pixel(0, 0, 0, 255));
+						95 + x, 95 + y, ft_pixel(0, 0, 0, 255));
 			}
 		}
 	}
+	draw_player(cube, 4, 0, 0);
+	draw_line(cube, &cube->player, &cube->exec);
 }
 
 void	minimap_backround(t_cube *cube, t_player *player, double x, double y)
 {
-	(1) && (player->radius = 65, y = -player->radius - 1);
+	int32_t	color;
+
+	(1) && (player->radius = 80, y = -player->radius - 1);
 	while (++y <= player->radius)
 	{
 		x = -player->radius - 1;
@@ -99,9 +120,18 @@ void	minimap_backround(t_cube *cube, t_player *player, double x, double y)
 		{
 			if ((x * x) + (y * y) <= (player->radius * player->radius))
 				mlx_put_pixel(cube->image,
-					90 + x, 90 + y, ft_pixel(255, 255, 255, 255));
+					95 + x, 95 + y, ft_pixel(255, 0, 0, 255));
 		}
 	}
 	draw_mini_map(cube, player, 0, 0);
-	draw_player(cube, 4);
+	(1) && (x = -1, color = ft_pixel(255, 255, 255, 255));
+	while (++x < 10)
+	{
+		mlx_put_pixel(cube->image, 95 - 4, 15 + x, color);
+		mlx_put_pixel(cube->image, 95 - 5, 15 + x, color);
+		mlx_put_pixel(cube->image, 95 + 5, 15 + x, color);
+		mlx_put_pixel(cube->image, 95 + 6, 15 + x, color);
+		mlx_put_pixel(cube->image, 95 - 4 + x, 15 + x, color);
+		mlx_put_pixel(cube->image, 95 - 3 + x, 15 + x, color);
+	}
 }
