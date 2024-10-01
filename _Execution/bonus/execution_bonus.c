@@ -6,7 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/01 11:25:50 by hboudar          ###   ########.fr       */
+=======
+/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
+>>>>>>> hboudar
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +36,8 @@ void	init_exec(t_cube *cube, t_player *player)
 	cube->mlx = mlx_init((int32_t)WIDTH, (int32_t)HEIGHT, "MLX42", false);
 	if (!cube->mlx)
 		ft_error("Error : MLX not found\n");
-	player->x = (player->x * TILE_SIZE) + ((double)TILE_SIZE / 2);
-	player->y = (player->y * TILE_SIZE) + ((double)TILE_SIZE / 2);
+	player->x = (player->x * TILE) + ((double)TILE / 2);
+	player->y = (player->y * TILE) + ((double)TILE / 2);
 	(player->way == 'E') && (player->rotation_angle = 0);
 	(player->way == 'S') && (player->rotation_angle = M_PI / 2);
 	(player->way == 'W') && (player->rotation_angle = M_PI);

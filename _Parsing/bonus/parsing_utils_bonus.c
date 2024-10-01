@@ -108,6 +108,12 @@ void	initialize_list(t_cube *cube, char *map)
 	cube->player.x = 0;
 	cube->player.y = 0;
 	cube->player.rotation_angle = M_PI / 2;
+	cube->window.door_state = 0;
+	cube->window.x_ray = 0;
+	cube->window.y_ray = 0;
+	cube->window.mid_ray_distance = 200;
+	cube->exec.mode = 0;
+	cube->exec.key_tab = 0;
 }
 
 void	check_map_name(int argc, char *name, int i)

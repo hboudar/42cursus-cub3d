@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:45:27 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 	int	j;
 
 	i = 0;
-	while (i < TILE_SIZE - 1)
+	while (i < TILE - 1)
 	{
 		j = -1;
-		while (++j < TILE_SIZE - 1)
+		while (++j < TILE - 1)
 			mlx_put_pixel(image, x + i, y + j, color);
 		i++;
 	}

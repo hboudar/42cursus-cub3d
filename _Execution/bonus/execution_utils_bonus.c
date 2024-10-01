@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 11:21:34 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 17:41:20 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 	int	j;
 
 	i = 0;
-	while (i < TILE_SIZE - 1)
+	while (i < TILE - 1)
 	{
 		j = -1;
-		while (++j < TILE_SIZE - 1)
+		while (++j < TILE - 1)
 			mlx_put_pixel(image, x + i, y + j, color);
 		i++;
 	}
@@ -42,15 +42,13 @@ void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 
 double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
 {
-	int	tz;
-
-	tz = TILE_SIZE;
 	d_or = sqrt(pow(p->x - p->or_x, 2) + pow(p->y - p->or_y, 2));
 	d_vr = sqrt(pow(p->x - p->vr_x, 2) + pow(p->y - p->vr_y, 2));
 	if (d_or < d_vr)
 	{
+		(1) && (cube->window.y_ray = p->or_y, cube->window.x_ray = p->or_x);
 		cube->window.ray_intercept = p->or_x;
-		if (cube->pars.map[(int)(p->or_y / tz)][(int)(p->or_x / tz)] == 'D')
+		if (cube->pars.map[(int)(p->or_y / TILE)][(int)(p->or_x / TILE)] == 'D')
 			p->way = 'D';
 		else if (p->facing_up)
 			p->way = 'W';
@@ -59,27 +57,37 @@ double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
 		return (d_or);
 	}
 	cube->window.ray_intercept = p->vr_y;
-	if (cube->pars.map[(int)(p->vr_y / tz)][(int)(p->vr_x / tz)] == 'D')
+	if (cube->pars.map[(int)(p->vr_y / TILE)][(int)(p->vr_x / TILE)] == 'D')
 		p->way = 'D';
 	else if (cube->player.facing_left)
 		cube->player.way = 'N';
 	else if (cube->player.facing_right)
 		cube->player.way = 'S';
+	(1) && (cube->window.y_ray = p->vr_y, cube->window.x_ray = p->vr_x);
 	return (d_vr);
 }
 
-int	check_wall(double x, double y, t_cube *cube, t_win *window)
+int	check_wall(double x, double y, t_cube *cube)
 {
 	int	map_x;
 	int	map_y;
 
-	map_x = floor(x / TILE_SIZE);
-	map_y = floor(y / TILE_SIZE);
-	if (map_x < 0 || map_x >= window->width
-		|| map_y < 0 || map_y >= window->height)
+	map_x = floor(x / TILE);
+	map_y = floor(y / TILE);
+	if (map_x < 0 || map_x >= cube->window.width
+		|| map_y < 0 || map_y >= cube->window.height)
 		return (1);
 	if ((int)ft_strlen(cube->pars.map[map_y]) <= map_x)
 		return (1);
+	if (cube->exec.mode && cube->pars.map[map_y][map_x] == '2')
+	{
+		cube->window.door_state = 1;
+		cube->window.mid_ray_distance = sqrt(pow(cube->player.x - x, 2)
+				+ pow(cube->player.y - y, 2));
+		if (cube->window.mid_ray_distance < TILE * 2)
+			cube->pars.map[map_y][map_x] = 'D';
+		return (1);
+	}
 	if (cube->pars.map[map_y][map_x] == '1'
 		|| cube->pars.map[map_y][map_x] == 'D')
 		return (1);
