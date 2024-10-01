@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 10:47:05 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	check_move(t_cube *cube, double move_x, double move_y)
 	int	to_x;
 	int	to_y;
 
-	to_x = floor(cube->player.x + move_x) / TILE_SIZE;
-	to_y = floor(cube->player.y + move_y) / TILE_SIZE;
-	index_x = floor(cube->player.x) / TILE_SIZE;
-	index_y = floor(cube->player.y) / TILE_SIZE;
+	to_x = floor(cube->player.x + move_x) / TILE;
+	to_y = floor(cube->player.y + move_y) / TILE;
+	index_x = floor(cube->player.x) / TILE;
+	index_y = floor(cube->player.y) / TILE;
 	if (to_x < 0 || to_x >= cube->window.width || to_y < 0
 		|| to_y >= cube->window.height)
 		return ;
@@ -56,23 +56,23 @@ void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y)
 		exit(EXIT_SUCCESS);
 	if (mlx_is_key_down(cube->mlx, MLX_KEY_W))
 	{
-		move_x = cos(player->rotation_angle) * MOVE_SPEED;
-		move_y = sin(player->rotation_angle) * MOVE_SPEED;
+		move_x += cos(player->rotation_angle) * MOVE_SPEED;
+		move_y += sin(player->rotation_angle) * MOVE_SPEED;
 	}
 	if (mlx_is_key_down(cube->mlx, MLX_KEY_S))
 	{
-		move_x = cos(player->rotation_angle) * -MOVE_SPEED;
-		move_y = sin(player->rotation_angle) * -MOVE_SPEED;
+		move_x += cos(player->rotation_angle) * -MOVE_SPEED;
+		move_y += sin(player->rotation_angle) * -MOVE_SPEED;
 	}
 	if (mlx_is_key_down(cube->mlx, MLX_KEY_D))
 	{
-		move_x = -sin(player->rotation_angle) * MOVE_SPEED;
-		move_y = cos(player->rotation_angle) * MOVE_SPEED;
+		move_x += -sin(player->rotation_angle) * MOVE_SPEED;
+		move_y += cos(player->rotation_angle) * MOVE_SPEED;
 	}
 	if (mlx_is_key_down(cube->mlx, MLX_KEY_A))
 	{
-		move_x = sin(player->rotation_angle) * MOVE_SPEED;
-		move_y = -cos(player->rotation_angle) * MOVE_SPEED;
+		move_x += sin(player->rotation_angle) * MOVE_SPEED;
+		move_y += -cos(player->rotation_angle) * MOVE_SPEED;
 	}
 	check_move(cube, move_x, move_y);
 }

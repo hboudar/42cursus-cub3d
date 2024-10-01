@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 10:47:05 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	check_wall(double x, double y, t_cube *cube, t_win *window)
 	int	map_x;
 	int	map_y;
 
-	map_x = floor(x / TILE_SIZE);
-	map_y = floor(y / TILE_SIZE);
+	map_x = floor(x / TILE);
+	map_y = floor(y / TILE);
 	if (map_x < 0 || map_x >= window->width
 		|| map_y < 0 || map_y >= window->height)
 		return (1);
@@ -60,8 +60,8 @@ static void	get_oriz(t_cube *cube, double angle, double x_step, double y_step)
 	double	y_intercept;
 	double	x_intercept;
 
-	y_intercept = floor(cube->player.y / TILE_SIZE) * TILE_SIZE;
-	(cube->player.facing_down) && (y_intercept += TILE_SIZE);
+	y_intercept = floor(cube->player.y / TILE) * TILE;
+	(cube->player.facing_down) && (y_intercept += TILE);
 	x_intercept = cube->player.x + (y_intercept - cube->player.y) / tan(angle);
 	(cube->player.facing_up) && (y_step *= -1);
 	(cube->player.facing_right && x_step < 0) && (x_step *= -1);
@@ -88,8 +88,8 @@ static void	get_vert(t_cube *cube, double angle, double x_step, double y_step)
 	double	x_intercept;
 	double	y_intercept;
 
-	x_intercept = floor(cube->player.x / TILE_SIZE) * TILE_SIZE;
-	(cube->player.facing_right) && (x_intercept += TILE_SIZE);
+	x_intercept = floor(cube->player.x / TILE) * TILE;
+	(cube->player.facing_right) && (x_intercept += TILE);
 	y_intercept = cube->player.y + (x_intercept - cube->player.x) * tan(angle);
 	(cube->player.facing_left) && (x_step *= -1);
 	(cube->player.facing_down && y_step < 0) && (y_step *= -1);
@@ -126,8 +126,8 @@ void	ray_casting(t_cube *cube, t_player *player)
 				|| ray_angle > 1.5 * M_PI);
 		player->facing_left = !player->facing_right;
 		ray_angle = normalize_angle(ray_angle);
-		get_oriz(cube, ray_angle, TILE_SIZE / tan(ray_angle), TILE_SIZE);
-		get_vert(cube, ray_angle, TILE_SIZE, TILE_SIZE * tan(ray_angle));
+		get_oriz(cube, ray_angle, TILE / tan(ray_angle), TILE);
+		get_vert(cube, ray_angle, TILE, TILE * tan(ray_angle));
 		player->true_distance = smallest_distance(cube);
 		cube->exec.ray_angle = ray_angle;
 		cube->exec.ray = ray;

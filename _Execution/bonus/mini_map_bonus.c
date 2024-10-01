@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 11:00:44 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	is_a_wall(t_cube *cube, double x, double y)
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)floor((cube->player.x + x) / TILE_SIZE);
-	map_y = (int)floor((cube->player.y + y) / TILE_SIZE);
+	map_x = (int)floor((cube->player.x + x) / TILE);
+	map_y = (int)floor((cube->player.y + y) / TILE);
 	if (map_x < 0 || map_x >= cube->window.width
 		|| map_y < 0 || map_y >= cube->window.height)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 11:21:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	render_sky(t_cube *cube, t_exec *exec, t_player *player, t_win *win)
 		exec->i++;
 	}
 	(player->way == 'E') && (exec->tx
-			= fmod(win->ray_intercept, TILE_SIZE) * win->t1->width / TILE_SIZE);
+			= fmod(win->ray_intercept, TILE) * win->t1->width / TILE);
 	(player->way == 'W') && (exec->tx
-			= fmod(win->ray_intercept, TILE_SIZE) * win->t2->width / TILE_SIZE);
+			= fmod(win->ray_intercept, TILE) * win->t2->width / TILE);
 	(player->way == 'N') && (exec->tx
-			= fmod(win->ray_intercept, TILE_SIZE) * win->t3->width / TILE_SIZE);
+			= fmod(win->ray_intercept, TILE) * win->t3->width / TILE);
 	(player->way == 'S') && (exec->tx
-			= fmod(win->ray_intercept, TILE_SIZE) * win->t4->width / TILE_SIZE);
+			= fmod(win->ray_intercept, TILE) * win->t4->width / TILE);
 	(player->way == 'D') && (exec->tx
-			= fmod(win->ray_intercept, TILE_SIZE)
-			* win->door->width / TILE_SIZE);
+			= fmod(win->ray_intercept, TILE)
+			* win->door->width / TILE);
 }
 
 void	render_floor(t_cube *cube, t_exec *exec, t_win *win)
@@ -88,7 +88,7 @@ void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *wind)
 	exec->correct_distance = cube->player.true_distance
 		* cos(cube->player.rotation_angle - exec->ray_angle);
 	exec->distance_proj_plane = ((double)WIDTH / 2) / tan(FOV / 2);
-	exec->wallstripheight = (TILE_SIZE / exec->correct_distance)
+	exec->wallstripheight = (TILE / exec->correct_distance)
 		* exec->distance_proj_plane;
 	exec->walltop_pixel = ((double)HEIGHT / 2) - (exec->wallstripheight / 2);
 	exec->wallbottom_pixel = ((double)HEIGHT / 2) + (exec->wallstripheight / 2);
