@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 11:00:59 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 11:22:32 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y)
 		move_x = sin(player->rotation_angle) * MOVE_SPEED;
 		move_y = -cos(player->rotation_angle) * MOVE_SPEED;
 	}
+	if (mlx_is_key_down(cube->mlx, MLX_KEY_TAB))
+		return ;
 	check_move(cube, move_x, move_y);
 }
