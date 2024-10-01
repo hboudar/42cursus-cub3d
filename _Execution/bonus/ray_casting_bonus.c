@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 10:56:03 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 11:03:21 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	ray_casting(t_cube *cube, t_player *player)
 		ray_angle = normalize_angle(ray_angle);
 		get_oriz(cube, ray_angle, TILE_SIZE / tan(ray_angle), TILE_SIZE);
 		get_vert(cube, ray_angle, TILE_SIZE, TILE_SIZE * tan(ray_angle));
-		player->true_distance = smallest_distance(cube, player, 0, 0);
+		player->true_distance = small_distance(cube, player, 0, 0);
 		cube->exec.ray_angle = ray_angle;
 		cube->exec.ray = ray;
 		if (ray == WIDTH / 2)
