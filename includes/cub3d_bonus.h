@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 10:50:24 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 11:21:54 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,10 @@ void	key_rotations(void *mlx, t_player *player);
 void	ray_casting(t_cube *cube, t_player *player);
 void	render_map(t_cube *cube, t_player *player, char **map);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-int		get_pixel(mlx_texture_t *texture, int x, int y);
 void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
 double	normalize_angle(double angle);
+int		check_wall(double x, double y, t_cube *cube, t_win *window);
+double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 void	minimap_backround(t_cube *cube, t_player *player, double x, double y);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);

@@ -6,57 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 11:08:39 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 11:25:17 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
-{
-	int	tz;
-
-	tz = TILE_SIZE;
-	d_or = sqrt(pow(p->x - p->or_x, 2) + pow(p->y - p->or_y, 2));
-	d_vr = sqrt(pow(p->x - p->vr_x, 2) + pow(p->y - p->vr_y, 2));
-	if (d_or < d_vr)
-	{
-		cube->window.ray_intercept = p->or_x;
-		if (cube->pars.map[(int)(p->or_y / tz)][(int)(p->or_x / tz)] == 'D')
-			p->way = 'D';
-		else if (p->facing_up)
-			p->way = 'W';
-		else if (p->facing_down)
-			p->way = 'E';
-		return (d_or);
-	}
-	cube->window.ray_intercept = p->vr_y;
-	if (cube->pars.map[(int)(p->vr_y / tz)][(int)(p->vr_x / tz)] == 'D')
-		p->way = 'D';
-	else if (cube->player.facing_left)
-		cube->player.way = 'N';
-	else if (cube->player.facing_right)
-		cube->player.way = 'S';
-	return (d_vr);
-}
-
-static int	check_wall(double x, double y, t_cube *cube, t_win *window)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = floor(x / TILE_SIZE);
-	map_y = floor(y / TILE_SIZE);
-	if (map_x < 0 || map_x >= window->width
-		|| map_y < 0 || map_y >= window->height)
-		return (1);
-	if ((int)ft_strlen(cube->pars.map[map_y]) <= map_x)
-		return (1);
-	if (cube->pars.map[map_y][map_x] == '1'
-		|| cube->pars.map[map_y][map_x] == 'D')
-		return (1);
-	return (0);
-}
 
 static void	get_oriz(t_cube *cube, double angle, double x_step, double y_step)
 {

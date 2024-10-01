@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/30 11:15:15 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 11:21:34 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-int	get_pixel(mlx_texture_t *texture, int x, int y)
-{
-	int	index;
-
-	index = (y * texture->width + x) * texture->bytes_per_pixel;
-	return (ft_pixel(texture->pixels[index], texture->pixels[index + 1],
-			texture->pixels[index + 2], texture->pixels[index + 3]));
 }
 
 double	normalize_angle(double angle)
@@ -47,4 +38,50 @@ void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 			mlx_put_pixel(image, x + i, y + j, color);
 		i++;
 	}
+}
+
+double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
+{
+	int	tz;
+
+	tz = TILE_SIZE;
+	d_or = sqrt(pow(p->x - p->or_x, 2) + pow(p->y - p->or_y, 2));
+	d_vr = sqrt(pow(p->x - p->vr_x, 2) + pow(p->y - p->vr_y, 2));
+	if (d_or < d_vr)
+	{
+		cube->window.ray_intercept = p->or_x;
+		if (cube->pars.map[(int)(p->or_y / tz)][(int)(p->or_x / tz)] == 'D')
+			p->way = 'D';
+		else if (p->facing_up)
+			p->way = 'W';
+		else if (p->facing_down)
+			p->way = 'E';
+		return (d_or);
+	}
+	cube->window.ray_intercept = p->vr_y;
+	if (cube->pars.map[(int)(p->vr_y / tz)][(int)(p->vr_x / tz)] == 'D')
+		p->way = 'D';
+	else if (cube->player.facing_left)
+		cube->player.way = 'N';
+	else if (cube->player.facing_right)
+		cube->player.way = 'S';
+	return (d_vr);
+}
+
+int	check_wall(double x, double y, t_cube *cube, t_win *window)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = floor(x / TILE_SIZE);
+	map_y = floor(y / TILE_SIZE);
+	if (map_x < 0 || map_x >= window->width
+		|| map_y < 0 || map_y >= window->height)
+		return (1);
+	if ((int)ft_strlen(cube->pars.map[map_y]) <= map_x)
+		return (1);
+	if (cube->pars.map[map_y][map_x] == '1'
+		|| cube->pars.map[map_y][map_x] == 'D')
+		return (1);
+	return (0);
 }
