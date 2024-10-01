@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/28 15:20:28 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 10:43:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ void	render_sky(t_cube *cube, t_exec *exec, t_player *player, t_win *win)
 			ft_pixel(win->c[0], win->c[1], win->c[2], 255));
 		exec->i++;
 	}
-	(player->way == 'E') && (exec->texture_x
+	(player->way == 'E') && (exec->tx
 			= fmod(win->ray_intercept, TILE_SIZE) * win->t1->width / TILE_SIZE);
-	(player->way == 'W') && (exec->texture_x
+	(player->way == 'W') && (exec->tx
 			= fmod(win->ray_intercept, TILE_SIZE) * win->t2->width / TILE_SIZE);
-	(player->way == 'N') && (exec->texture_x
+	(player->way == 'N') && (exec->tx
 			= fmod(win->ray_intercept, TILE_SIZE) * win->t3->width / TILE_SIZE);
-	(player->way == 'S') && (exec->texture_x
+	(player->way == 'S') && (exec->tx
 			= fmod(win->ray_intercept, TILE_SIZE) * win->t4->width / TILE_SIZE);
+	(player->way == 'D') && (exec->tx
+			= fmod(win->ray_intercept, TILE_SIZE)
+			* win->door->width / TILE_SIZE);
 }
 
 void	render_floor(t_cube *cube, t_exec *exec, t_win *win)
@@ -46,26 +49,26 @@ void	render_wall(t_cube *cube, t_exec *exec, t_player *ply, t_win *win)
 {
 	while (exec->i < exec->wallbottom_pixel)
 	{
-		(ply->way == 'E') && (exec->texture_y
-				= (exec->i - exec->walltop_pixel)
+		(ply->way == 'E') && (exec->ty = (exec->i - exec->walltop_pixel)
 				* win->t1->height / exec->wallstripheight);
 		(ply->way == 'E') && (exec->color
-				= get_pixel(win->t1, exec->texture_x, exec->texture_y));
-		(ply->way == 'W') && (exec->texture_y
-				= (exec->i - exec->walltop_pixel)
+				= get_pixel(win->t1, exec->tx, exec->ty));
+		(ply->way == 'W') && (exec->ty = (exec->i - exec->walltop_pixel)
 				* win->t2->height / exec->wallstripheight);
 		(ply->way == 'W') && (exec->color
-				= get_pixel(win->t2, exec->texture_x, exec->texture_y));
-		(ply->way == 'N') && (exec->texture_y
-				= (exec->i - exec->walltop_pixel)
+				= get_pixel(win->t2, exec->tx, exec->ty));
+		(ply->way == 'N') && (exec->ty = (exec->i - exec->walltop_pixel)
 				* win->t3->height / exec->wallstripheight);
 		(ply->way == 'N') && (exec->color
-				= get_pixel(win->t3, exec->texture_x, exec->texture_y));
-		(ply->way == 'S') && (exec->texture_y
-				= (exec->i - exec->walltop_pixel)
+				= get_pixel(win->t3, exec->tx, exec->ty));
+		(ply->way == 'S') && (exec->ty = (exec->i - exec->walltop_pixel)
 				* win->t4->height / exec->wallstripheight);
 		(ply->way == 'S') && (exec->color
-				= get_pixel(win->t4, exec->texture_x, exec->texture_y));
+				= get_pixel(win->t4, exec->tx, exec->ty));
+		(ply->way == 'D') && (exec->ty = (exec->i - exec->walltop_pixel)
+				* win->door->height / exec->wallstripheight);
+		(ply->way == 'D') && (exec->color
+				= get_pixel(win->door, exec->tx, exec->ty));
 		mlx_put_pixel(cube->image, exec->ray, exec->i, exec->color);
 		exec->i++;
 	}

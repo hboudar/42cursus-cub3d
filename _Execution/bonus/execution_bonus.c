@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/28 19:19:37 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 17:51:53 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	execution(void *arg)
 	cube->image = mlx_new_image(cube->mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
 	key_hooks(cube, &cube->player, 0.0, 0.0);
 	key_rotations(cube->mlx, &cube->player);
-	// ray_casting(cube, &cube->player);
+	ray_casting(cube, &cube->player);
 	minimap_backround(cube, &cube->player, 0, 0);
 	if (mlx_image_to_window(cube->mlx, cube->image, 0, 0) == -1)
 		ft_error("Error : Image not found\n");
@@ -42,6 +42,7 @@ void	init_exec(t_cube *cube, t_player *player)
 	cube->window.t2 = mlx_load_png(cube->window.so);
 	cube->window.t3 = mlx_load_png(cube->window.ea);
 	cube->window.t4 = mlx_load_png(cube->window.we);
+	cube->window.door = mlx_load_png("textures/door.png");
 	if (!cube->window.t1 || !cube->window.t2
 		|| !cube->window.t3 || !cube->window.t4)
 		ft_error("Error : Texture not found\n");

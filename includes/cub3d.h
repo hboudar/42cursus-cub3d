@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:45:48 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 10:47:05 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "../_Utils/libft.h"
+# include "../Utils/libft.h"
 # include "../../../MLX42/include/MLX42/MLX42.h"
 
 # define WIDTH 1000
@@ -62,7 +62,7 @@ typedef struct s_window
 	double			ray_intercept;
 }	t_win;
 
-typedef struct s_parsing
+typedef struct s_pars
 {
 	int			fd;
 	char		**map;
@@ -93,7 +93,7 @@ typedef struct s_cube
 	mlx_image_t	*image;
 	t_player	player;
 	t_win		window;
-	t_pars		parsing;
+	t_pars		pars;
 	t_exec		exec;
 }	t_cube;
 
@@ -104,7 +104,7 @@ int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);
 int		check_map(char **map, int x, int y);
 int		skip_space(char *str, int mode);
-int		skip_line(t_pars *parsing, int i, int mode);
+int		skip_line(t_pars *pars, int i, int mode);
 void	init_exec(t_cube *cube, t_player *player);
 void	execution(void *arg);
 void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y);

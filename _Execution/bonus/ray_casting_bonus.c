@@ -6,37 +6,38 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:51:18 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/01 10:56:03 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-
-static double	smallest_distance(t_cube *cube)
+double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
 {
-	double	distance_oriz;
-	double	distance_vert;
+	int	tz;
 
-	distance_oriz = sqrt(pow(cube->player.x - cube->player.orizontal_x, 2)
-			+ pow(cube->player.y - cube->player.orizontal_y, 2));
-	distance_vert = sqrt(pow(cube->player.x - cube->player.vertical_x, 2)
-			+ pow(cube->player.y - cube->player.vertical_y, 2));
-	if (distance_oriz < distance_vert)
+	tz = TILE_SIZE;
+	d_or = sqrt(pow(p->x - p->or_x, 2) + pow(p->y - p->or_y, 2));
+	d_vr = sqrt(pow(p->x - p->vr_x, 2) + pow(p->y - p->vr_y, 2));
+	if (d_or < d_vr)
 	{
-		cube->window.ray_intercept = cube->player.orizontal_x;
-		if (cube->player.facing_up)
-			cube->player.way = 'W';
-		else if (cube->player.facing_down)
-			cube->player.way = 'E';
-		return (distance_oriz);
+		cube->window.ray_intercept = p->or_x;
+		if (cube->pars.map[(int)(p->or_y / tz)][(int)(p->or_x / tz)] == 'D')
+			p->way = 'D';
+		else if (p->facing_up)
+			p->way = 'W';
+		else if (p->facing_down)
+			p->way = 'E';
+		return (d_or);
 	}
-	cube->window.ray_intercept = cube->player.vertical_y;
-	if (cube->player.facing_left)
+	cube->window.ray_intercept = p->vr_y;
+	if (cube->pars.map[(int)(p->vr_y / tz)][(int)(p->vr_x / tz)] == 'D')
+		p->way = 'D';
+	else if (cube->player.facing_left)
 		cube->player.way = 'N';
 	else if (cube->player.facing_right)
 		cube->player.way = 'S';
-	return (distance_vert);
+	return (d_vr);
 }
 
 static int	check_wall(double x, double y, t_cube *cube, t_win *window)
@@ -49,9 +50,10 @@ static int	check_wall(double x, double y, t_cube *cube, t_win *window)
 	if (map_x < 0 || map_x >= window->width
 		|| map_y < 0 || map_y >= window->height)
 		return (1);
-	if ((int)ft_strlen(cube->parsing.map[map_y]) <= map_x)
+	if ((int)ft_strlen(cube->pars.map[map_y]) <= map_x)
 		return (1);
-	if (cube->parsing.map[map_y][map_x] == '1')
+	if (cube->pars.map[map_y][map_x] == '1'
+		|| cube->pars.map[map_y][map_x] == 'D')
 		return (1);
 	return (0);
 }
@@ -72,8 +74,8 @@ static void	get_oriz(t_cube *cube, double angle, double x_step, double y_step)
 	{
 		if (check_wall(x_intercept, y_intercept, cube, &cube->window))
 		{
-			cube->player.orizontal_x = x_intercept;
-			cube->player.orizontal_y = y_intercept;
+			cube->player.or_x = x_intercept;
+			cube->player.or_y = y_intercept;
 			break ;
 		}
 		else
@@ -100,8 +102,8 @@ static void	get_vert(t_cube *cube, double angle, double x_step, double y_step)
 	{
 		if (check_wall(x_intercept, y_intercept, cube, &cube->window))
 		{
-			cube->player.vertical_x = x_intercept;
-			cube->player.vertical_y = y_intercept;
+			cube->player.vr_x = x_intercept;
+			cube->player.vr_y = y_intercept;
 			break ;
 		}
 		else
@@ -129,9 +131,11 @@ void	ray_casting(t_cube *cube, t_player *player)
 		ray_angle = normalize_angle(ray_angle);
 		get_oriz(cube, ray_angle, TILE_SIZE / tan(ray_angle), TILE_SIZE);
 		get_vert(cube, ray_angle, TILE_SIZE, TILE_SIZE * tan(ray_angle));
-		player->true_distance = smallest_distance(cube);
+		player->true_distance = smallest_distance(cube, player, 0, 0);
 		cube->exec.ray_angle = ray_angle;
 		cube->exec.ray = ray;
+		if (ray == WIDTH / 2)
+			cube->window.mid_ray_distance = player->true_distance;
 		render_window(cube, &cube->exec, player, &cube->window);
 		ray_angle += FOV / WIDTH;
 		ray_angle = normalize_angle(ray_angle);

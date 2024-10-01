@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2_bonus.c                                   :+:      :+:    :+:   */
+/*   pars2_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:01:28 by hboudar           #+#    #+#             */
-/*   Updated: 2024/09/27 12:51:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/09/30 17:43:02 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ int	skip_space(char *str, int mode)
 	return (i);
 }
 
-int	skip_line(t_pars *parsing, int i, int mode)
+int	skip_line(t_pars *pars, int i, int mode)
 {
 	if (mode)
 	{
 		mode = 0;
-		while (parsing->fd_file[i] && parsing->fd_file[i] != '\n')
+		while (pars->fd_file[i] && pars->fd_file[i] != '\n')
 			(1) && (i++, mode++);
-		if (parsing->fd_file[i] == '\n')
+		if (pars->fd_file[i] == '\n')
 			(1) && (i++, mode++);
 	}
 	else
 	{
-		while (parsing->fd_file[i] && parsing->fd_file[i] != '\n')
+		while (pars->fd_file[i] && pars->fd_file[i] != '\n')
 		{
 			i++;
 			mode++;
@@ -59,20 +59,24 @@ int	skip_line(t_pars *parsing, int i, int mode)
 static int	next_check(char **map, int x, int y)
 {
 	if (map[x + 1][y] != '0' && map[x + 1][y] != '1' &&
-			map[x + 1][y] != 'N' && map[x + 1][y] != 'S' &&
-			map[x + 1][y] != 'W' && map[x + 1][y] != 'E')
+		map[x + 1][y] != 'N' && map[x + 1][y] != 'S' &&
+		map[x + 1][y] != 'W' && map[x + 1][y] != 'E' &&
+		map[x + 1][y] != 'D')
 		return (0);
 	if (map[x - 1][y] != '0' && map[x - 1][y] != '1' &&
-			map[x - 1][y] != 'N' && map[x - 1][y] != 'S' &&
-			map[x - 1][y] != 'W' && map[x - 1][y] != 'E')
+		map[x - 1][y] != 'N' && map[x - 1][y] != 'S' &&
+		map[x - 1][y] != 'W' && map[x - 1][y] != 'E' &&
+		map[x - 1][y] != 'D')
 		return (0);
 	if (map[x][y + 1] != '0' && map[x][y + 1] != '1' &&
-			map[x][y + 1] != 'N' && map[x][y + 1] != 'S' &&
-			map[x][y + 1] != 'W' && map[x][y + 1] != 'E')
+		map[x][y + 1] != 'N' && map[x][y + 1] != 'S' &&
+		map[x][y + 1] != 'W' && map[x][y + 1] != 'E' &&
+		map[x][y + 1] != 'D')
 		return (0);
 	if (map[x][y - 1] != '0' && map[x][y - 1] != '1' &&
-			map[x][y - 1] != 'N' && map[x][y - 1] != 'S' &&
-			map[x][y - 1] != 'W' && map[x][y - 1] != 'E')
+		map[x][y - 1] != 'N' && map[x][y - 1] != 'S' &&
+		map[x][y - 1] != 'W' && map[x][y - 1] != 'E' &&
+		map[x][y - 1] != 'D')
 		return (0);
 	return (1);
 }
@@ -87,7 +91,7 @@ int	check_map(char **map, int x, int y)
 		while (map[x][y])
 		{
 			if ((map[x][y] == '0' || map[x][y] == 'N' || map[x][y] == 'S' ||
-						map[x][y] == 'W' || map[x][y] == 'E')
+					map[x][y] == 'W' || map[x][y] == 'E' || map[x][y] == 'D')
 					&& (map[x + 1][y] && map[x - 1][y] &&
 						map[x][y + 1] && map[x][y - 1]))
 			{
@@ -96,7 +100,7 @@ int	check_map(char **map, int x, int y)
 			}
 			else if (map[x][y] == '0' || map[x][y] == 'N' ||
 					map[x][y] == 'S' || map[x][y] == 'W' ||
-					map[x][y] == 'E')
+					map[x][y] == 'E' || map[x][y] == 'D')
 				return (0);
 			y++;
 		}
@@ -119,7 +123,7 @@ int	check_elem(char **map, t_cube *cube)
 		{
 			if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'N'
 					&& map[y][x] != 'S' && map[y][x] != 'W' && map[y][x] != 'E'
-					&& map[y][x] != ' ')
+					&& map[y][x] != ' ' && map[y][x] != 'D')
 				return (0);
 			else if (map[y][x] == 'N' || map[y][x] == 'S'
 					|| map[y][x] == 'W' || map[y][x] == 'E')

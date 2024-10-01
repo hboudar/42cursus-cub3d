@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2.c                                         :+:      :+:    :+:   */
+/*   pars2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -35,19 +35,19 @@ int	skip_space(char *str, int mode)
 	return (i);
 }
 
-int	skip_line(t_pars *parsing, int i, int mode)
+int	skip_line(t_pars *pars, int i, int mode)
 {
 	if (mode)
 	{
 		mode = 0;
-		while (parsing->fd_file[i] && parsing->fd_file[i] != '\n')
+		while (pars->fd_file[i] && pars->fd_file[i] != '\n')
 			(1) && (i++, mode++);
-		if (parsing->fd_file[i] == '\n')
+		if (pars->fd_file[i] == '\n')
 			(1) && (i++, mode++);
 	}
 	else
 	{
-		while (parsing->fd_file[i] && parsing->fd_file[i] != '\n')
+		while (pars->fd_file[i] && pars->fd_file[i] != '\n')
 		{
 			i++;
 			mode++;
