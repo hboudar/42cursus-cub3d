@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 17:26:15 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/02 20:32:34 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include "../Utils/libft.h"
 # include "../../../MLX42/include/MLX42/MLX42.h"
 
+# define PI 3.14159265
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE 24
-# define ROTATION_SPEED 0.06030302258
-# define MOVE_SPEED 1.4
+# define ROTATION_SPEED 0.06030300258
+# define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
 

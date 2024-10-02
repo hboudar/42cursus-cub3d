@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 17:41:20 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/02 20:28:02 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	check_wall(double x, double y, t_cube *cube)
 		cube->window.door_state = 1;
 		cube->window.mid_ray_distance = sqrt(pow(cube->player.x - x, 2)
 				+ pow(cube->player.y - y, 2));
-		if (cube->window.mid_ray_distance < TILE * 2)
+		if (cube->window.mid_ray_distance < TILE * 1.5)
 			cube->pars.map[map_y][map_x] = 'D';
 		return (1);
 	}

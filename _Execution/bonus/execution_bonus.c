@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/02 18:15:57 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	execution(void *arg)
 	mlx_delete_image(cube->mlx, cube->image);
 	cube->image = mlx_new_image(cube->mlx, (int32_t)WIDTH, (int32_t)HEIGHT);
 	key_hooks(cube, &cube->player, 0.0, 0.0);
+	mouse_hook(cube, &cube->window);
 	key_rotations(cube->mlx, &cube->player);
 	ray_casting(cube, &cube->player);
-	minimap_backround(cube, &cube->player, 0, 0);
+	minimap(cube, &cube->player, 0, 0);
 	if (mlx_image_to_window(cube->mlx, cube->image, 0, 0) == -1)
 		ft_error("Error : Image not found\n");
 }
