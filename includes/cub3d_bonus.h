@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 17:25:15 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/02 20:30:03 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE 24
-# define ROTATION_SPEED 0.06030302258
-# define MOVE_SPEED 1.4
+# define ROTATION_SPEED 0.06030300258
+# define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
 
@@ -57,18 +57,20 @@ typedef struct s_window
 	char			*we;
 	char			*ea;
 	int				flag;
-	int				width;
-	int				height;
 	mlx_texture_t	*t1;
 	mlx_texture_t	*t2;
 	mlx_texture_t	*t3;
 	mlx_texture_t	*t4;
 	mlx_texture_t	*door;
+	int				door_state;
+	int				width;
+	int				height;
+	int				x_ray;
+	int				y_ray;
 	double			ray_intercept;
 	double			mid_ray_distance;
-	int				y_ray;
-	int				x_ray;
-	int				door_state;
+	int32_t			mouse_x;
+	int32_t			mouse_y;
 }	t_win;
 
 typedef struct s_pars
@@ -128,6 +130,7 @@ void	init_exec(t_cube *cube, t_player *player);
 void	execution(void *arg);
 void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y);
 void	key_rotations(void *mlx, t_player *player);
+void	mouse_hook(t_cube *cube, t_win *win);
 void	ray_casting(t_cube *cube, t_player *player);
 double	cast_ray(t_cube *cube, t_player *player);
 void	render_map(t_cube *cube, t_player *player, char **map);
@@ -137,7 +140,7 @@ double	normalize_angle(double angle);
 int		check_wall(double x, double y, t_cube *cube);
 double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
-void	minimap_backround(t_cube *cube, t_player *player, double x, double y);
+void	minimap(t_cube *cube, t_player *player, double x, double y);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 

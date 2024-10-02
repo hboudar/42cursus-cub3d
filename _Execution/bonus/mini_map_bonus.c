@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/02 20:34:41 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 	draw_line(cube, &cube->player, &cube->exec);
 }
 
-void	minimap_backround(t_cube *cube, t_player *player, double x, double y)
+void	minimap(t_cube *cube, t_player *player, double x, double y)
 {
 	int32_t	color;
 
@@ -124,7 +124,7 @@ void	minimap_backround(t_cube *cube, t_player *player, double x, double y)
 		}
 	}
 	draw_mini_map(cube, player, 0, 0);
-	(1) && (x = -1, color = ft_pixel(255, 255, 255, 255));
+	(1) && (x = -1, color = ft_pixel(255, 255, 0, 255));
 	while (++x < 10)
 	{
 		mlx_put_pixel(cube->image, 95 - 4, 15 + x, color);

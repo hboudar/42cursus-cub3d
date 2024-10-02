@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 17:46:29 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/02 20:34:19 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,34 @@ static void	check_move(t_cube *cube, double move_x, double move_y)
 	cube->player.y += move_y;
 }
 
+void	mouse_hook(t_cube *cube, t_win *win)
+{
+	static int	hidden = 0;
+	static int	prev_mouse_x = -1;
+	static int	prev_mouse_y = -1;
+
+	if (mlx_is_mouse_down(cube->mlx, MLX_MOUSE_BUTTON_LEFT))
+		(1) && (mlx_set_cursor_mode(cube->mlx, MLX_MOUSE_HIDDEN), \
+			hidden = 1);
+	if (mlx_is_mouse_down(cube->mlx, MLX_MOUSE_BUTTON_RIGHT))
+	{
+		hidden = 0;
+		mlx_set_cursor_mode(cube->mlx, MLX_MOUSE_NORMAL);
+	}
+	mlx_get_mouse_pos(cube->mlx, &win->mouse_x, &win->mouse_y);
+	if (prev_mouse_x != -1 && prev_mouse_y != -1 && hidden == 1)
+	{
+		if (win->mouse_x != prev_mouse_x || win->mouse_y != prev_mouse_y)
+		{
+			if (win->mouse_x > prev_mouse_x)
+				cube->player.rotation_angle += ROTATION_SPEED / 2.5;
+			if (win->mouse_x < prev_mouse_x)
+				cube->player.rotation_angle -= ROTATION_SPEED / 2.5;
+		}
+	}
+	(1) && (prev_mouse_x = win->mouse_x, prev_mouse_y = win->mouse_y);
+}
+
 void	key_rotations(void *mlx, t_player *player)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -52,7 +80,7 @@ void	key_rotations(void *mlx, t_player *player)
 	player->rotation_angle = normalize_angle(player->rotation_angle);
 }
 
-void	door_hook(t_cube *cube, t_pars *pars, t_win *win)
+static void	door_hook(t_cube *cube, t_pars *pars, t_win *win)
 {
 	double	distance;
 
@@ -60,7 +88,8 @@ void	door_hook(t_cube *cube, t_pars *pars, t_win *win)
 	{
 		cube->exec.mode = 1;
 		distance = cast_ray(cube, &cube->player);
-		if (!win->door_state && cube->player.way == 'D' && distance < TILE * 2)
+		if (!win->door_state && cube->player.way == 'D'
+			&& distance < TILE * 1.5)
 			pars->map[(int)(win->y_ray / TILE)][(int)(win->x_ray / TILE)] = '2';
 		else
 			win->door_state = 0;
