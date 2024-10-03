@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 20:34:41 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/03 15:37:38 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	draw_player(t_cube *cube, int radius, int x, int y)
 		{
 			if ((x * x) + (y * y) <= (radius * radius))
 				mlx_put_pixel(cube->image,
-					95 + x, 95 + y, ft_pixel(255, 20, 0, 180));
+					95 + x, 95 + y, ft_pixel(255, 255, 0, 180));
 		}
 	}
 	y = -3;
-	while (++y <= 2)
+	while (++y <= 1)
 	{
 		x = -3;
 		while (++x <= 2)
@@ -67,21 +67,25 @@ void	draw_player(t_cube *cube, int radius, int x, int y)
 
 int	is_a_wall(t_cube *cube, double x, double y)
 {
+	int	tile_size;
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)floor((cube->player.x + x) / TILE);
-	map_y = (int)floor((cube->player.y + y) / TILE);
+	tile_size = TILE;
+	map_x = (int)floor((cube->player.x + x) / tile_size);
+	map_y = (int)floor((cube->player.y + y) / tile_size);
 	if (map_x < 0 || map_x >= cube->window.width
 		|| map_y < 0 || map_y >= cube->window.height)
 		return (1);
 	return ((cube->pars.map[map_y][map_x] == '1')
-			+ (cube->pars.map[map_y][map_x] == 'D') * 2);
+			+ (cube->pars.map[map_y][map_x] == 'C') * 2
+			+ (cube->pars.map[map_y][map_x] == 'O') * 3);
 }
 
 void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 {
-	int	i;
+	int32_t	color;
+	int		i;
 
 	(1) && (player->radius = 77, y = -player->radius - 1);
 	while (++y <= player->radius)
@@ -92,15 +96,11 @@ void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 			if ((x * x) + (y * y) <= (player->radius * player->radius))
 			{
 				i = is_a_wall(cube, x, y);
-				if (i == 1)
-					mlx_put_pixel(cube->image,
-						95 + x, 95 + y, ft_pixel(255, 255, 10, 200));
-				else if (i == 2)
-					mlx_put_pixel(cube->image,
-						95 + x, 95 + y, ft_pixel(255, 0, 0, 255));
-				else
-					mlx_put_pixel(cube->image,
-						95 + x, 95 + y, ft_pixel(0, 0, 0, 255));
+				color = ft_pixel(0, 0, 0, 255);
+				(i == 1) && (color = ft_pixel(50, 50, 50, 255));
+				(i == 2) && (color = ft_pixel(250, 250, 0, 180));
+				(i == 3) && (color = ft_pixel(80, 80, 80, 250));
+				mlx_put_pixel(cube->image, 95 + x, 95 + y, color);
 			}
 		}
 	}
@@ -112,6 +112,7 @@ void	minimap(t_cube *cube, t_player *player, double x, double y)
 {
 	int32_t	color;
 
+	color = ft_pixel(80, 80, 80, 255);
 	(1) && (player->radius = 80, y = -player->radius - 1);
 	while (++y <= player->radius)
 	{
@@ -120,11 +121,11 @@ void	minimap(t_cube *cube, t_player *player, double x, double y)
 		{
 			if ((x * x) + (y * y) <= (player->radius * player->radius))
 				mlx_put_pixel(cube->image,
-					95 + x, 95 + y, ft_pixel(255, 0, 0, 255));
+					95 + x, 95 + y, color);
 		}
 	}
 	draw_mini_map(cube, player, 0, 0);
-	(1) && (x = -1, color = ft_pixel(255, 255, 0, 255));
+	(1) && (x = -1, color = ft_pixel(250, 250, 0, 180));
 	while (++x < 10)
 	{
 		mlx_put_pixel(cube->image, 95 - 4, 15 + x, color);

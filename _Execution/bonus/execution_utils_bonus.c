@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 20:28:02 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/03 14:55:18 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
 	{
 		(1) && (cube->window.y_ray = p->or_y, cube->window.x_ray = p->or_x);
 		cube->window.ray_intercept = p->or_x;
-		if (cube->pars.map[(int)(p->or_y / TILE)][(int)(p->or_x / TILE)] == 'D')
-			p->way = 'D';
+		if (cube->pars.map[(int)(p->or_y / TILE)][(int)(p->or_x / TILE)] == 'C')
+			p->way = 'C';
 		else if (p->facing_up)
 			p->way = 'W';
 		else if (p->facing_down)
@@ -57,8 +57,8 @@ double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
 		return (d_or);
 	}
 	cube->window.ray_intercept = p->vr_y;
-	if (cube->pars.map[(int)(p->vr_y / TILE)][(int)(p->vr_x / TILE)] == 'D')
-		p->way = 'D';
+	if (cube->pars.map[(int)(p->vr_y / TILE)][(int)(p->vr_x / TILE)] == 'C')
+		p->way = 'C';
 	else if (cube->player.facing_left)
 		cube->player.way = 'N';
 	else if (cube->player.facing_right)
@@ -79,17 +79,17 @@ int	check_wall(double x, double y, t_cube *cube)
 		return (1);
 	if ((int)ft_strlen(cube->pars.map[map_y]) <= map_x)
 		return (1);
-	if (cube->exec.mode && cube->pars.map[map_y][map_x] == '2')
+	if (cube->exec.mode && cube->pars.map[map_y][map_x] == 'O')
 	{
 		cube->window.door_state = 1;
 		cube->window.mid_ray_distance = sqrt(pow(cube->player.x - x, 2)
 				+ pow(cube->player.y - y, 2));
 		if (cube->window.mid_ray_distance < TILE * 1.5)
-			cube->pars.map[map_y][map_x] = 'D';
+			cube->pars.map[map_y][map_x] = 'C';
 		return (1);
 	}
 	if (cube->pars.map[map_y][map_x] == '1'
-		|| cube->pars.map[map_y][map_x] == 'D')
+		|| cube->pars.map[map_y][map_x] == 'C')
 		return (1);
 	return (0);
 }

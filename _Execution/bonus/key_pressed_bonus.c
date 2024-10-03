@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 20:34:19 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/03 14:55:18 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void	check_move(t_cube *cube, double move_x, double move_y)
 	if (to_x < 0 || to_x >= cube->window.width || to_y < 0
 		|| to_y >= cube->window.height)
 		return ;
-	if (cube->pars.map[to_y][to_x] == '1' || cube->pars.map[to_y][to_x] == 'D')
+	if (cube->pars.map[to_y][to_x] == '1' || cube->pars.map[to_y][to_x] == 'C')
 		return ;
 	else if (to_x != index_x && to_y != index_y)
 	{
 		if (cube->pars.map[to_y][index_x] == '1'
 			|| cube->pars.map[index_y][to_x] == '1'
-			|| cube->pars.map[to_y][index_x] == 'D'
-			|| cube->pars.map[index_y][to_x] == 'D')
+			|| cube->pars.map[to_y][index_x] == 'C'
+			|| cube->pars.map[index_y][to_x] == 'C')
 			return ;
 	}
 	cube->player.x += move_x;
@@ -88,9 +88,9 @@ static void	door_hook(t_cube *cube, t_pars *pars, t_win *win)
 	{
 		cube->exec.mode = 1;
 		distance = cast_ray(cube, &cube->player);
-		if (!win->door_state && cube->player.way == 'D'
+		if (!win->door_state && cube->player.way == 'C'
 			&& distance < TILE * 1.5)
-			pars->map[(int)(win->y_ray / TILE)][(int)(win->x_ray / TILE)] = '2';
+			pars->map[(int)(win->y_ray / TILE)][(int)(win->x_ray / TILE)] = 'O';
 		else
 			win->door_state = 0;
 	}

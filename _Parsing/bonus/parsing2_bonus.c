@@ -61,22 +61,22 @@ static int	next_check(char **map, int x, int y)
 	if (map[x + 1][y] != '0' && map[x + 1][y] != '1' &&
 		map[x + 1][y] != 'N' && map[x + 1][y] != 'S' &&
 		map[x + 1][y] != 'W' && map[x + 1][y] != 'E' &&
-		map[x + 1][y] != 'D')
+		map[x + 1][y] != 'C')
 		return (0);
 	if (map[x - 1][y] != '0' && map[x - 1][y] != '1' &&
 		map[x - 1][y] != 'N' && map[x - 1][y] != 'S' &&
 		map[x - 1][y] != 'W' && map[x - 1][y] != 'E' &&
-		map[x - 1][y] != 'D')
+		map[x - 1][y] != 'C')
 		return (0);
 	if (map[x][y + 1] != '0' && map[x][y + 1] != '1' &&
 		map[x][y + 1] != 'N' && map[x][y + 1] != 'S' &&
 		map[x][y + 1] != 'W' && map[x][y + 1] != 'E' &&
-		map[x][y + 1] != 'D')
+		map[x][y + 1] != 'C')
 		return (0);
 	if (map[x][y - 1] != '0' && map[x][y - 1] != '1' &&
 		map[x][y - 1] != 'N' && map[x][y - 1] != 'S' &&
 		map[x][y - 1] != 'W' && map[x][y - 1] != 'E' &&
-		map[x][y - 1] != 'D')
+		map[x][y - 1] != 'C')
 		return (0);
 	return (1);
 }
@@ -91,7 +91,7 @@ int	check_map(char **map, int x, int y)
 		while (map[x][y])
 		{
 			if ((map[x][y] == '0' || map[x][y] == 'N' || map[x][y] == 'S' ||
-					map[x][y] == 'W' || map[x][y] == 'E' || map[x][y] == 'D')
+					map[x][y] == 'W' || map[x][y] == 'E' || map[x][y] == 'C')
 					&& (map[x + 1][y] && map[x - 1][y] &&
 						map[x][y + 1] && map[x][y - 1]))
 			{
@@ -100,7 +100,7 @@ int	check_map(char **map, int x, int y)
 			}
 			else if (map[x][y] == '0' || map[x][y] == 'N' ||
 					map[x][y] == 'S' || map[x][y] == 'W' ||
-					map[x][y] == 'E' || map[x][y] == 'D')
+					map[x][y] == 'E' || map[x][y] == 'C')
 				return (0);
 			y++;
 		}
@@ -123,7 +123,7 @@ int	check_elem(char **map, t_cube *cube)
 		{
 			if (map[y][x] != '0' && map[y][x] != '1' && map[y][x] != 'N'
 					&& map[y][x] != 'S' && map[y][x] != 'W' && map[y][x] != 'E'
-					&& map[y][x] != ' ' && map[y][x] != 'D')
+					&& map[y][x] != ' ' && map[y][x] != 'C')
 				return (0);
 			else if (map[y][x] == 'N' || map[y][x] == 'S'
 					|| map[y][x] == 'W' || map[y][x] == 'E')

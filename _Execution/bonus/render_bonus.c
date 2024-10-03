@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/01 13:07:10 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/03 16:40:56 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	render_sky(t_cube *cube, t_exec *exec, t_player *player, t_win *win)
 			= fmod(win->ray_intercept, TILE) * win->t3->width / TILE);
 	(player->way == 'S') && (exec->tx
 			= fmod(win->ray_intercept, TILE) * win->t4->width / TILE);
-	(player->way == 'D') && (exec->tx
+	(player->way == 'C') && (exec->tx
 			= fmod(win->ray_intercept, TILE)
 			* win->door->width / TILE);
 }
@@ -74,9 +74,9 @@ void	render_wall(t_cube *cube, t_exec *exec, t_player *ply, t_win *win)
 				* win->t4->height / exec->wallstripheight);
 		(ply->way == 'S') && (exec->color
 				= get_pixel(win->t4, exec->tx, exec->ty));
-		(ply->way == 'D') && (exec->ty = (exec->i - exec->walltop_pixel)
+		(ply->way == 'C') && (exec->ty = (exec->i - exec->walltop_pixel)
 				* win->door->height / exec->wallstripheight);
-		(ply->way == 'D') && (exec->color
+		(ply->way == 'C') && (exec->color
 				= get_pixel(win->door, exec->tx, exec->ty));
 		mlx_put_pixel(cube->image, exec->ray, exec->i, exec->color);
 		exec->i++;

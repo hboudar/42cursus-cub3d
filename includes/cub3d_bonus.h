@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 20:30:03 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:50:28 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define PI 3.14159265
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE 24
+# define TILE 22
 # define ROTATION_SPEED 0.06030300258
 # define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976

@@ -55,19 +55,3 @@ fclean: clean
 # @cd ../../MLX42 && rm -rf build
 
 re: fclean all
-
-
-# if (mlx_is_key_down(cube->mlx, MLX_KEY_F))
-# 	{
-# 		if (!tab_key_f)
-# 		{
-# 			cast_ray(cube, cube->player_angle, 1);
-# 			if (cube->flag_door == 0 && cube->direction == DOOR && cube->true_distance < DOOR_DIS)
-# 				cube->map[(int)(cube->y_ray / TILE)][(int)(cube->x_ray / TILE)] = '2';
-# 			else
-# 				cube->flag_door = 0;
-# 		}
-# 		tab_key_f = 1;
-# 	}
-# 	else
-# 		tab_key_f = 0;
