@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/02 20:32:34 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 10:12:56 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_window
 	mlx_texture_t	*t2;
 	mlx_texture_t	*t3;
 	mlx_texture_t	*t4;
+	mlx_texture_t	*sky;
 	double			ray_intercept;
 }	t_win;
 
