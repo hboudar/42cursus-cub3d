@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/04 16:06:02 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 10:02:25 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ typedef struct s_window
 	mlx_texture_t	*t2;
 	mlx_texture_t	*t3;
 	mlx_texture_t	*t4;
-	mlx_texture_t	*door;
 	mlx_texture_t	*sky;
-	mlx_texture_t	*floor;
+	mlx_texture_t	*door;
 	int				door_state;
 	int				width;
 	int				height;

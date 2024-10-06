@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/04 16:34:53 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 10:02:15 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ void	init_exec(t_cube *cube, t_player *player)
 	cube->window.t3 = mlx_load_png(cube->window.ea);
 	cube->window.t4 = mlx_load_png(cube->window.we);
 	cube->window.door = mlx_load_png("textures/door.png");
-	cube->window.sky = mlx_load_png("textures/sf.png");
-	cube->window.floor = mlx_load_png("textures/sf.png");
-	if (!cube->window.t1 || !cube->window.t2
-		|| !cube->window.t3 || !cube->window.t4 || !cube->window.door
-		|| !cube->window.sky || !cube->window.floor)
+	cube->window.sky = mlx_load_png("textures/sky.png");
+	if (!cube->window.t1 || !cube->window.t2 || !cube->window.t3
+		|| !cube->window.t4 || !cube->window.door || !cube->window.sky)
 		ft_error("Error : Texture not found\n");
 	mlx_loop_hook(cube->mlx, execution, cube);
 	mlx_loop(cube->mlx);

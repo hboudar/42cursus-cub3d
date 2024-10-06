@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 09:09:20 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 10:01:08 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,17 @@ void	render_sky(t_cube *cube, t_exec *exec, t_player *player, t_win *win)
 			* win->door->width / TILE);
 }
 
-void	render_floor(t_cube *cube, t_exec *exec, t_win *win)
+void	render_floor(t_cube *cube, t_exec *exec)
 {
+	uint32_t	color;
+
+	color = ft_pixel(80, 0, 0, 255);
 	exec->i = exec->wallbottom_pixel;
 	while (exec->i < HEIGHT)
 	{
-		mlx_put_pixel(cube->image, exec->ray, exec->i, ft_pixel(0, 0, 0, 255));
+		mlx_put_pixel(cube->image, exec->ray, exec->i, color);
 		exec->i++;
 	}
-	(void)win;
 }
 
 void	render_wall(t_cube *cube, t_exec *exec, t_player *ply, t_win *win)
@@ -102,5 +104,5 @@ void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *wind)
 		exec->walltop_pixel -= (exec->wallstripheight - HEIGHT) / 2;
 	render_sky(cube, exec, player, wind);
 	render_wall(cube, exec, player, wind);
-	render_floor(cube, exec, wind);
+	render_floor(cube, exec);
 }

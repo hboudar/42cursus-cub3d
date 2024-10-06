@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 09:08:20 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 09:48:13 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	draw_player(t_cube *cube, int radius, int x, int y)
 		{
 			if ((x * x) + (y * y) <= (radius * radius))
 				mlx_put_pixel(cube->image, 95 + x, 95 + y,
-					ft_pixel(255, rand() % 255, 0, 255));
+					ft_pixel(20, 200, 250, 235));
 		}
 	}
 	y = -3;
@@ -98,7 +98,7 @@ void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 				i = is_a_wall(cube, x, y);
 				color = ft_pixel(0, 0, 0, 255);
 				(i == 1) && (color = ft_pixel(100, 100, 100, 250));
-				(i == 2) && (color = ft_pixel(255, 140, 0, 255));
+				(i == 2) && (color = ft_pixel(20, 200, 250, 235));
 				(i == 3) && (color = ft_pixel(40, 40, 40, 255));
 				mlx_put_pixel(cube->image, 95 + x, 95 + y, color);
 			}
