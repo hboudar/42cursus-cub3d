@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 10:02:25 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 15:03:36 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_window
 	mlx_texture_t	*t4;
 	mlx_texture_t	*sky;
 	mlx_texture_t	*door;
+	mlx_texture_t	*weapon;
 	int				door_state;
 	int				width;
 	int				height;
@@ -109,6 +110,17 @@ typedef struct s_execution
 	int		key_tab;
 }	t_exec;
 
+typedef struct s_sprite
+{
+	mlx_texture_t	*sprite;
+	int				sprite_count;
+	uint32_t		start_x;
+	uint32_t		start_y;
+	uint32_t		s_x;
+	uint32_t		s_y;
+	uint32_t		color;
+}	t_sprite;
+
 typedef struct s_cube
 {
 	void		*mlx;
@@ -117,6 +129,7 @@ typedef struct s_cube
 	t_win		window;
 	t_pars		pars;
 	t_exec		exec;
+	t_sprite	sprite;
 }	t_cube;
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
@@ -136,12 +149,14 @@ void	ray_casting(t_cube *cube, t_player *player);
 double	cast_ray(t_cube *cube, t_player *player);
 void	render_map(t_cube *cube, t_player *player, char **map);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+int		get_pixel(mlx_texture_t *texture, int x, int y);
 void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color);
 double	normalize_angle(double angle);
 int		check_wall(double x, double y, t_cube *cube);
-double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 void	minimap(t_cube *cube, t_player *player, double x, double y);
+void	render_weapons(mlx_image_t *image, mlx_texture_t *picture);
+void	draw_sprite(t_cube *cube, t_sprite *sprite, int w, int h);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 

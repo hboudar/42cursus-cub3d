@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:17 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/03 14:55:18 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 14:59:36 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,6 @@ void	ft_pixel_to_image(mlx_image_t *image, int x, int y, uint32_t color)
 	}
 }
 
-double	small_distance(t_cube *cube, t_player *p, double d_or, double d_vr)
-{
-	d_or = sqrt(pow(p->x - p->or_x, 2) + pow(p->y - p->or_y, 2));
-	d_vr = sqrt(pow(p->x - p->vr_x, 2) + pow(p->y - p->vr_y, 2));
-	if (d_or < d_vr)
-	{
-		(1) && (cube->window.y_ray = p->or_y, cube->window.x_ray = p->or_x);
-		cube->window.ray_intercept = p->or_x;
-		if (cube->pars.map[(int)(p->or_y / TILE)][(int)(p->or_x / TILE)] == 'C')
-			p->way = 'C';
-		else if (p->facing_up)
-			p->way = 'W';
-		else if (p->facing_down)
-			p->way = 'E';
-		return (d_or);
-	}
-	cube->window.ray_intercept = p->vr_y;
-	if (cube->pars.map[(int)(p->vr_y / TILE)][(int)(p->vr_x / TILE)] == 'C')
-		p->way = 'C';
-	else if (cube->player.facing_left)
-		cube->player.way = 'N';
-	else if (cube->player.facing_right)
-		cube->player.way = 'S';
-	(1) && (cube->window.y_ray = p->vr_y, cube->window.x_ray = p->vr_x);
-	return (d_vr);
-}
-
 int	check_wall(double x, double y, t_cube *cube)
 {
 	int	map_x;
@@ -92,4 +65,13 @@ int	check_wall(double x, double y, t_cube *cube)
 		|| cube->pars.map[map_y][map_x] == 'C')
 		return (1);
 	return (0);
+}
+
+int	get_pixel(mlx_texture_t *texture, int x, int y)
+{
+	int	index;
+
+	index = (y * texture->width + x) * texture->bytes_per_pixel;
+	return (ft_pixel(texture->pixels[index], texture->pixels[index + 1],
+			texture->pixels[index + 2], texture->pixels[index + 3]));
 }

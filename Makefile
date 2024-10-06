@@ -20,7 +20,7 @@ HEADER_BONUS	=	includes/cub3d_bonus.h
 CC				=	cc
 RM				=	rm -f
 LIB				=	Utils/libft.a
-CFLAGS			=	-Wall -Wextra -Werror -g
+CFLAGS			=	-Wall -Wextra -Werror -g 
 MLX				=	../../MLX42/build/libmlx42.a
 LINKS			=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
 
