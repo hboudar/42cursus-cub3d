@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/03 16:40:56 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 09:09:20 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static int	get_pixel(mlx_texture_t *texture, int x, int y)
 
 void	render_sky(t_cube *cube, t_exec *exec, t_player *player, t_win *win)
 {
+	uint32_t	color;
+
 	exec->i = 0;
 	while (exec->i < exec->walltop_pixel)
 	{
-		mlx_put_pixel(cube->image, exec->ray, exec->i,
-			ft_pixel(win->c[0], win->c[1], win->c[2], 255));
+		color = get_pixel(win->sky, exec->ray, exec->i);
+		mlx_put_pixel(cube->image, exec->ray, exec->i, color);
 		exec->i++;
 	}
 	(player->way == 'E') && (exec->tx
@@ -48,10 +50,10 @@ void	render_floor(t_cube *cube, t_exec *exec, t_win *win)
 	exec->i = exec->wallbottom_pixel;
 	while (exec->i < HEIGHT)
 	{
-		mlx_put_pixel(cube->image, exec->ray, exec->i,
-			ft_pixel(win->f[0], win->f[1], win->f[2], 255));
+		mlx_put_pixel(cube->image, exec->ray, exec->i, ft_pixel(0, 0, 0, 255));
 		exec->i++;
 	}
+	(void)win;
 }
 
 void	render_wall(t_cube *cube, t_exec *exec, t_player *ply, t_win *win)

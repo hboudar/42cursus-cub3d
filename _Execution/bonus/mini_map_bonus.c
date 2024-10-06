@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/03 15:37:38 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/06 09:08:20 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	draw_player(t_cube *cube, int radius, int x, int y)
 		while (++x <= radius)
 		{
 			if ((x * x) + (y * y) <= (radius * radius))
-				mlx_put_pixel(cube->image,
-					95 + x, 95 + y, ft_pixel(255, 255, 0, 180));
+				mlx_put_pixel(cube->image, 95 + x, 95 + y,
+					ft_pixel(255, rand() % 255, 0, 255));
 		}
 	}
 	y = -3;
@@ -97,9 +97,9 @@ void	draw_mini_map(t_cube *cube, t_player *player, double x, double y)
 			{
 				i = is_a_wall(cube, x, y);
 				color = ft_pixel(0, 0, 0, 255);
-				(i == 1) && (color = ft_pixel(50, 50, 50, 255));
-				(i == 2) && (color = ft_pixel(250, 250, 0, 180));
-				(i == 3) && (color = ft_pixel(80, 80, 80, 250));
+				(i == 1) && (color = ft_pixel(100, 100, 100, 250));
+				(i == 2) && (color = ft_pixel(255, 140, 0, 255));
+				(i == 3) && (color = ft_pixel(40, 40, 40, 255));
 				mlx_put_pixel(cube->image, 95 + x, 95 + y, color);
 			}
 		}
@@ -112,7 +112,7 @@ void	minimap(t_cube *cube, t_player *player, double x, double y)
 {
 	int32_t	color;
 
-	color = ft_pixel(80, 80, 80, 255);
+	color = ft_pixel(50, 50, 50, 255);
 	(1) && (player->radius = 80, y = -player->radius - 1);
 	while (++y <= player->radius)
 	{
@@ -124,10 +124,10 @@ void	minimap(t_cube *cube, t_player *player, double x, double y)
 					95 + x, 95 + y, color);
 		}
 	}
-	draw_mini_map(cube, player, 0, 0);
-	(1) && (x = -1, color = ft_pixel(250, 250, 0, 180));
+	(1) && (draw_mini_map(cube, player, 0, 0), x = -1);
 	while (++x < 10)
 	{
+		color = ft_pixel(rand() % 255, rand() % 255, rand() % 255, 255);
 		mlx_put_pixel(cube->image, 95 - 4, 15 + x, color);
 		mlx_put_pixel(cube->image, 95 - 5, 15 + x, color);
 		mlx_put_pixel(cube->image, 95 + 5, 15 + x, color);
