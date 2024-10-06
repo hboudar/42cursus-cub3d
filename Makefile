@@ -4,7 +4,7 @@ SRC				=	cub3d.c \
 					_Execution/mandatory/execution.c _Execution/mandatory/key_pressed.c _Execution/mandatory/ray_casting.c \
 					_Execution/mandatory/render.c _Execution/mandatory/execution_utils.c \
 					Utils/error.c
-OBJ				=	$(SRC:.c=.o)
+OBJS			=	$(SRC:.c=.o)
 HEADER			=	includes/cub3d.h
 
 NAME_BONUS		=	cub3D_bonus
@@ -24,34 +24,44 @@ CFLAGS			=	-Wall -Wextra -Werror -g
 MLX				=	../../MLX42/build/libmlx42.a
 LINKS			=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
 
-all: $(LIB) $(MLX) $(NAME)
+all: libft $(MLX) $(NAME)
 
-bonus: $(LIB) $(MLX) $(NAME_BONUS)
+bonus: libft $(MLX) $(NAME_BONUS)
 
-$(NAME): $(OBJ) $(LIB) $(MLX)
-	$(CC) $(OBJ) $(LIB) $(MLX) $(LINKS) -o $(NAME)
+
+$(NAME): $(OBJS) $(LIB) $(MLX)
+	@echo "\033[0;36mMaking cub3D\033[0m"
+	@$(CC) $(OBJS) $(LIB) $(MLX) $(LINKS) -o $(NAME)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LIB) $(MLX)
-	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) $(LINKS) -o $(NAME_BONUS)
+	@echo "\033[0;36mMaking cub3D_bonus\033[0m"
+	@$(CC) $(OBJS_BONUS) $(LIB) $(MLX) $(LINKS) -o $(NAME_BONUS)
 
-%_bonus.o: %_bonus.c $(HEADER_BONUS)
-	$(CC) $(CFLAGS) -c $< -o $@
+libft:
+	@cd Utils && make
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(LIB):
-	@$(MAKE) -C Utils
 $(MLX):
+	@echo "\033[0;33mMaking MLX\033[0m"
 	@cd ../../MLX42 && cmake -B build && cmake --build build -j4
 
+%_bonus.o: %_bonus.c $(HEADER_BONUS)
+	@echo "\033[0;32mCompiling bonus\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+%.o: %.c $(HEADER)
+	@echo "\033[0;32mCompiling mandatory\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+
 clean:
-	$(MAKE) -C Utils clean
-	$(RM) $(OBJ) $(OBJS_BONUS)
+	@echo "\033[0;34mCleaning\033[0m"
+	@$(MAKE) -C Utils clean
+	@$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
+	@echo "\033[0;31mFull Cleaning\033[0m"
 	@cd Utils && make fclean
-	$(RM) $(NAME) $(NAME_BONUS)
-# @cd ../../MLX42 && rm -rf build
+	@$(RM) $(NAME) $(NAME_BONUS)
+	@cd ../../MLX42 && rm -rf build
 
 re: fclean all
