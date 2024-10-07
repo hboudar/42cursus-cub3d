@@ -1,33 +1,33 @@
 NAME			=	cub3D
+NAME_BONUS		=	cub3D_bonus
+
 SRC				=	cub3d.c \
 					_Parsing/mandatory/parsing1.c _Parsing/mandatory/parsing2.c _Parsing/mandatory/parsing_utils.c \
 					_Execution/mandatory/execution.c _Execution/mandatory/key_pressed.c _Execution/mandatory/ray_casting.c \
 					_Execution/mandatory/render.c _Execution/mandatory/execution_utils.c \
 					Utils/error.c
-OBJS			=	$(SRC:.c=.o)
-HEADER			=	includes/cub3d.h
-
-NAME_BONUS		=	cub3D_bonus
 SRC_BONUS		=	cub3d_bonus.c \
 					_Parsing/bonus/parsing1_bonus.c _Parsing/bonus/parsing2_bonus.c _Parsing/bonus/parsing_utils_bonus.c \
 					_Execution/bonus/execution_bonus.c _Execution/bonus/key_pressed_bonus.c _Execution/bonus/ray_casting_bonus.c \
 					_Execution/bonus/render_bonus.c _Execution/bonus/mini_map_bonus.c _Execution/bonus/execution_utils_bonus.c \
 					Utils/error_bonus.c
 
+OBJS			=	$(SRC:.c=.o)
 OBJS_BONUS		=	${SRC_BONUS:_bonus.c=_bonus.o}
+
+HEADER			=	includes/cub3d.h
 HEADER_BONUS	=	includes/cub3d_bonus.h
 
 CC				=	cc
 RM				=	rm -f
 LIB				=	Utils/libft.a
-CFLAGS			=	-Wall -Wextra -Werror -g 
+CFLAGS			=	-Wall -Wextra -Werror
 MLX				=	../../MLX42/build/libmlx42.a
-LINKS			=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit 
+LINKS			=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit
 
 all: libft $(MLX) $(NAME)
 
 bonus: libft $(MLX) $(NAME_BONUS)
-
 
 $(NAME): $(OBJS) $(LIB) $(MLX)
 	@echo "\033[0;36mMaking cub3D\033[0m"
