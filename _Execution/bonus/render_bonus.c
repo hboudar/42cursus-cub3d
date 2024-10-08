@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aghounam <aghounam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:57:51 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 14:57:57 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/07 15:59:31 by aghounam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *wind)
 {
 	exec->correct_distance = cube->player.true_distance
 		* cos(cube->player.rotation_angle - exec->ray_angle);
-	exec->distance_proj_plane = ((double)WIDTH / 2) / tan(FOV / 2);
 	exec->wallstripheight = (TILE / exec->correct_distance)
-		* exec->distance_proj_plane;
+		* PROJECT_PLANE;
 	exec->walltop_pixel = ((double)HEIGHT / 2) - (exec->wallstripheight / 2);
 	exec->wallbottom_pixel = ((double)HEIGHT / 2) + (exec->wallstripheight / 2);
 	if (exec->wallbottom_pixel > HEIGHT)
@@ -117,14 +116,15 @@ void	draw_sprite(t_cube *cube, t_sprite *sprite, int w, int h)
 	sprite->start_y = h + 10;
 	sprite->s_x = 0;
 	sprite->s_y = 0;
-	while (sprite->s_y < sprite->sprite->height
+	while (sprite->s_y < sprite->sprite[sprite->i]->height
 		&& sprite->s_y + sprite->start_y < HEIGHT)
 	{
 		sprite->s_x = 0;
-		while (sprite->s_x < sprite->sprite->width
+		while (sprite->s_x < sprite->sprite[sprite->i]->width
 			&& sprite->s_x + sprite->start_x < WIDTH)
 		{
-			sprite->color = get_pixel(sprite->sprite, sprite->s_x, sprite->s_y);
+			sprite->color = get_pixel(sprite->sprite[sprite->i],
+					sprite->s_x, sprite->s_y);
 			if (((sprite->color >> 24) & 0xFF) != 0)
 				mlx_put_pixel(cube->image, sprite->start_x + sprite->s_x,
 					sprite->start_y + sprite->s_y, sprite->color);

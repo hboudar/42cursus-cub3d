@@ -78,8 +78,8 @@ void	get_element(t_cube *cube, char *elm, char mode)
 	else if (mode == 'F' || mode == 'C')
 	{
 		tmp = ft_strtrim(elm, " ");
-		(mode == 'F') && (cube->window.c = get_rgb(cube, tmp, NULL, 0));
-		(mode == 'C') && (cube->window.f = get_rgb(cube, tmp, NULL, 0));
+		(mode == 'F') && (cube->window.f = get_rgb(cube, tmp, NULL, 0));
+		(mode == 'C') && (cube->window.c = get_rgb(cube, tmp, NULL, 0));
 		free(tmp);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 17:37:42 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/08 15:28:05 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE 22
+# define PROJECT_PLANE 866.0254037844
 # define ROTATION_SPEED 0.06030300258
 # define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976
@@ -97,7 +98,6 @@ typedef struct s_execution
 	int		wallbottom_pixel;
 	double	wallstripheight;
 	double	correct_distance;
-	double	distance_proj_plane;
 	int		sx;
 	int		sy;
 	int		dx;
@@ -112,7 +112,8 @@ typedef struct s_execution
 
 typedef struct s_sprite
 {
-	mlx_texture_t	*sprite;
+	int				i;
+	mlx_texture_t	*sprite[6];
 	int				sprite_count;
 	uint32_t		start_x;
 	uint32_t		start_y;
