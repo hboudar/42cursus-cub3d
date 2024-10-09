@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/08 15:28:05 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:31:57 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,10 @@ int		check_wall(double x, double y, t_cube *cube);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 void	minimap(t_cube *cube, t_player *player, double x, double y);
 void	render_weapons(mlx_image_t *image, mlx_texture_t *picture);
+void	sprite_load(t_cube *cube);
 void	draw_sprite(t_cube *cube, t_sprite *sprite, int w, int h);
+void	weapon_shoot(t_cube *cube, t_win *win);
+void	sprite_animation(t_cube *cube, t_sprite *sprite);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 
