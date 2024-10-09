@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 17:37:09 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/08 15:37:52 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define PI 3.14159265
 # define WIDTH 1000
 # define HEIGHT 600
-# define TILE 24
+# define TILE 22
+# define PROJECT_PLANE 866.0254037844
 # define ROTATION_SPEED 0.06030300258
 # define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976
@@ -86,7 +87,6 @@ typedef struct s_execution
 	int		wallbottom_pixel;
 	double	wallstripheight;
 	double	correct_distance;
-	double	distance_proj_plane;
 }	t_exec;
 
 typedef struct s_cube

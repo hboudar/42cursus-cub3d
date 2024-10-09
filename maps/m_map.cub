@@ -6,7 +6,7 @@ WE textures/wall5.png
 
 EA textures/wall4.png
 
-C 0,0,0
+C 1,0,100
 
 F 0,0,0
 

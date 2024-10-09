@@ -6,63 +6,11 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 16:57:44 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:30:52 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-void	sprite_animation(t_cube *cube, t_sprite *sprite)
-{
-	int	w;
-
-	if (sprite->sprite_count == 0)
-		sprite->sprite = mlx_load_png("textures/s1.png");
-	else if (sprite->sprite_count == 3)
-		sprite->sprite = mlx_load_png("textures/s2.png");
-	else if (sprite->sprite_count == 6)
-		sprite->sprite = mlx_load_png("textures/s3.png");
-	else if (sprite->sprite_count == 9)
-		sprite->sprite = mlx_load_png("textures/s4.png");
-	else if (sprite->sprite_count == 12)
-		sprite->sprite = mlx_load_png("textures/s5.png");
-	else if (sprite->sprite_count == 15)
-		sprite->sprite = mlx_load_png("textures/s6.png");
-	if (!sprite->sprite)
-		ft_error("Error : Sprite not found\n");
-	sprite->sprite_count++;
-	if (sprite->sprite_count == 18)
-		sprite->sprite_count = 0;
-	w = 0;
-	while (w < 500)
-	{
-		draw_sprite(cube, sprite, w, 0);
-		w += 100;
-	}
-}
-
-void	weapon_shoot(t_cube *cube, t_win *win)
-{
-	static int	shooting = 0;
-
-	if (mlx_is_key_down(cube->mlx, MLX_KEY_SPACE))
-	{
-		if (shooting == 0)
-			(1) && (win->weapon = mlx_load_png("textures/2.png"),
-				shooting = 1);
-		else if (shooting == 1)
-			(1) && (win->weapon = mlx_load_png("textures/3.png"),
-				shooting = 2);
-		else if (shooting == 2)
-			(1) && (win->weapon = mlx_load_png("textures/1.png"),
-				shooting = 0);
-	}
-	else
-		(1) && (win->weapon = mlx_load_png("textures/1.png"),
-			shooting = 0);
-	if (!win->weapon)
-		ft_error("Error : Weapon not found\n");
-}
 
 void	execution(void *arg)
 {
@@ -105,6 +53,7 @@ void	init_exec(t_cube *cube, t_player *player)
 		|| !cube->window.t4 || !cube->window.door || !cube->window.sky
 		|| !cube->window.weapon)
 		ft_error("Error : Texture not found\n");
+	sprite_load(cube);
 	mlx_loop_hook(cube->mlx, execution, cube);
 	mlx_loop(cube->mlx);
 }

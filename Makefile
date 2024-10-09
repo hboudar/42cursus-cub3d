@@ -9,8 +9,8 @@ SRC				=	cub3d.c \
 SRC_BONUS		=	cub3d_bonus.c \
 					_Parsing/bonus/parsing1_bonus.c _Parsing/bonus/parsing2_bonus.c _Parsing/bonus/parsing_utils_bonus.c \
 					_Execution/bonus/execution_bonus.c _Execution/bonus/key_pressed_bonus.c _Execution/bonus/ray_casting_bonus.c \
-					_Execution/bonus/render_bonus.c _Execution/bonus/mini_map_bonus.c _Execution/bonus/execution_utils_bonus.c \
-					Utils/error_bonus.c
+					_Execution/bonus/render_bonus.c _Execution/bonus/mini_map_bonus.c _Execution/bonus/animation_bonus.c \
+					_Execution/bonus/execution_utils_bonus.c Utils/error_bonus.c
 
 OBJS			=	$(SRC:.c=.o)
 OBJS_BONUS		=	${SRC_BONUS:_bonus.c=_bonus.o}

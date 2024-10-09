@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/06 17:37:42 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:29:59 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIDTH 1000
 # define HEIGHT 600
 # define TILE 22
+# define PROJECT_PLANE 866.0254037844
 # define ROTATION_SPEED 0.06030300258
 # define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976
@@ -97,7 +98,6 @@ typedef struct s_execution
 	int		wallbottom_pixel;
 	double	wallstripheight;
 	double	correct_distance;
-	double	distance_proj_plane;
 	int		sx;
 	int		sy;
 	int		dx;
@@ -112,7 +112,8 @@ typedef struct s_execution
 
 typedef struct s_sprite
 {
-	mlx_texture_t	*sprite;
+	int				i;
+	mlx_texture_t	*sprite[6];
 	int				sprite_count;
 	uint32_t		start_x;
 	uint32_t		start_y;
@@ -156,7 +157,10 @@ int		check_wall(double x, double y, t_cube *cube);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 void	minimap(t_cube *cube, t_player *player, double x, double y);
 void	render_weapons(mlx_image_t *image, mlx_texture_t *picture);
+void	sprite_load(t_cube *cube);
 void	draw_sprite(t_cube *cube, t_sprite *sprite, int w, int h);
+void	weapon_shoot(t_cube *cube, t_win *win);
+void	sprite_animation(t_cube *cube, t_sprite *sprite);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 
