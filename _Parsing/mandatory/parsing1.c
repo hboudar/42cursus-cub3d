@@ -80,9 +80,10 @@ static void	parse_map(t_cube *cube, t_pars *pars, char *tmp1, char **tmp2)
 		ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
 	while (pars->map[i])
 		(1) && (tmp2[j] = ft_strdup(pars->map[i]), i++, j++);
-	tmp2[j] = NULL;
-	free(pars->map);
-	pars->map = tmp2;
+	(1) && (tmp2[j] = NULL, i = -1);
+	while (pars->map[++i])
+		(1) && (free(pars->map[i]), pars->map[i] = NULL);
+	(1) && (free(pars->map), pars->map = NULL, pars->map = tmp2);
 }
 
 void	parse_textures(t_cube *cube, t_pars *pars, t_win *window)
