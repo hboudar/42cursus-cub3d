@@ -22,7 +22,7 @@ CC				=	cc
 RM				=	rm -f
 LIB				=	Utils/libft.a
 CFLAGS			=	-Wall -Wextra -Werror
-MLX				=	../MLX42/build/libmlx42.a
+MLX				=	../../MLX42/build/libmlx42.a
 LINKS			=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit
 
 all: libft $(MLX) $(NAME)
@@ -42,7 +42,7 @@ libft:
 
 $(MLX):
 	@echo "\033[0;33mMaking MLX\033[0m"
-	@cd ../MLX42 && cmake -B build && cmake --build build -j4
+	@cd ../../MLX42 && cmake -B build && cmake --build build -j4
 
 %_bonus.o: %_bonus.c $(HEADER_BONUS)
 	@echo "\033[0;32mCompiling bonus\033[0m"
@@ -62,6 +62,6 @@ fclean: clean
 	@echo "\033[0;31mFull Cleaning\033[0m"
 	@cd Utils && make fclean
 	@$(RM) $(NAME) $(NAME_BONUS)
-	@cd ../MLX42 && rm -rf build
+	@cd ../../MLX42 && rm -rf build
 
 re: fclean all
