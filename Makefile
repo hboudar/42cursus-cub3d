@@ -21,7 +21,7 @@ HEADER_BONUS	=	includes/cub3d_bonus.h
 CC				=	cc
 RM				=	rm -f
 LIB				=	Utils/libft.a
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
 MLX				=	../../MLX42/build/libmlx42.a
 LINKS			=	-Iinclude -lglfw -L/Users/$(USER)/.brew/lib -framework Cocoa -framework OpenGL -framework IOKit
 
@@ -35,7 +35,7 @@ $(NAME): $(OBJS) $(LIB) $(MLX)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LIB) $(MLX)
 	@echo "\033[0;36mMaking cub3D_bonus\033[0m"
-	@$(CC) $(OBJS_BONUS) $(LIB) $(MLX) $(LINKS) -o $(NAME_BONUS)
+	@$(CC) $(OBJS_BONUS) -fsanitize=address $(LIB) $(MLX) $(LINKS) -o $(NAME_BONUS)
 
 libft:
 	@cd Utils && make

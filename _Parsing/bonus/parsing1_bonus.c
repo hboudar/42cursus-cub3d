@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+#include <stdio.h>
 
 static void	take_map(t_pars *pars, int i, int j, int k)
 {
@@ -44,6 +45,7 @@ static int	parse_mape2(t_cube *cube, t_pars *pars)
 	r = check_elem(pars->map, cube);
 	if (!r || r != 1)
 		return (1);
+	//do it here
 	r = check_map(pars->map, 1, 0);
 	if (r)
 	{
@@ -138,5 +140,5 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
 	parse_textures(cube, &cube->pars, &cube->window);
 	parse_map(cube, &cube->pars, NULL, NULL);
 	if (parse_mape2(cube, &cube->pars))
-		ft_error("Error : Map is invalid 2\n");
+		ft_error("Error : Map is invalid\n");
 }
