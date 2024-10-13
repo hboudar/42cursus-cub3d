@@ -110,10 +110,10 @@ void	parse_textures(t_cube *cube, t_pars *pars, t_win *window)
 		i++;
 	}
 	if (window->flag != 6)
-		ft_error("Error : elements are not valid\n");
+		ft_eraser(cube, NULL, NULL, "Error : an element is missing\n");
 	else if (!window->no || !window->so || !window->we || !window->ea
 		|| !window->f || !window->c)
-		ft_error("Error : an element is missing\n");
+		ft_eraser(cube, NULL, NULL, "Error : an element is missing\n");
 }
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube)
@@ -139,5 +139,6 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
 	parse_textures(cube, &cube->pars, &cube->window);
 	parse_map(cube, &cube->pars, NULL, NULL);
 	if (parse_mape2(cube, &cube->pars))
-		ft_error("Error : Map is invalid\n");
+		ft_error("Error : invalid map\n");
+	(cube->pars.fd) && (close(cube->pars.fd), cube->pars.fd = 0);
 }
