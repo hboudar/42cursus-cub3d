@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:55:06 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/13 15:03:15 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	check_map_name(int argc, char *name, int i);
 void	initialize_list(t_cube *cube, char *map);
 int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);
+void	add_spaces(t_cube *cube, char *tmp, int x, int y);
 int		check_map(char **map, int x, int y);
 int		skip_space(char *str, int mode);
 int		skip_line(t_pars *pars, int i, int mode);

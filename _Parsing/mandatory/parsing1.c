@@ -42,6 +42,7 @@ static int	parse_mape2(t_cube *cube, t_pars *pars)
 	int		r;
 
 	r = check_elem(pars->map, cube);
+	add_spaces(cube, NULL, 0, 0);
 	if (!r || r != 1)
 		return (1);
 	r = check_map(pars->map, 1, 0);
@@ -138,5 +139,5 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
 	parse_textures(cube, &cube->pars, &cube->window);
 	parse_map(cube, &cube->pars, NULL, NULL);
 	if (parse_mape2(cube, &cube->pars))
-		ft_error("Error : Map is invalid 2\n");
+		ft_error("Error : Map is invalid\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:38:38 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:51:17 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:28:36 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sprite_load(t_cube *cube)
 		ft_error("Error : Sprite not found\n");
 }
 
-void	sprite_animation(t_cube *cube, t_sprite *sprite)
+void	sprite_animation(t_cube *cube, t_animation *sprite)
 {
 	int	w;
 
@@ -103,26 +103,26 @@ void	render_weapons(mlx_image_t *image, mlx_texture_t *picture)
 	}
 }
 
-void	draw_sprite(t_cube *cube, t_sprite *sprite, int w, int h)
+void	draw_sprite(t_cube *cube, t_animation *anim, int w, int h)
 {
-	sprite->start_x = 245 + w;
-	sprite->start_y = h + 10;
-	sprite->s_x = 0;
-	sprite->s_y = 0;
-	while (sprite->s_y < sprite->sprite[sprite->i]->height
-		&& sprite->s_y + sprite->start_y < HEIGHT)
+	anim->start_x = 245 + w;
+	anim->start_y = h + 10;
+	anim->s_x = 0;
+	anim->s_y = 0;
+	while (anim->s_y < anim->sprite[anim->i]->height
+		&& anim->s_y + anim->start_y < HEIGHT)
 	{
-		sprite->s_x = 0;
-		while (sprite->s_x < sprite->sprite[sprite->i]->width
-			&& sprite->s_x + sprite->start_x < WIDTH)
+		anim->s_x = 0;
+		while (anim->s_x < anim->sprite[anim->i]->width
+			&& anim->s_x + anim->start_x < WIDTH)
 		{
-			sprite->color = get_pixel(sprite->sprite[sprite->i],
-					sprite->s_x, sprite->s_y);
-			if (((sprite->color >> 24) & 0xFF) != 0)
-				mlx_put_pixel(cube->image, sprite->start_x + sprite->s_x,
-					sprite->start_y + sprite->s_y, sprite->color);
-			sprite->s_x++;
+			anim->color = get_pixel(anim->sprite[anim->i],
+					anim->s_x, anim->s_y);
+			if (((anim->color >> 24) & 0xFF) != 0)
+				mlx_put_pixel(cube->image, anim->start_x + anim->s_x,
+					anim->start_y + anim->s_y, anim->color);
+			anim->s_x++;
 		}
-		sprite->s_y++;
+		anim->s_y++;
 	}
 }

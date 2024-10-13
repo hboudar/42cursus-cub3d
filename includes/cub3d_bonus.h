@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:54:58 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/13 15:03:09 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_execution
 	int		key_tab;
 }	t_exec;
 
-typedef struct s_sprite
+typedef struct s_animation
 {
 	int				i;
 	mlx_texture_t	*sprite[6];
@@ -120,7 +120,7 @@ typedef struct s_sprite
 	uint32_t		s_x;
 	uint32_t		s_y;
 	uint32_t		color;
-}	t_sprite;
+}	t_animation;
 
 typedef struct s_cube
 {
@@ -130,7 +130,7 @@ typedef struct s_cube
 	t_win		window;
 	t_pars		pars;
 	t_exec		exec;
-	t_sprite	sprite;
+	t_animation	sprite;
 }	t_cube;
 
 void	is_map_valid(int argc, char *argv[], t_cube *cube);
@@ -138,6 +138,7 @@ void	check_map_name(int argc, char *name, int i);
 void	initialize_list(t_cube *cube, char *map);
 int		check_elem(char **map, t_cube *cube);
 void	get_element(t_cube *cube, char *str, char mode);
+void	add_spaces(t_cube *cube, char *tmp, int x, int y);
 int		check_map(char **map, int x, int y);
 int		skip_space(char *str, int mode);
 int		skip_line(t_pars *pars, int i, int mode);
@@ -158,9 +159,9 @@ void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 void	minimap(t_cube *cube, t_player *player, double x, double y);
 void	render_weapons(mlx_image_t *image, mlx_texture_t *picture);
 void	sprite_load(t_cube *cube);
-void	draw_sprite(t_cube *cube, t_sprite *sprite, int w, int h);
+void	draw_sprite(t_cube *cube, t_animation *sprite, int w, int h);
 void	weapon_shoot(t_cube *cube, t_win *win);
-void	sprite_animation(t_cube *cube, t_sprite *sprite);
+void	sprite_animation(t_cube *cube, t_animation *sprite);
 void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg);
 int		ft_error(char *msg);
 

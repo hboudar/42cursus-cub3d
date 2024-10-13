@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-#include <stdio.h>
 
 static void	take_map(t_pars *pars, int i, int j, int k)
 {
@@ -43,9 +42,9 @@ static int	parse_mape2(t_cube *cube, t_pars *pars)
 	int		r;
 
 	r = check_elem(pars->map, cube);
+	add_spaces(cube, NULL, 0, 0);
 	if (!r || r != 1)
 		return (1);
-	//do it here
 	r = check_map(pars->map, 1, 0);
 	if (r)
 	{
