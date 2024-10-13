@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/13 15:03:15 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/13 17:19:59 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define HEIGHT 600
 # define TILE 22
 # define PROJECT_PLANE 866.0254037844
-# define ROTATION_SPEED 0.06030300258
+# define ROTATION_SPEED 0.05030250258
 # define MOVE_SPEED 1.2
 # define FOV 1.0471975511965976
 # define FOV_ANGLE 1.0471975512
