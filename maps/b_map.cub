@@ -1,6 +1,6 @@
 NO textures/wall1.png
 
-NO textures/wall2.png
+SO textures/wall2.png
 
 WE textures/wall5.png
 
@@ -23,3 +23,4 @@ F 0,0,0
 100000000C000C01011001
 100100000100010010011
  111111111111111 11
+ 

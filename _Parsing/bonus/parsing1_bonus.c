@@ -66,7 +66,7 @@ static void	parse_map(t_cube *cube, t_pars *pars, char *tmp1, char **tmp2)
 	(1) && (j = 0, i = 6);
 	tmp1 = ft_strtrim(pars->file[i], "1 ");
 	if (!ft_strchr(pars->file[i], '1') || (tmp1 && tmp1[0] != '\0'))
-		ft_eraser(cube, NULL, (void *)tmp1, "Error : invalid map\n");
+		ft_eraser(cube, NULL, (void *)tmp1, "Error : invalid file\n");
 	(tmp1) && (free (tmp1), tmp1 = NULL);
 	pars->map = (char **)malloc(sizeof(char *)
 			* (pars->len_file - i + 1));

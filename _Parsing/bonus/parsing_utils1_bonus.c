@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:21:15 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/20 10:45:06 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 11:08:11 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	get_element(t_cube *cube, char *elm, char mode)
 		free(tmp);
 	}
 	else
-		ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
+		ft_eraser(cube, NULL, NULL, "Error : invalid element(s)\n");
 	cube->win.flag++;
 }
 
