@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:21:15 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/13 14:44:01 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:45:06 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,26 @@ void	get_element(t_cube *cube, char *elm, char mode)
 	char	*tmp;
 	int		start;
 
-	(mode != 'F' && mode != 'C') && (start = skip_space(elm + 3, 0));
-	if (mode == 'N')
-		cube->window.no = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
-	else if (mode == 'S')
-		cube->window.so = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
-	else if (mode == 'W')
-		cube->window.we = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
-	else if (mode == 'E')
-		cube->window.ea = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
-	else if (mode == 'F' || mode == 'C')
+	if (mode != 'F' && mode != 'C')
+		start = skip_space(elm + 3, 0);
+	if (mode == 'N' && !cube->win.no)
+		cube->win.no = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
+	else if (mode == 'S' && !cube->win.so)
+		cube->win.so = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
+	else if (mode == 'W' && !cube->win.we)
+		cube->win.we = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
+	else if (mode == 'E' && !cube->win.ea)
+		cube->win.ea = ft_substr(elm + 3, start, ft_strlen(elm) - 3);
+	else if ((mode == 'F' && !cube->win.f) || (mode == 'C' && !cube->win.c))
 	{
 		tmp = ft_strtrim(elm, " ");
-		(mode == 'F') && (cube->window.f = get_rgb(cube, tmp, NULL, 0));
-		(mode == 'C') && (cube->window.c = get_rgb(cube, tmp, NULL, 0));
+		(mode == 'F') && (cube->win.f = get_rgb(cube, tmp, NULL, 0));
+		(mode == 'C') && (cube->win.c = get_rgb(cube, tmp, NULL, 0));
 		free(tmp);
 	}
 	else
 		ft_eraser(cube, NULL, NULL, "Error : Wrong format\n");
-	cube->window.flag++;
+	cube->win.flag++;
 }
 
 void	initialize_list(t_cube *cube, char *map)
@@ -92,26 +93,18 @@ void	initialize_list(t_cube *cube, char *map)
 	cube->pars.fd = open(map, O_RDONLY);
 	if (cube->pars.fd == -1)
 		ft_error("Error : open failed\n");
-	cube->pars.map = NULL;
-	cube->pars.file = NULL;
-	cube->pars.map_len = 0;
-	cube->pars.len_file = 0;
-	cube->window.flag = 0;
-	cube->window.f = NULL;
-	cube->window.c = NULL;
-	cube->window.width = 0;
-	cube->window.no = NULL;
-	cube->window.so = NULL;
-	cube->window.we = NULL;
-	cube->window.ea = NULL;
-	cube->window.height = 0;
-	cube->player.x = 0;
-	cube->player.y = 0;
+	(1) && (cube->pars.map = NULL, cube->pars.file = NULL);
+	(1) && (cube->pars.map_len = 0, cube->pars.len_file = 0);
+	(1) && (cube->win.f = NULL, cube->win.c = NULL);
+	(1) && (cube->win.no = NULL, cube->win.so = NULL);
+	(1) && (cube->win.ea = NULL, cube->win.we = NULL);
+	(1) && (cube->win.width = 0, cube->win.height = 0);
+	(1) && (cube->player.x = 0, cube->player.y = 0);
+	(1) && (cube->win.x_ray = 0, cube->win.y_ray = 0);
+	cube->win.flag = 0;
 	cube->player.rotation_angle = M_PI / 2;
-	cube->window.door_state = 0;
-	cube->window.x_ray = 0;
-	cube->window.y_ray = 0;
-	cube->window.mid_ray_distance = 200;
+	cube->win.door_state = 0;
+	cube->win.mid_ray_distance = 200;
 	(1) && (cube->exec.mode = 0, cube->exec.key_tab = 0);
 	(1) && (cube->sprite.i = 0, cube->sprite.sprite_count = 0);
 }

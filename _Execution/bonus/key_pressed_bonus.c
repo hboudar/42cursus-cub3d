@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:51:06 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:31:51 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	check_move(t_cube *cube, double move_x, double move_y)
 	to_y = floor(cube->player.y + move_y) / TILE;
 	index_x = floor(cube->player.x) / TILE;
 	index_y = floor(cube->player.y) / TILE;
-	if (to_x < 0 || to_x >= cube->window.width || to_y < 0
-		|| to_y >= cube->window.height)
+	if (to_x < 0 || to_x >= cube->win.width || to_y < 0
+		|| to_y >= cube->win.height)
 		return ;
 	if (cube->pars.map[to_y][to_x] == '1' || cube->pars.map[to_y][to_x] == 'C')
 		return ;
@@ -115,7 +115,7 @@ void	key_hooks(t_cube *cube, t_player *player, double move_x, double move_y)
 		(1) && (move_x += cos(player->rotation_angle + M_PI_2) * MOVE_SPEED,
 		move_y += sin(player->rotation_angle + M_PI_2) * MOVE_SPEED);
 	if (mlx_is_key_down(cube->mlx, MLX_KEY_TAB))
-		door_hook(cube, &cube->pars, &cube->window);
+		door_hook(cube, &cube->pars, &cube->win);
 	else
 		cube->exec.key_tab = 0;
 	check_move(cube, move_x, move_y);

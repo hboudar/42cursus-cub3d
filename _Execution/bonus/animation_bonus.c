@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:38:38 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/11 16:28:36 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:28:50 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,19 @@ void	weapon_shoot(t_cube *cube, t_win *win)
 	if (mlx_is_key_down(cube->mlx, MLX_KEY_SPACE))
 	{
 		if (shooting == 0)
-			(1) && (win->weapon = mlx_load_png("textures/2.png"),
-				shooting = 1);
+			(1) && (win->weapon = win->weapon2[1], shooting = 1);
 		else if (shooting == 1)
-			(1) && (win->weapon = mlx_load_png("textures/3.png"),
-				shooting = 2);
+			(1) && (win->weapon = win->weapon2[2], shooting = 2);
 		else if (shooting == 2)
-			(1) && (win->weapon = mlx_load_png("textures/1.png"),
-				shooting = 0);
+			(1) && (win->weapon = win->weapon2[0], shooting = 0);
 	}
 	else
-		(1) && (win->weapon = mlx_load_png("textures/1.png"),
-			shooting = 0);
+		(1) && (win->weapon = win->weapon2[0], shooting = 0);
 	if (!win->weapon)
 		ft_error("Error : Weapon not found\n");
 }
 
-void	render_weapons(mlx_image_t *image, mlx_texture_t *picture)
+void	render_weapons(mlx_image_t *image, mlx_texture_t *weapon)
 {
 	uint32_t	start_x;
 	uint32_t	start_y;
@@ -86,14 +82,14 @@ void	render_weapons(mlx_image_t *image, mlx_texture_t *picture)
 
 	weapon_x = 0;
 	weapon_y = 0;
-	start_x = (WIDTH - picture->width) / 2;
-	start_y = HEIGHT - picture->height;
-	while (weapon_y < picture->height)
+	start_x = (WIDTH - weapon->width) / 2;
+	start_y = HEIGHT - weapon->height;
+	while (weapon_y < weapon->height)
 	{
 		weapon_x = 0;
-		while (weapon_x < picture->width)
+		while (weapon_x < weapon->width)
 		{
-			color = get_pixel(picture, weapon_x, weapon_y);
+			color = get_pixel(weapon, weapon_x, weapon_y);
 			if (((color >> 24) & 0xFF) != 0)
 				mlx_put_pixel(image, start_x + weapon_x, \
 				start_y + weapon_y, color);

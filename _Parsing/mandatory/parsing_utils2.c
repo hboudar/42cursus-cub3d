@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:17:45 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/13 15:02:45 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:48:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	add_spaces(t_cube *cube, char *tmp, int x, int y)
 	int		found;
 
 	y = -1;
-	while (++y < cube->window.height)
+	while (++y < cube->win.height)
 	{
-		if (y == cube->window.height - 1 && !ft_strlen(cube->pars.map[y]))
+		if (y == cube->win.height - 1 && !ft_strlen(cube->pars.map[y]))
 			break ;
-		tmp = malloc(sizeof(char) * (cube->window.width + 1));
+		tmp = malloc(sizeof(char) * (cube->win.width + 1));
 		if (!tmp)
 			ft_eraser(cube, NULL, NULL, "Error : malloc failed\n");
 		(1) && (found = 0, x = -1);
-		while (++x < cube->window.width)
+		while (++x < cube->win.width)
 		{
 			if (found || cube->pars.map[y][x] == '\0')
 			{

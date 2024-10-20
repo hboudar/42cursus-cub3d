@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:15:53 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:51:14 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:32:43 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	is_a_wall(t_cube *cube, double x, double y)
 	tile_size = TILE;
 	map_x = (int)floor((cube->player.x + x) / tile_size);
 	map_y = (int)floor((cube->player.y + y) / tile_size);
-	if (map_x < 0 || map_x >= cube->window.width
-		|| map_y < 0 || map_y >= cube->window.height)
+	if (map_x < 0 || map_x >= cube->win.width
+		|| map_y < 0 || map_y >= cube->win.height)
 		return (1);
 	return ((cube->pars.map[map_y][map_x] == '1')
 			+ (cube->pars.map[map_y][map_x] == 'C') * 2

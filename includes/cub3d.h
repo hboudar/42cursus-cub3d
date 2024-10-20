@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:03:24 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/13 17:19:59 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:47:30 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_cube
 	void		*mlx;
 	mlx_image_t	*image;
 	t_player	player;
-	t_win		window;
+	t_win		win;
 	t_pars		pars;
 	t_exec		exec;
 }	t_cube;

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/09 14:29:25 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:32:33 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static double	ori_or_ver(t_cube *cube, t_player *p, double d_or, double d_vr)
 	d_vr = sqrt(pow(p->x - p->vr_x, 2) + pow(p->y - p->vr_y, 2));
 	if (d_or < d_vr)
 	{
-		(1) && (cube->window.y_ray = p->or_y, cube->window.x_ray = p->or_x);
-		cube->window.ray_intercept = p->or_x;
+		(1) && (cube->win.y_ray = p->or_y, cube->win.x_ray = p->or_x);
+		cube->win.ray_intercept = p->or_x;
 		if (cube->pars.map[(int)(p->or_y / TILE)][(int)(p->or_x / TILE)] == 'C')
 			p->way = 'C';
 		else if (p->facing_up)
@@ -28,14 +28,14 @@ static double	ori_or_ver(t_cube *cube, t_player *p, double d_or, double d_vr)
 			p->way = 'E';
 		return (d_or);
 	}
-	cube->window.ray_intercept = p->vr_y;
+	cube->win.ray_intercept = p->vr_y;
 	if (cube->pars.map[(int)(p->vr_y / TILE)][(int)(p->vr_x / TILE)] == 'C')
 		p->way = 'C';
 	else if (cube->player.facing_left)
 		cube->player.way = 'N';
 	else if (cube->player.facing_right)
 		cube->player.way = 'S';
-	(1) && (cube->window.y_ray = p->vr_y, cube->window.x_ray = p->vr_x);
+	(1) && (cube->win.y_ray = p->vr_y, cube->win.x_ray = p->vr_x);
 	return (d_vr);
 }
 
@@ -129,7 +129,7 @@ void	ray_casting(t_cube *cube, t_player *player)
 		get_ver(cube, ray_angle, TILE, TILE * tan(ray_angle));
 		player->true_distance = ori_or_ver(cube, player, 0, 0);
 		cube->exec.ray_angle = ray_angle;
-		render_window(cube, &cube->exec, player, &cube->window);
+		render_window(cube, &cube->exec, player, &cube->win);
 		ray_angle += FOV / WIDTH;
 		ray_angle = normalize_angle(ray_angle);
 	}

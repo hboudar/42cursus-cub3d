@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:24:35 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:50:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:48:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	check_move(t_cube *cube, double move_x, double move_y)
 	to_y = floor(cube->player.y + move_y) / TILE;
 	index_x = floor(cube->player.x) / TILE;
 	index_y = floor(cube->player.y) / TILE;
-	if (to_x < 0 || to_x >= cube->window.width || to_y < 0
-		|| to_y >= cube->window.height)
+	if (to_x < 0 || to_x >= cube->win.width || to_y < 0
+		|| to_y >= cube->win.height)
 		return ;
 	if (cube->pars.map[to_y][to_x] == '1')
 		return ;

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:36:47 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/13 17:31:43 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:48:56 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg)
 	t_win	*window;
 
 	i = -1;
-	window = &cube->window;
+	window = &cube->win;
 	(window->no) && (free(window->no), window->no = NULL);
 	(window->so) && (free(window->so), window->so = NULL);
 	(window->we) && (free(window->we), window->we = NULL);
@@ -34,5 +34,6 @@ void	ft_eraser(t_cube *cube, void *tmp, int *rgb, char *msg)
 	(tmp) && (free(tmp), tmp = NULL);
 	(rgb) && (free(rgb), rgb = NULL);
 	(cube->pars.fd) && (close(cube->pars.fd), cube->pars.fd = 0);
+	sleep(2);
 	ft_error(msg);
 }

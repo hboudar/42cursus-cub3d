@@ -136,7 +136,7 @@ void	is_map_valid(int argc, char *argv[], t_cube *cube)
 	if (!cube->pars.file)
 		ft_eraser(cube, NULL,
 			(void *)tmp, "Error : ft_split failed\n");
-	parse_textures(cube, &cube->pars, &cube->window);
+	parse_textures(cube, &cube->pars, &cube->win);
 	parse_map(cube, &cube->pars, NULL, NULL);
 	if (parse_mape2(cube, &cube->pars))
 		ft_eraser(cube, NULL, NULL, "Error : invalid map\n");

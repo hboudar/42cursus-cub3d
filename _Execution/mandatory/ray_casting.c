@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:26:08 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/16 17:33:32 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:48:56 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static double	smallest_distance(t_cube *cube)
 			+ pow(cube->player.y - cube->player.vertical_y, 2));
 	if (distance_oriz < distance_vert)
 	{
-		cube->window.ray_intercept = cube->player.orizontal_x;
+		cube->win.ray_intercept = cube->player.orizontal_x;
 		if (cube->player.facing_up)
 			cube->player.way = 'W';
 		else if (cube->player.facing_down)
 			cube->player.way = 'E';
 		return (distance_oriz);
 	}
-	cube->window.ray_intercept = cube->player.vertical_y;
+	cube->win.ray_intercept = cube->player.vertical_y;
 	if (cube->player.facing_left)
 		cube->player.way = 'N';
 	else if (cube->player.facing_right)
@@ -67,7 +67,7 @@ static void	get_oriz(t_cube *cube, double angle, double x_step, double y_step)
 	(cube->player.facing_up) && (y_intercept -= 0.0001);
 	while (1)
 	{
-		if (check_wall(x_intercept, y_intercept, cube, &cube->window))
+		if (check_wall(x_intercept, y_intercept, cube, &cube->win))
 		{
 			cube->player.orizontal_x = x_intercept;
 			cube->player.orizontal_y = y_intercept;
@@ -95,7 +95,7 @@ static void	get_vert(t_cube *cube, double angle, double x_step, double y_step)
 	(cube->player.facing_left) && (x_intercept -= 0.0001);
 	while (1)
 	{
-		if (check_wall(x_intercept, y_intercept, cube, &cube->window))
+		if (check_wall(x_intercept, y_intercept, cube, &cube->win))
 		{
 			cube->player.vertical_x = x_intercept;
 			cube->player.vertical_y = y_intercept;
@@ -129,7 +129,7 @@ void	ray_casting(t_cube *cube, t_player *player)
 		player->true_distance = smallest_distance(cube);
 		cube->exec.ray_angle = ray_angle;
 		cube->exec.ray = ray;
-		render_window(cube, &cube->exec, player, &cube->window);
+		render_window(cube, &cube->exec, player, &cube->win);
 		ray_angle += FOV / WIDTH;
 		ray_angle = normalize_angle(ray_angle);
 	}

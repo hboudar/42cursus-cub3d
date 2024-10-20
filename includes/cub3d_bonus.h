@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:13:05 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/13 17:19:38 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:29:06 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_window
 	mlx_texture_t	*sky;
 	mlx_texture_t	*door;
 	mlx_texture_t	*weapon;
+	mlx_texture_t	*weapon2[3];
 	int				door_state;
 	int				width;
 	int				height;
@@ -127,7 +128,7 @@ typedef struct s_cube
 	void		*mlx;
 	mlx_image_t	*image;
 	t_player	player;
-	t_win		window;
+	t_win		win;
 	t_pars		pars;
 	t_exec		exec;
 	t_animation	sprite;
@@ -157,7 +158,7 @@ double	normalize_angle(double angle);
 int		check_wall(double x, double y, t_cube *cube);
 void	render_window(t_cube *cube, t_exec *exec, t_player *player, t_win *win);
 void	minimap(t_cube *cube, t_player *player, double x, double y);
-void	render_weapons(mlx_image_t *image, mlx_texture_t *picture);
+void	render_weapons(mlx_image_t *image, mlx_texture_t *weapon);
 void	sprite_load(t_cube *cube);
 void	draw_sprite(t_cube *cube, t_animation *sprite, int w, int h);
 void	weapon_shoot(t_cube *cube, t_win *win);

@@ -6,7 +6,7 @@
 /*   By: hboudar <hboudar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:37:11 by hboudar           #+#    #+#             */
-/*   Updated: 2024/10/10 14:50:35 by hboudar          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:48:40 by hboudar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	init_exec(t_cube *cube, t_player *player)
 	(player->way == 'S') && (player->rotation_angle = M_PI / 2);
 	(player->way == 'W') && (player->rotation_angle = M_PI);
 	(player->way == 'N') && (player->rotation_angle = 3 * M_PI / 2);
-	cube->window.t1 = mlx_load_png(cube->window.no);
-	cube->window.t2 = mlx_load_png(cube->window.so);
-	cube->window.t3 = mlx_load_png(cube->window.ea);
-	cube->window.t4 = mlx_load_png(cube->window.we);
-	cube->window.sky = mlx_load_png("textures/sky.png");
-	if (!cube->window.t1 || !cube->window.t2
-		|| !cube->window.t3 || !cube->window.t4 || !cube->window.sky)
+	cube->win.t1 = mlx_load_png(cube->win.no);
+	cube->win.t2 = mlx_load_png(cube->win.so);
+	cube->win.t3 = mlx_load_png(cube->win.ea);
+	cube->win.t4 = mlx_load_png(cube->win.we);
+	cube->win.sky = mlx_load_png("textures/sky.png");
+	if (!cube->win.t1 || !cube->win.t2
+		|| !cube->win.t3 || !cube->win.t4 || !cube->win.sky)
 		ft_error("Error : Texture not found\n");
 	mlx_loop_hook(cube->mlx, execution, cube);
 	mlx_loop(cube->mlx);
